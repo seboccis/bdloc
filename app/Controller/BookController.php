@@ -12,12 +12,17 @@ class BookController extends DefaultController
 	 */
 	public function catalog()
 	{
+		$this->show('book/catalog');
+	}
+
+	public function ajaxCatalog()
+	{
 		$bookManager = new BookManager();
-		$books = $bookManager->showMiniDetail(35);
+		$books= $bookManager->showBooks();
 
 		$data = array('books' => $books);
 
-		$this->show('book/catalog', $data);
+		$this->show('book/ajax_catalog', $data);
 	}
 
 }

@@ -11,4 +11,7 @@
 		// Page de login
 		['GET|POST', '/securite/login/', 'User#login', 'login'],
 
+		// Requête AJAX pour afficher les BD
+		['GET|POST', '/ajax/catalogue/', 'Book#ajaxCatalog', 'ajax_catalog'],
+
 	);
