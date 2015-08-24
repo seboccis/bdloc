@@ -13,7 +13,7 @@ class BookController extends DefaultController
 	public function catalog()
 	{
 		$bookManager = new BookManager();
-		$books = $bookManager->findBooks(9);
+		$books = $bookManager->showMiniDetail(35);
 
 		$data = array('books' => $books);
 
