@@ -38,16 +38,32 @@ class BookManager extends DefaultManager
 
 	public function showBooks()
 	{
-		$selectedGenre = 3;
+		$selectedGenres = array();
+
+		$selectedGenres = array(2,3);
 
 
-		if($selectedGenre == 0){
+		if(count($selectedGenres) == 0){
 			$selectedGenreSQL = '';
 		}
-		else{
+		else if(count($selectedGenres) == 1){
+			$selectedGenre = $selectedGenres[0];
+
 			$selectedGenreSQL = "	LEFT JOIN books_genres as bg
 									ON b.id = bg.bookId
 									WHERE bg.genreId = ".$selectedGenre;		
+		}
+		else{
+			$selectedGenre = $selectedGenres[0];
+
+			$selectedGenreSQL = "	LEFT JOIN books_genres as bg
+									ON b.id = bg.bookId
+									WHERE bg.genreId = ".$selectedGenre;
+			for($index = 1; $index < count($selectedGenres); $index++){
+				$selectedGenre = $selectedGenres[$index];
+
+				$selectedGenreSQL .= " OR bg.genreId = ".$selectedGenre;
+			}
 		}
 
 		$start = 0;
