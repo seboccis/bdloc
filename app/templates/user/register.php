@@ -34,7 +34,7 @@
 			</div>
 			<div class="form-row">
 				<label for="zipcode">Code postal</label>
-				<input type="number" name="zipcode" id="zipcode">
+				<input type="text" name="zip_code" id="zipcode">
 			</div>
 			<div class="form-row">
 				<label for="phoneNumber">Numero de téléphone</label>

@@ -13,10 +13,6 @@ class BookController extends DefaultController
 	 */
 	public function catalog()
 	{
-		if(!empty($_POST)){
-			debug($_POST);
-		}
-
 		$genreManager = new GenreManager();
 		$genres= $genreManager->findAll();
 
