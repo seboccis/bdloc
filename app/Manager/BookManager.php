@@ -17,33 +17,26 @@ class BookManager extends DefaultManager
 		return $sth->fetchAll();
 	}
 
-	public function showBooks($selectedGenres)
+	public function showBooksbyIds($booksIdsToFind, $start)
 	{
-
-		if(count($selectedGenres) == 0){
-			$selectedGenreSQL = '';
-		}
-		else if(count($selectedGenres) == 1){
-			$selectedGenre = $selectedGenres[0];
-
-			$selectedGenreSQL = "	LEFT JOIN books_genres as bg
-									ON b.id = bg.bookId
-									WHERE bg.genreId = ".$selectedGenre;		
+		if(count($booksIdsToFind) == 0){
+			$booksIdsToFindSQL = '';
 		}
 		else{
-			$selectedGenre = $selectedGenres[0];
+			$bookIdToFind = $booksIdsToFind[0];
 
-			$selectedGenreSQL = "	LEFT JOIN books_genres as bg
-									ON b.id = bg.bookId
-									WHERE bg.genreId = ".$selectedGenre;
-			for($index = 1; $index < count($selectedGenres); $index++){
-				$selectedGenre = $selectedGenres[$index];
+			$booksIdsToFindSQL = " WHERE b.id = ".$bookIdToFind;
 
-				$selectedGenreSQL .= " OR bg.genreId = ".$selectedGenre;
+			if(count($booksIdsToFind) > 1){
+
+				for($index = 1; $index < count($booksIdsToFind); $index++){
+					$bookIdToFind = $booksIdsToFind[$index];
+
+					$booksIdsToFindSQL .= " OR b.id = ".$bookIdToFind;
+				}
+
 			}
 		}
-
-		$start = 0;
 
 		if($start == 0){
 			$startSQL = '';
@@ -59,8 +52,8 @@ class BookManager extends DefaultManager
 				LEFT JOIN authors as i
 				ON  b.illustrator = i.id
 				LEFT JOIN authors as c
-				ON  b.colorist = c.id "
-				. $selectedGenreSQL ." LIMIT " . $startSQL . " 6";
+				ON  b.colorist = c.id" . $booksIdsToFindSQL .
+				" LIMIT " . $startSQL . " 6";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 

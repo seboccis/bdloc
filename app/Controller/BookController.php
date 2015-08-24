@@ -4,6 +4,7 @@ namespace Controller;
 
 use \Manager\BookManager;
 use \Manager\GenreManager;
+use \Manager\BookGenreManager;
 
 class BookController extends DefaultController
 {
@@ -23,18 +24,35 @@ class BookController extends DefaultController
 
 	public function ajaxCatalog()
 	{
-		$selectedGenres = []; 
+		$selectedGenresId = [];
+		$booksIdsToFind = [];
+		$start = 0; 
 
 		if(!empty($_POST['genres'])){
-			$selectedGenres = $_POST['genres'];
+			$selectedGenresId = $_POST['genres'];
+		}
+
+		if(count($selectedGenresId) == 1){
+			$bookGenreManager = new BookGenreManager();
+			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenres($selectedGenresId); 
+		}
+		else if(count($selectedGenresId) > 1){
+			$bookGenreManager = new BookGenreManager();
+			$unsortedBooksIds = $bookGenreManager->findBooksIdsByGenres($selectedGenresId);
+			$booksIdsToFind = $this->sortBooksIdsByOccurence($unsortedBooksIds); 
 		}
 
 		$bookManager = new BookManager();
-		$books= $bookManager->showBooks($selectedGenres);
+		$books = $bookManager->showBooksbyIds($booksIdsToFind, $start);
 
 		$data = array('books' => $books);
 
 		$this->show('book/ajax_catalog', $data);
+	}
+
+	private function sortBooksIdsByOccurence($unsortedBooksIds)
+	{
+		
 	}
 
 }
