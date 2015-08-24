@@ -12,6 +12,7 @@ class BookController extends DefaultController
 	 */
 	public function catalog()
 	{
+		
 		$this->show('book/catalog');
 	}
 

@@ -12,6 +12,7 @@ class UserController extends DefaultController
 	public function register()
 	{
 		$userManager = new UserManager;
+		$authentificationManager = new AuthentificationManager;
 
 		$last_name = "";
 		$first_name = "";
@@ -19,13 +20,17 @@ class UserController extends DefaultController
 		$email = "";
 		$password = "";
 		$confirmPassword = "";
-		$zipCode = "";
+		$zip_code = "";
+		for ($i=75001; $i < 75021; $i++) { 
+			$zip[] = $i;
+		}
 		$address = "";
 		$phoneNumber = "";
 		$error = "";
 		
 		if (!empty($_POST))
 		{
+			debug($_POST);
 
 			foreach ($_POST as $k => $v)
 			{
@@ -52,6 +57,10 @@ class UserController extends DefaultController
 				$error = "Email déjà utilisé !";
 			}
 
+			if (!in_array($zip_code, $zip)) {
+				$error = "Vous devez indiquer un code postal parisien !";
+			}
+
 			if ($password != $confirmPassword)
 			{
 				$error = "le mot de passe ne correspond pas !";
@@ -68,7 +77,7 @@ class UserController extends DefaultController
 					'username' => $username,
 					'email' => $email,
 					'password' => $hashedPassword,
-					'zip_code' => $zipCode,
+					'zip_code' => $zip_code,
 					'address' => $address,
 					'phone_number' => $phoneNumber,
 					'role' => 'client',
@@ -77,7 +86,10 @@ class UserController extends DefaultController
 				];
 
 				$userManager->insert($newUser);
-				$this->redirectToRoute('catalog');
+				$authentificationManager->logUserIn($user);
+				if ($userManager) {
+					$this->redirectToRoute('catalog');
+				}
 			}
 		}
 
