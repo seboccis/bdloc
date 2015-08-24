@@ -7,7 +7,7 @@ function showRequestFailed(){
 }
 
 function getBooks(){
-	 var path = $('.container').attr('value');
+	var path = $('.container').attr('value');
 	$.ajax({
 		url: path
 	})
@@ -15,5 +15,23 @@ function getBooks(){
 	.fail(showRequestFailed);
 }
 
+function getBooksByGenres(){
+
+	var path = $('.container').attr('value');
+	$.ajax({
+		url: path,
+		data: $('#formChooseGenres').serialize(),
+		type: "POST",
+	})
+	.done(showBooks)
+	.fail(showRequestFailed);
+}
+
 
 $(window).on("load", getBooks);
+
+$('#buttonChooseGenres').on('click', function(e){
+	e.preventDefault();
+
+	getBooksByGenres();
+})

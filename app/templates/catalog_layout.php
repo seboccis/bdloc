@@ -17,7 +17,7 @@
 			<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
 		</nav>
 
-		<section id='showBooks'>
+		<section>
 			<?= $this->section('main_content') ?>
 		</section>
 

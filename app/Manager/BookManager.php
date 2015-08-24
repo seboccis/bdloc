@@ -17,31 +17,8 @@ class BookManager extends DefaultManager
 		return $sth->fetchAll();
 	}
 
-	public function showMiniDetail($number)
+	public function showBooks($selectedGenres)
 	{
-
-    	$sql = "SELECT b.id, b.serieId, b.title, b.num, b.publisher, b.isbn, b.cover, b.exlibris, b.pages, b.dateCreated, b.dateModified , s.id scenaristId, s.firstName scenaristFirstName, s.lastName scenaristLastName, s.aka scenaristAka, i.id illustratorId, i.firstName illustratorFirstName, i.lastName illustratorLastName, i.aka illustratorAka
-    			FROM books as b
-    			LEFT JOIN authors as s
-    			ON  b.scenarist = s.id
-    			LEFT JOIN authors as i
-    			ON  b.illustrator = i.id
-    			LEFT JOIN books_genres as bg
-    			ON b.id = bg.bookId
-    			WHERE bg.genreId = 17
-    			LIMIT ". $number;
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		return $sth->fetchAll();
-    
-	}
-
-	public function showBooks()
-	{
-		$selectedGenres = array();
-
-		$selectedGenres = array(2,3);
-
 
 		if(count($selectedGenres) == 0){
 			$selectedGenreSQL = '';
