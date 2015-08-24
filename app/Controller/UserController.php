@@ -30,8 +30,6 @@ class UserController extends DefaultController
 		
 		if (!empty($_POST))
 		{
-			debug($_POST);
-
 			foreach ($_POST as $k => $v)
 			{
 				$$k = trim(strip_tags($v));
