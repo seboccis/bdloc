@@ -52,7 +52,24 @@ class BookController extends DefaultController
 
 	private function sortBooksIdsByOccurence($unsortedBooksIds)
 	{
-		
+		$ids = [];
+		$occurence = [];
+
+		foreach($unsortedBooksIds as $id){
+
+			if(in_array($id, $ids)){
+				$occurence[array_search($id, $ids)]++;
+			}
+			else{
+				$ids[] = $id;
+				$occurence[array_search($id, $ids)] = 1;
+			}
+
+		}
+
+		array_multisort($occurence, SORT_DESC,$ids);
+
+		return $ids;
 	}
 
 }
