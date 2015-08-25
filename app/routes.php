@@ -5,6 +5,8 @@
 		['GET', '/', 'Default#home', 'home'],
 		// Page de catalogue
 		['GET|POST', '/catalogue/', 'Book#catalog', 'catalog'],
+		// Page du compte
+		['GET', '/compte/', 'User#account', 'account'],
 
 		// Page d'inscription
 		['GET|POST', '/securite/inscription/', 'User#register', 'register'],

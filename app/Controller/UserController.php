@@ -150,4 +150,11 @@ class UserController extends DefaultController
 		$this->show('user/login', $data);
 	}
 
+	public function account()
+	{
+		$userManager = new UserManager;
+		$userInfo = $userManager->find($_SESSION['user']['id']);
+		
+		$this->show('user/account',$userInfo);
+	}
 }

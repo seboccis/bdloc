@@ -13,8 +13,9 @@
 		</header>
 
 		<nav>
-			<a href="<?php echo $this->url('home');?>">Accueil</a>
 			<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
+			<a href="<?php echo $this->url('account');?>">Mon Compte</a>
+			<a href="#">Panier</a>
 		</nav>
 
 		<section>
