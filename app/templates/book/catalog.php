@@ -15,6 +15,7 @@
 
 			<div>
 				<h3>Disponibilité</h3>
+				<label for="checkboxAvailability"><input type="checkbox" name="availability" id="checkboxAvailability" value="1">Disponibles</label>
 			</div>
 
 			<div>

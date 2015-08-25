@@ -25,20 +25,25 @@ class BookController extends DefaultController
 	public function ajaxCatalogGetBooks()
 	{
 		$selectedGenresId = [];
+		$availability = 0;
 		$booksIdsToFind = [];
-		$start = 0; 
+		$start = 0;
 
 		if(!empty($_POST['genres'])){
 			$selectedGenresId = $_POST['genres'];
 		}
 
+		if(!empty($_POST['availability'])){
+			$availability = $_POST['availability'];
+		}
+
 		if(count($selectedGenresId) == 1){
 			$bookGenreManager = new BookGenreManager();
-			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenres($selectedGenresId); 
+			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenresAndAvailability($selectedGenresId, $availability); 
 		}
 		else if(count($selectedGenresId) > 1){
 			$bookGenreManager = new BookGenreManager();
-			$unsortedBooksIds = $bookGenreManager->findBooksIdsByGenres($selectedGenresId);
+			$unsortedBooksIds = $bookGenreManager->findBooksIdsByGenresAndAvailability($selectedGenresId, $availability);
 			$booksIdsToFind = $this->sortBooksIdsByOccurence($unsortedBooksIds); 
 		}
 
