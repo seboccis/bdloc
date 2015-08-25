@@ -34,7 +34,7 @@
 
 			<h2>Résultats</h2>
 
-			<form action="" method='POST' id="formResultsBarFilters">
+			<form action="" method='POST' id="formResultsBarFilters" class="elementOfResultsBar">
 
 				<div>
 					<select name="number">
@@ -47,6 +47,12 @@
 				<button id="btnNumber">Valider</button>
 
 			</form>
+
+			<div id="paginationNav" class="elementOfResultsBar">
+				<a href="">&lsaquo; Précédentes</a>
+				<span id="pagination">#<span id="first">1</span>à#<span id="last">20</span>sur<span id="total">476</span>BD</span>
+				<a href="">Suivantes &rsaquo;</a>
+			</div>
 			
 		</div>
 

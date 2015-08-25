@@ -1,5 +1,7 @@
 function showBooks(response){
 	$('#showBooks').html(response);
+	var total = $('#showBooks > #dataRequest').attr('data-request-total');
+	$('#total').html(total);
 }
 
 function showRequestFailed(){

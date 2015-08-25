@@ -1,5 +1,7 @@
-<?php
+<?php ?>
+	<input type="hidden" id='dataRequest' data-request-first="" data-request-last="" data-request-total="<?= $max; ?>">
 		
+<?php	
 	foreach($books as $book){
 	?>
 	<a href="" class="detail" value="<?php echo $book['id']; ?>">

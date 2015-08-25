@@ -73,6 +73,23 @@ body{
 				left: 0;
 			}
 
+				.container section #content #resultsBar .elementOfResultsBar{
+					display: block;
+					float: left;
+				}
+
+				.container section #content #resultsBar form{
+					margin-right: 50px;
+				}
+
+					.container section #content #resultsBar #paginationNav a:first-child{
+						padding-right: 10px;
+					}
+
+					.container section #content #resultsBar #paginationNav a:last-child{
+						padding-left: 10px;
+					}
+
 			.container section #content #showBooks{
 				display: block;
 				width: 100%;
