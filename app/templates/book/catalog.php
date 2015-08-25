@@ -1,10 +1,10 @@
 <?php $this->layout('catalog_layout', ['title' => 'Catalogue']) ?>
 
 <?php $this->start('main_content') ?>
-	<div class="sideBar" data-ajax-catalog-getBooks-path="<?= $this->url('ajax_catalog_getBooks');?>">
+	<div id="sideBar" data-ajax-catalog-getBooks-path="<?= $this->url('ajax_catalog_getBooks');?>">
 		<h2>Filtres</h2>
 
-		<form action="" method='POST' id="formChooseGenres">
+		<form action="" method='POST' id="formSideBarFilters">
 
 			<div>
 				<h3>Catégories</h3>
@@ -23,6 +23,26 @@
 			</div>
 
 		</form>
+	</div>
+
+	<div id="resultsBar">
+
+		<h2>Résultats</h2>
+
+		<form action="" method='POST' id="formResultsBarFilters">
+
+			<div>
+				<select name="number">
+				  <option value="10">Afficher 10 résultats</option> 
+				  <option value="20" selected>Afficher 20 résultats</option>
+				  <option value="40">Afficher 40 résultats</option>
+				</select>
+			</div>
+
+			<button id="btnNumber">Valider</button>
+
+		</form>
+		
 	</div>
 
 	<div id="showBooks"></div>

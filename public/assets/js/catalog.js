@@ -8,10 +8,10 @@ function showRequestFailed(){
 
 function getBooks(){
 
-	var path = $('.sideBar').attr('data-ajax-catalog-getBooks-path');
+	var path = $('#sideBar').attr('data-ajax-catalog-getBooks-path');
 	$.ajax({
 		url: path,
-		data: $('#formChooseGenres').serialize(),
+		data: $('#formSideBarFilters').serialize()+'&'+$('#formResultsBarFilters').serialize(),				
 		type: "POST",
 	})
 	.done(showBooks)
@@ -21,7 +21,12 @@ function getBooks(){
 
 $(window).on("load", getBooks);
 
-$('.sideBar').on('click', '.checkbox', function(e){
+$('#sideBar').on('click', '.checkbox', function(e){
+	getBooks();
+})
+
+$('#btnNumber').on('click', function(e){
+	e.preventDefault();
 	getBooks();
 })
 

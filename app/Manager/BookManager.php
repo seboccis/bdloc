@@ -8,7 +8,7 @@ namespace Manager;
 class BookManager extends DefaultManager
 {
 
-	public function findBooks($start)
+	public function findBooks($start, $number)
 	{
 		if($start == 0){
 			$startSQL = '';
@@ -25,7 +25,7 @@ class BookManager extends DefaultManager
 				ON  b.illustrator = i.id
 				LEFT JOIN authors as c
 				ON  b.colorist = c.id
-				LIMIT " . $startSQL . " 20";
+				LIMIT " . $startSQL . " ".$number;
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
