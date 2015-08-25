@@ -84,6 +84,7 @@ class BookController extends DefaultController
 			'books' => $books,
 			);
 
+
 		$this->show('book/ajax_catalog_showBooks', $data);
 	}
 
@@ -120,6 +121,23 @@ class BookController extends DefaultController
 		array_multisort($occurence, SORT_DESC,$ids);
 
 		return $ids;
+	}
+
+	public function ajaxCatalogkeyword()
+	{
+		$bookManager = new BookManager;
+
+		
+		$keyword = $_GET['keyword'];
+		
+		$titles = $bookManager->showTitle($keyword);
+		// debug($titles);
+		// die();
+
+		$data = array('titles' => $titles);
+
+
+		$this->show('book/ajax_catalog_keyword', $data);
 	}
 
 }

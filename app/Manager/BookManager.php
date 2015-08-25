@@ -49,4 +49,20 @@ class BookManager extends DefaultManager
 		return $sth->fetch();
 	}
 
+	public function showTitle($title)
+	{
+		$sql = "SELECT title
+				FROM books
+				WHERE title LIKE :keyword";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindvalue(':keyword', $_GET['keyword'] . '%');
+		$sth->execute();
+
+		$titles = $sth->fetchAll();
+
+		return $titles;	
+			
+		
+	}
+
 }
