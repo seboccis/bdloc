@@ -23,29 +23,35 @@
 			</div>
 
 		</form>
+
 	</div>
 
-	<div id="resultsBar">
+	<div id="content">
 
-		<h2>Résultats</h2>
+		<div id="resultsBar">
 
-		<form action="" method='POST' id="formResultsBarFilters">
+			<h2>Résultats</h2>
 
-			<div>
-				<select name="number">
-				  <option value="10">Afficher 10 résultats</option> 
-				  <option value="20" selected>Afficher 20 résultats</option>
-				  <option value="40">Afficher 40 résultats</option>
-				</select>
-			</div>
+			<form action="" method='POST' id="formResultsBarFilters">
 
-			<button id="btnNumber">Valider</button>
+				<div>
+					<select name="number">
+					  <option value="10">Afficher 10 résultats</option> 
+					  <option value="20" selected>Afficher 20 résultats</option>
+					  <option value="40">Afficher 40 résultats</option>
+					</select>
+				</div>
 
-		</form>
-		
+				<button id="btnNumber">Valider</button>
+
+			</form>
+			
+		</div>
+
+		<div id="showBooks"></div>
+
 	</div>
 
-	<div id="showBooks"></div>
 	<div id="showDetail" data-ajax-catalog-detail-path="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
 	
 <?php $this->stop('main_content') ?>
