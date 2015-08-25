@@ -54,10 +54,19 @@ class BookController extends DefaultController
 		}
 		else{
 			$books = [];
-
-			for($index = $start; $index < $start + 20; $index++){
-				$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+			$max =count($booksIdsToFind);
+			
+			if($max >= $start + 20){
+				for($index = $start; $index < $start + 20; $index++){
+					$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+				}				
 			}
+			else{
+				for($index = $start; $index < $max; $index++){
+					$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+				}
+			}
+
 		}
 
 		$data = array('books' => $books);
