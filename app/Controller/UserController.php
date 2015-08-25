@@ -25,7 +25,7 @@ class UserController extends DefaultController
 			$zip[] = $i;
 		}
 		$address = "";
-		$phoneNumber = "";
+		$phone_number = "";
 
 		$usernameError = "";
 		$emailError = "";
@@ -82,7 +82,7 @@ class UserController extends DefaultController
 					'password' => $hashedPassword,
 					'zip_code' => $zip_code,
 					'address' => $address,
-					'phone_number' => $phoneNumber,
+					'phone_number' => $phone_number,
 					'role' => 'client',
 					'date_created' => date('Y-m-d H:i:s'),
 					'date_modified' => date('Y-m-d H:i:s')
@@ -103,7 +103,7 @@ class UserController extends DefaultController
 			'email' => $email,
 			'zip_code' => $zip_code,
 			'address' => $address,
-			'phoneNumber' => $phoneNumber,
+			'phone_number' => $phone_number,
 			'usernameError' => $usernameError,
 			'emailError' => $emailError,
 			'passwordError' => $passwordError,
@@ -161,5 +161,97 @@ class UserController extends DefaultController
 	public function account()
 	{
 		$this->show('user/account');
+	}
+
+	public function editProfile()
+	{
+
+		$userManager = new UserManager;
+		$authentificationManager = new AuthentificationManager;
+
+		$last_name = "";
+		$first_name = "";
+		$username = "";
+		$email = "";
+		$zip_code = "";
+		for ($i=75001; $i < 75021; $i++) { 
+			$zip[] = $i;
+		}
+		$address = "";
+		$phone_number = "";
+
+		$usernameError = "";
+		$emailError = "";
+		$zip_codeError = "";
+	
+		if (!empty($_POST)) {
+			
+			foreach ($_POST as $k => $v)
+			{
+				$$k = trim(strip_tags($v));
+			}
+
+			// Validation des données
+
+			if (strlen($username) < 4)
+			{
+				$usernameError = "Pseudo trop court !";
+			}
+
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+			{
+				$emailError = "Email non valide";
+			}
+
+			if (!in_array($zip_code, $zip)) {
+				$zip_codeError = "Vous devez indiquer un code postal parisien !";
+			}
+
+			if (empty($usernameError) && empty($emailError) && empty($zip_codeError)) {
+		
+				// Si l'utilisateur décide de changer de username
+				if ($username != $_SESSION['user']['username']) {
+					// S'assurer que le nouveau username n'est pas déjà utilisé
+					if ($userManager->usernameExists($username)) {
+						$usernameError = "Pseudo déjà utilisé !";
+					}
+				}
+				
+				// Si l'utilisateur décide de changer d'email
+				if ($email != $_SESSION['user']['email']) {
+					// S'assurer que le nouvel email n'est pas déjà utilisé
+					if ($userManager->emailExists($email)) {
+						$emailError = "Email déjà utilisé !";
+					}
+				}
+				
+				$newUser = [
+					'last_name' => $last_name,
+					'first_name' => $first_name,
+					'username' => $username,
+					'email' => $email,
+					'zip_code' => $zip_code,
+					'address' => $address,
+					'phone_number' => $phone_number,
+					'date_modified' => date('Y-m-d H:i:s')
+				];
+
+
+				
+				if ($userManager->update($newUser,$_SESSION['user']['id'])) {
+					$refreshUser = $userManager->find($_SESSION['user']['id']);
+					$_SESSION['user'] = $refreshUser;
+				}
+			}
+					
+		}
+
+		$data = [
+			'usernameError' => $usernameError,
+			'emailError' => $emailError,
+			'zip_codeError' => $zip_codeError,
+			];
+
+		$this->show('user/edit_profile', $data);
 	}
 }
