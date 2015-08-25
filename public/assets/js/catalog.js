@@ -7,17 +7,8 @@ function showRequestFailed(){
 }
 
 function getBooks(){
-	var path = $('.container').attr('value');
-	$.ajax({
-		url: path
-	})
-	.done(showBooks)
-	.fail(showRequestFailed);
-}
 
-function getBooksByGenres(){
-
-	var path = $('.container').attr('value');
+	var path = $('.sideBar').attr('value');
 	$.ajax({
 		url: path,
 		data: $('#formChooseGenres').serialize(),
@@ -32,9 +23,7 @@ $(window).on("load", getBooks);
 
 $('#buttonChooseGenres').on('click', function(e){
 	e.preventDefault();
-
-	getBooksByGenres();
-	e.stopPropagation();
+	getBooks();
 })
 
 $("#showBooks").on("click", ".detail", function(e){
@@ -52,4 +41,4 @@ $("#showBooks").on("click", ".detail", function(e){
 	.done(function(response){
 		$('#showDetail').html(response);
 	})
-});
+})

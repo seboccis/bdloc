@@ -4,6 +4,7 @@ namespace Controller;
 
 use \Manager\BookManager;
 use \Manager\GenreManager;
+use \Manager\BookGenreManager;
 
 class BookController extends DefaultController
 {
@@ -21,25 +22,70 @@ class BookController extends DefaultController
 		$this->show('book/catalog', $data);
 	}
 
-	public function ajaxCatalog()
+	public function ajaxCatalogGetBooks()
 	{
-		$selectedGenres = []; 
+		$selectedGenresId = [];
+		$booksIdsToFind = [];
+		$start = 0; 
 
 		if(!empty($_POST['genres'])){
-			$selectedGenres = $_POST['genres'];
+			$selectedGenresId = $_POST['genres'];
+		}
+
+		if(count($selectedGenresId) == 1){
+			$bookGenreManager = new BookGenreManager();
+			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenres($selectedGenresId); 
+		}
+		else if(count($selectedGenresId) > 1){
+			$bookGenreManager = new BookGenreManager();
+			$unsortedBooksIds = $bookGenreManager->findBooksIdsByGenres($selectedGenresId);
+			$booksIdsToFind = $this->sortBooksIdsByOccurence($unsortedBooksIds); 
 		}
 
 		$bookManager = new BookManager();
-		$books= $bookManager->showBooks($selectedGenres);
+
+		if(count($booksIdsToFind) == 0){
+			$books = $bookManager->findBooks($start);
+		}
+		else{
+			$books = [];
+
+			for($index = $start; $index < $start + 20; $index++){
+				$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+			}
+		}
 
 		$data = array('books' => $books);
 
 		$this->show('book/ajax_catalog', $data);
 	}
 
+
 	public function ajaxDetail()
 	{
 		debug($_GET);
+	}
+
+	private function sortBooksIdsByOccurence($unsortedBooksIds)
+	{
+		$ids = [];
+		$occurence = [];
+
+		foreach($unsortedBooksIds as $id){
+
+			if(in_array($id, $ids)){
+				$occurence[array_search($id, $ids)]++;
+			}
+			else{
+				$ids[] = $id;
+				$occurence[array_search($id, $ids)] = 1;
+			}
+
+		}
+
+		array_multisort($occurence, SORT_DESC,$ids);
+
+		return $ids;
 	}
 
 }
