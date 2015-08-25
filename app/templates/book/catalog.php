@@ -1,7 +1,7 @@
 <?php $this->layout('catalog_layout', ['title' => 'Catalogue']) ?>
 
 <?php $this->start('main_content') ?>
-	<div id="sideBar">
+	<div class="sideBar" value="<?= $this->url('ajax_catalog_getBooks');?>">
 
 		<form action="" method='POST' id="formChooseGenres">
 

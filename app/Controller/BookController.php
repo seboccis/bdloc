@@ -22,7 +22,7 @@ class BookController extends DefaultController
 		$this->show('book/catalog', $data);
 	}
 
-	public function ajaxCatalog()
+	public function ajaxCatalogGetBooks()
 	{
 		$selectedGenresId = [];
 		$booksIdsToFind = [];
@@ -43,7 +43,17 @@ class BookController extends DefaultController
 		}
 
 		$bookManager = new BookManager();
-		$books = $bookManager->showBooksbyIds($booksIdsToFind, $start);
+
+		if(count($booksIdsToFind) == 0){
+			$books = $bookManager->findBooks($start);
+		}
+		else{
+			$books = [];
+
+			for($index = $start; $index < $start + 20; $index++){
+				$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+			}
+		}
 
 		$data = array('books' => $books);
 

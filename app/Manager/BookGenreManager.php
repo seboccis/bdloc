@@ -32,12 +32,20 @@ class BookGenreManager extends DefaultManager
 		}
 
 		$sql = "SELECT bookId as id
-				FROM $table" . $selectedGenresIdSQL;
+				FROM " . $this->table . $selectedGenresIdSQL;
 
-		$sth = $this->dbh->prepar($sql);
+		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
-		return $sth->fetchAll();
+		$arrayResponse = $sth->fetchAll();
+
+		$booksIdsToFind = [];
+
+		foreach($arrayResponse as $rowResponse){
+			$booksIdsToFind[] = $rowResponse['id'];
+		}
+
+		return $booksIdsToFind;
 	}
 
 }
