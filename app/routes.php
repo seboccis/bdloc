@@ -12,9 +12,9 @@
 		['GET|POST', '/securite/login/', 'User#login', 'login'],
 
 		// Requête AJAX pour afficher les BD
-		['GET|POST', '/ajax/catalogue/bd/', 'Book#ajaxCatalogGetBooks', 'ajax_catalog_getBooks'],
+		['GET|POST', '/ajax/catalogue/books/', 'Book#ajaxCatalogGetBooks', 'ajax_catalog_getBooks'],
 
 		//Requête AJAX pour afficher le detail de la BD
-		['GET|POST', '/ajax/detail/', 'Book#ajaxDetail', 'ajax_detail'],
+		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
 
 	);

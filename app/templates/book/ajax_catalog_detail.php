@@ -1,6 +1,6 @@
 <?php ?>
 
-	<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
+	<img src="<?php echo $this->assetUrl('img/covers/'.$book['cover']);?>">
 			<h1><?php echo $this->e($book['title'])?></h1>
 			<p>
 				Scénariste : 

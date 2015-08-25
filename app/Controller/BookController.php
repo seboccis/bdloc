@@ -57,11 +57,11 @@ class BookController extends DefaultController
 
 		$data = array('books' => $books);
 
-		$this->show('book/ajax_catalog', $data);
+		$this->show('book/ajax_catalog_showBooks', $data);
 	}
 
 
-	public function ajaxDetail()
+	public function ajaxCatalogDetail()
 	{
 		$bookManager = new BookManager;
 
@@ -70,7 +70,7 @@ class BookController extends DefaultController
 		$data = array('book' => $book);
 
 
-		$this->show('book/ajax_detail', $data);
+		$this->show('book/ajax_catalog_detail', $data);
 	}
 
 	private function sortBooksIdsByOccurence($unsortedBooksIds)
