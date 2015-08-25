@@ -1,5 +1,5 @@
 <?php ?>
-	<input type="hidden" id='dataRequest' data-request-first="" data-request-last="" data-request-total="<?= $max; ?>">
+	<input type="hidden" id='dataRequest' data-request-first="<?= $first; ?>" data-request-last="<?= $last; ?>" data-request-total="<?= $total; ?>">
 		
 <?php	
 	foreach($books as $book){

@@ -1,7 +1,25 @@
 function showBooks(response){
+
 	$('#showBooks').html(response);
+	
+	var first = $('#showBooks > #dataRequest').attr('data-request-first');
+	var last = $('#showBooks > #dataRequest').attr('data-request-last');
 	var total = $('#showBooks > #dataRequest').attr('data-request-total');
+	$('#first').html(first);
+	$('#last').html(last);
 	$('#total').html(total);
+	if(first == 1){
+		$('#prevBooks').css({'display' : 'none'});
+	}
+	if(first > 1){
+		$('#prevBooks').css({'display' : 'inline'});
+	}
+	if(last == total){
+		$('#nextBooks').css({'display' : 'none'});
+	}
+	if(last < total){
+		$('#nextBooks').css({'display' : 'inline'});
+	}
 }
 
 function showRequestFailed(){

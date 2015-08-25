@@ -56,31 +56,36 @@ class BookController extends DefaultController
 
 		$bookManager = new BookManager();
 
+		$last = $start + $number;
+
 		if(count($booksIdsToFind) == 0){
 			$books = $bookManager->findBooks($start, $number);
-			$max = $bookManager->count();
+			$total = $bookManager->count();
 		}
 		else{
 			$books = [];
-			$max =count($booksIdsToFind);
+			$total = count($booksIdsToFind);
 			
-			if($max >= $start + $number){
+			if($total >= $start + $number){
 				for($index = $start; $index < $start + $number; $index++){
 					$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
 				}				
 			}
 			else{
-				for($index = $start; $index < $max; $index++){
+				for($index = $start; $index < $total; $index++){
 					$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
 				}
+				$last = $total;
 			}
 
 		}
 
+		$first = $start + 1;
+
 		$data = array(
-			'start' => $start,
-			'number'=> $number,
-			'max'	=> $max,
+			'first' => $first,
+			'last'	=> $last,
+			'total'	=> $total,
 			'books' => $books,
 			);
 

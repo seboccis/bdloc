@@ -27,6 +27,11 @@
 
 		<footer>
 		</footer>
+		
+		<div id='shadow'>
+			<div id="showDetail" data-ajax-catalog-detail-path="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
+		</div>
+
 		<script type="text/javascript" src="<?= $this->assetUrl('js/catalog.js') ?>"></script>
 	</div>
 </body>

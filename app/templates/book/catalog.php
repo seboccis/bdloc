@@ -49,9 +49,9 @@
 			</form>
 
 			<div id="paginationNav" class="elementOfResultsBar">
-				<a href="">&lsaquo; Précédentes</a>
-				<span id="pagination">#<span id="first">1</span>à#<span id="last">20</span>sur<span id="total">476</span>BD</span>
-				<a href="">Suivantes &rsaquo;</a>
+				<a href="" id="prevBooks">&lsaquo; Précédentes</a>
+				<span id="pagination">#<span id="first">1</span>à#<span id="last">20</span>sur<span id="total"></span>BD</span>
+				<a href="" id="nextBooks">Suivantes &rsaquo;</a>
 			</div>
 			
 		</div>
@@ -59,7 +59,5 @@
 		<div id="showBooks"></div>
 
 	</div>
-
-	<div id="showDetail" data-ajax-catalog-detail-path="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
 	
 <?php $this->stop('main_content') ?>
