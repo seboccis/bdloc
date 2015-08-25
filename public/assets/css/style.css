@@ -8,7 +8,6 @@ body{
 	font: 16px sans-serif;
 }
 
-
 .table{
 	display: table;
 	border:solid 1px #000;
@@ -23,6 +22,29 @@ body{
 	text-align:center;
 }
 
+.borderedWithTitle{
+	height: 95%;
+	width: 90%;
+	padding: 10px;
+	background: #ccc;
+	border: solid 1px #000;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+	.borderedWithTitle>h2{
+		height: 30px;
+		line-height:30px;
+		width: 50px;
+		text-align: center;
+		position: absolute;
+		top: -15px;
+		left: 10px;
+		/*background-image: #fff;
+		background-position: -15px 15px;*/
+	}
+
 .container{
 	width: 100%;
 	height: 100%;
@@ -31,7 +53,7 @@ body{
 	.container header{
 		display: block;
 		width: 100%;
-		height: 15%;
+		height: 8%;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -40,9 +62,9 @@ body{
 	.container section{
 		display: block;
 		width: 100%;
-		height: 85%;
+		height: 92%;
 		position: absolute;
-		top: 15%;
+		top: 8%;
 		left: 0;
 	}
 
@@ -53,7 +75,7 @@ body{
 			position: absolute;
 			top: 0;
 			left: 0;
-		}
+		}	
 
 		.container section #content{
 			display: block;
@@ -67,7 +89,7 @@ body{
 			.container section #content #resultsBar{
 				display: block;
 				width: 100%;
-				height: 10%;
+				height: 20%;
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -93,9 +115,9 @@ body{
 			.container section #content #showBooks{
 				display: block;
 				width: 100%;
-				height: 90%;
+				height: 80%;
 				position: absolute;
-				top: 10%;
+				top: 20%;
 				left: 0;
 				overflow-y: scroll;
 			}
@@ -124,30 +146,32 @@ body{
 									margin: 0 auto;
 								}
 
-#showDetail{
-	position: absolute;
-	top:50%;
-	left: 50%;
-	z-index: 5;
-	-webkit-transform: translateX(-50%)translateY(-50%);
-	-ms-transform: translateX(-50%)translateY(-50%);
-	-o-transform: translateX(-50%)translateY(-50%);
-	transform: translateX(-50%)translateY(-50%);
-}
+	.container #shadow{
+		position: absolute;
+		display: none;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.8);
+	}
 
-#shadow{
-	position: absolute;
-	display: none;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,0.8);
-}
-figcaption h1{
-	font-size: 1.2rem;
-}
-figcaption{
-	background-color: #fff;
-	padding: 5px;
-}
+		.container #shadow #showDetail{
+			position: absolute;
+			top:50%;
+			left: 50%;
+			z-index: 5;
+			-webkit-transform: translateX(-50%)translateY(-50%);
+			-ms-transform: translateX(-50%)translateY(-50%);
+			-o-transform: translateX(-50%)translateY(-50%);
+			transform: translateX(-50%)translateY(-50%);
+		}
+
+			.container #shadow #showDetail figcaption{
+				background-color: #fff;
+				padding: 5px;
+			}
+
+				.container #shadow #showDetail figcaption h1{
+					font-size: 1.2rem;
+				}
