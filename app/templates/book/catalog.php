@@ -9,20 +9,18 @@
 			<div>
 				<h3>Catégories</h3>
 				<?php foreach($genres as $genre){	?>
-					<label for="checkbox<?= $genre['id']?>"><input type="checkbox" name="genres[]" id="checkbox<?= $genre['id']?>" value="<?= $genre['id']; ?>"><?= $genre['genre'];?></label>
+					<label for="checkbox<?= $genre['id']?>"><input type="checkbox" name="genres[]" class="checkbox" id="checkbox<?= $genre['id']?>" value="<?= $genre['id']; ?>"><?= $genre['genre'];?></label>
 				<?php }								?>
 			</div>
 
 			<div>
 				<h3>Disponibilité</h3>
-				<label for="checkboxAvailability"><input type="checkbox" name="availability" id="checkboxAvailability" value="1">Disponibles</label>
+				<label for="checkboxAvailability"><input type="checkbox" name="availability" class="checkbox" id="checkboxAvailability" value="1">Disponibles</label>
 			</div>
 
 			<div>
 				<h3>Recherche</h3>
 			</div>
-
-			<button id="buttonChooseGenres">Valider</button>
 
 		</form>
 	</div>

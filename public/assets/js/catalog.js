@@ -21,8 +21,7 @@ function getBooks(){
 
 $(window).on("load", getBooks);
 
-$('#buttonChooseGenres').on('click', function(e){
-	e.preventDefault();
+$('.checkbox').on('click', function(e){
 	getBooks();
 })
 
