@@ -25,7 +25,7 @@ class UserController extends DefaultController
 			$zip[] = $i;
 		}
 		$address = "";
-		$phoneNumber = "";
+		$phone_number = "";
 
 		$usernameError = "";
 		$emailError = "";
@@ -82,7 +82,7 @@ class UserController extends DefaultController
 					'password' => $hashedPassword,
 					'zip_code' => $zip_code,
 					'address' => $address,
-					'phone_number' => $phoneNumber,
+					'phone_number' => $phone_number,
 					'role' => 'client',
 					'date_created' => date('Y-m-d H:i:s'),
 					'date_modified' => date('Y-m-d H:i:s')
@@ -103,7 +103,7 @@ class UserController extends DefaultController
 			'email' => $email,
 			'zip_code' => $zip_code,
 			'address' => $address,
-			'phoneNumber' => $phoneNumber,
+			'phone_number' => $phone_number,
 			'usernameError' => $usernameError,
 			'emailError' => $emailError,
 			'passwordError' => $passwordError,
@@ -178,7 +178,7 @@ class UserController extends DefaultController
 			$zip[] = $i;
 		}
 		$address = "";
-		$phoneNumber = "";
+		$phone_number = "";
 
 		$usernameError = "";
 		$emailError = "";
@@ -232,7 +232,7 @@ class UserController extends DefaultController
 					'email' => $email,
 					'zip_code' => $zip_code,
 					'address' => $address,
-					'phone_number' => $phoneNumber,
+					'phone_number' => $phone_number,
 					'date_modified' => date('Y-m-d H:i:s')
 				];
 

@@ -45,8 +45,8 @@
 				<p><?= $zip_codeError ?></p>
 			</div>
 			<div class="form-row">
-				<label for="phoneNumber">Numero de téléphone</label>
-				<input type="tel" name="phoneNumber" id="phoneNumber" value="<?= $w_user['phone_number']; ?>">
+				<label for="phone_number">Numero de téléphone</label>
+				<input type="tel" name="phone_number" id="phone_number" value="<?= $w_user['phone_number']; ?>">
 			</div>
 
 
