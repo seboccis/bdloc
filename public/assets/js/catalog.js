@@ -78,7 +78,14 @@ $("#showBooks").on("click", ".detail", function(e){
 	.done(function(response){
 		$('#showDetail').html(response);
 	})
+	$('#shadow').fadeIn(200);
+	e.stopPropagation();
+
 })
+	// $('html').on("click",function(e){
+	// 	$('.shadow').fadeOut(200);
+	// 	e.stopPropagation();
+	// });
 
 
 $("#keyword").on('keyup', function(){

@@ -1,6 +1,10 @@
 <?php ?>
 
+	<figure>
+		
 	<img src="<?php echo $this->assetUrl('img/covers/'.$book['cover']);?>">
+	<figcaption>
+		
 			<h1><?php echo $this->e($book['title'])?></h1>
 			<p>
 				Scénariste : 
@@ -32,3 +36,5 @@
 					}
 				?>
 			</p>
+	</figcaption>
+	</figure>
