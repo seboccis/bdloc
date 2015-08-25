@@ -5,8 +5,6 @@
 		['GET', '/', 'Default#home', 'home'],
 		// Page de catalogue
 		['GET|POST', '/catalogue/', 'Book#catalog', 'catalog'],
-		// Page du compte
-		['GET', '/compte/', 'User#account', 'account'],
 
 		// Page d'inscription
 		['GET|POST', '/securite/inscription/', 'User#register', 'register'],
@@ -22,4 +20,8 @@
 		//Requête AJAX pour afficher le detail de la BD
 		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
 
+		// Page du compte
+		['GET', '/compte/', 'User#account', 'account'],
+		// Page de modification du profil
+		['GET|POST', '/compte/modifications/', 'User#editProfile', 'edit_profile'],
 	);
