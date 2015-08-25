@@ -63,7 +63,14 @@ class BookController extends DefaultController
 
 	public function ajaxDetail()
 	{
-		debug($_GET);
+		$bookManager = new BookManager;
+
+		$book = $bookManager->extendedFind($_GET['id']);
+
+		$data = array('book' => $book);
+
+
+		$this->show('book/ajax_detail', $data);
 	}
 
 	private function sortBooksIdsByOccurence($unsortedBooksIds)
