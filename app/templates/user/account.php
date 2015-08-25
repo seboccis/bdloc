@@ -1,12 +1,7 @@
-<?php $this->layout('layout', ['title' => 'Informations personnelles']) ?>
+<?php $this->layout('catalog_layout', ['title' => 'Informations personnelles']) ?>
 
 <?php $this->start('main_content') ?>
-
-	<nav>
-		<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
-		<a href="<?php echo $this->url('account');?>">Mon Compte</a>
-		<a href="#">Panier</a>
-	</nav>
+<?php debug($w_user) ?>
 
 	<h2>Ceci est la page du compte</h2>
 
@@ -17,15 +12,16 @@
 		<a href="#">Consulter mon historique de locations</a>
 		<a href="#">Payer une amende</a>
 		<a href="#">Me désabonner</a>
+
 	</nav>
 
-	<p>Prénom : <?= $first_name?></p>
-	<p>Nom : <?= $last_name?></p>
-	<p>Email : <?= $username ?></p>
-	<p>Pseudo : <?= $email?></p>
-	<p>Adresse : <?= $address ?></p>
-	<p>Code postal : <?= $zip_code ?></p>
-	<p>Numéro de téléphone : <?= $phone_number ?></p>
+	<p>Prénom : <?= $w_user['first_name'] ?></p>
+	<p>Nom : <?= $w_user['last_name'] ?></p>
+	<p>Pseudo : <?= $w_user['username'] ?></p>
+	<p>Email : <?= $w_user['email']?></p>
+	<p>Adresse : <?= $w_user['address'] ?></p>
+	<p>Code postal : <?= $w_user['zip_code'] ?></p>
+	<p>Numéro de téléphone : <?= $w_user['phone_number'] ?></p>
 
 
 	

@@ -10,6 +10,8 @@
 	<div class="container">
 		<header>
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
+			<h2><?= $w_user['username'] ?></h2>
+			<a href="<?= $this->url('logout')?>">Se déconnecter</a>
 		</header>
 
 		<nav>
