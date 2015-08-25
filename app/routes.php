@@ -17,4 +17,7 @@
 		//Requête AJAX pour afficher le detail de la BD
 		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
 
+		//
+		['GET|POST', '/ajax/catalogue/keyword/', 'Book#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
+
 	);

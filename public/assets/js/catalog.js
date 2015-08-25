@@ -42,3 +42,26 @@ $("#showBooks").on("click", ".detail", function(e){
 		$('#showDetail').html(response);
 	})
 })
+
+
+$("#keyword").on('keyup', function(){
+	var keyword = $('#keyword').val();
+	console.log(keyword);
+	var path = $('#keyword').attr('data');
+	console.log(path);
+	if (keyword.length < 2){
+		$('#showBooks').html('');
+	}
+	else{
+
+		$.ajax({
+			url : path,
+			data : {
+			'keyword' : $('#keyword').val(),
+			}
+
+		}).done(function(response){
+			$('#showBooks').html(response);
+		});	
+	}
+});
