@@ -21,7 +21,7 @@ function getBooks(){
 
 $(window).on("load", getBooks);
 
-$('#sideBar').on('click', '.checkbox', function(e){
+$('.checkbox').on('click', function(e){
 	getBooks();
 })
 
