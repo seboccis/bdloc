@@ -150,4 +150,16 @@ class UserController extends DefaultController
 		$this->show('user/login', $data);
 	}
 
+	public function logout()
+	{
+		$authentificationManager = new AuthentificationManager;
+		$authentificationManager->logUserOut();
+
+		$this->redirectToRoute('home');
+	}
+
+	public function account()
+	{
+		$this->show('user/account');
+	}
 }

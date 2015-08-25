@@ -24,38 +24,65 @@ class BookController extends DefaultController
 
 	public function ajaxCatalogGetBooks()
 	{
+		$number = $_POST['number'];
+
 		$selectedGenresId = [];
-		$booksIdsToFind = [];
-		$start = 0; 
+		$availability = 0;
+		$start = 0;
 
 		if(!empty($_POST['genres'])){
 			$selectedGenresId = $_POST['genres'];
 		}
 
+		if(!empty($_POST['availability'])){
+			$availability = $_POST['availability'];
+		}
+
+		if(!empty($_POST['start'])){
+			$start = $_POST['start'];
+		}
+
+		$booksIdsToFind = [];
+
 		if(count($selectedGenresId) == 1){
 			$bookGenreManager = new BookGenreManager();
-			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenres($selectedGenresId); 
+			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenresAndAvailability($selectedGenresId, $availability); 
 		}
 		else if(count($selectedGenresId) > 1){
 			$bookGenreManager = new BookGenreManager();
-			$unsortedBooksIds = $bookGenreManager->findBooksIdsByGenres($selectedGenresId);
+			$unsortedBooksIds = $bookGenreManager->findBooksIdsByGenresAndAvailability($selectedGenresId, $availability);
 			$booksIdsToFind = $this->sortBooksIdsByOccurence($unsortedBooksIds); 
 		}
 
 		$bookManager = new BookManager();
 
 		if(count($booksIdsToFind) == 0){
-			$books = $bookManager->findBooks($start);
+			$books = $bookManager->findBooks($start, $number);
+			$max = $bookManager->count();
 		}
 		else{
 			$books = [];
-
-			for($index = $start; $index < $start + 20; $index++){
-				$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+			$max =count($booksIdsToFind);
+			
+			if($max >= $start + $number){
+				for($index = $start; $index < $start + $number; $index++){
+					$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+				}				
 			}
+			else{
+				for($index = $start; $index < $max; $index++){
+					$books[] = $bookManager->extendedFind($booksIdsToFind[$index]);
+				}
+			}
+
 		}
 
-		$data = array('books' => $books);
+		$data = array(
+			'start' => $start,
+			'number'=> $number,
+			'max'	=> $max,
+			'books' => $books,
+			);
 
 
 		$this->show('book/ajax_catalog_showBooks', $data);

@@ -8,10 +8,10 @@ function showRequestFailed(){
 
 function getBooks(){
 
-	var path = $('.sideBar').attr('data');
+	var path = $('#sideBar').attr('data-ajax-catalog-getBooks-path');
 	$.ajax({
 		url: path,
-		data: $('#formChooseGenres').serialize(),
+		data: $('#formSideBarFilters').serialize()+'&'+$('#formResultsBarFilters').serialize(),				
 		type: "POST",
 	})
 	.done(showBooks)
@@ -21,7 +21,11 @@ function getBooks(){
 
 $(window).on("load", getBooks);
 
-$('#buttonChooseGenres').on('click', function(e){
+$('.checkbox').on('click', function(e){
+	getBooks();
+})
+
+$('#btnNumber').on('click', function(e){
 	e.preventDefault();
 	getBooks();
 })
@@ -29,7 +33,7 @@ $('#buttonChooseGenres').on('click', function(e){
 $("#showBooks").on("click", ".detail", function(e){
 	e.preventDefault();
 
-	var path = $('#showDetail').attr('data');
+	var path = $('#showDetail').attr('data-ajax-catalog-detail-path');
 	
 
 	$.ajax({

@@ -1,0 +1,108 @@
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body{
+	font: 16px sans-serif;
+}
+
+
+.table{
+	display: table;
+	border:solid 1px #000;
+}
+
+.row{
+	display: table-row;
+}
+
+.cell{
+	display: table-cell;
+	text-align:center;
+}
+
+.container{
+	width: 100%;
+	height: 100%;
+}
+
+	.container header{
+		display: block;
+		width: 100%;
+		height: 15%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.container section{
+		display: block;
+		width: 100%;
+		height: 85%;
+		position: absolute;
+		top: 15%;
+		left: 0;
+	}
+
+		.container section #sideBar{
+			display: block;
+			width: 20%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		.container section #content{
+			display: block;
+			width: 80%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 20%;
+		}
+
+			.container section #content #resultsBar{
+				display: block;
+				width: 100%;
+				height: 10%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			.container section #content #showBooks{
+				display: block;
+				width: 100%;
+				height: 90%;
+				position: absolute;
+				top: 10%;
+				left: 0;
+				overflow-y: scroll;
+			}
+
+				.container section #content #showBooks .detail{
+					color: #000;
+				}
+
+					.container section #content #showBooks .detail .cover{
+						width: 440px;
+						height: 350px;
+						margin: 0 20px 20px 0;
+						float: left;
+					}
+
+						.container section #content #showBooks .detail .cover .row{}
+
+							.container section #content #showBooks .detail .cover .row .cell{
+								width: 220px;
+								vertical-align: middle;
+							}
+
+								.container section #content #showBooks .detail .cover .row .cell img{
+									display:block;
+									width: 200px;
+									margin: 0 auto;
+								}

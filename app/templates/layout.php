@@ -13,11 +13,6 @@
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 		</header>
 
-		<nav>
-			<a href="<?php echo $this->url('home');?>">Accueil</a>
-			<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
-		</nav>
-
 		<section>
 			<?= $this->section('main_content') ?>
 		</section>
