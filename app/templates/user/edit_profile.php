@@ -1,7 +1,7 @@
 <?php $this->layout('catalog_layout', ['title' => 'Modifier le profile']) ?>
 
 <?php $this->start('main_content') ?>
-<?php debug($w_user)?>
+
 
 	<h2>Ceci est la page de modification.</h2>
 

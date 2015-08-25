@@ -239,7 +239,8 @@ class UserController extends DefaultController
 
 				
 				if ($userManager->update($newUser,$_SESSION['user']['id'])) {
-					echo "Modifications effectuées !";
+					$refreshUser = $userManager->find($_SESSION['user']['id']);
+					$_SESSION['user'] = $refreshUser;
 				}
 			}
 					
