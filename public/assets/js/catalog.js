@@ -86,6 +86,7 @@ $("#keyword").on('keyup', function(){
 
 		}).done(function(response){
 			$('#result').html(response);
+			
 		});	
 	}
 });

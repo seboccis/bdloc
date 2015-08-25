@@ -20,7 +20,8 @@
 
 			<div>
 				<h3>Recherche</h3>
-				<input type="text" id="keyword" data="<?php echo $this->url('ajax_catalog_keyword'); ?>">				
+				<input type="text" id="keyword" data="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="">
+				<button>Rechercher</button>				
 				<div id="result"></div>
 			</div>
 

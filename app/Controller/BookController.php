@@ -98,6 +98,7 @@ class BookController extends DefaultController
 	{
 		$bookManager = new BookManager;
 
+		
 		$book = $bookManager->extendedFind($_GET['id']);
 
 		$data = array('book' => $book);

@@ -6,7 +6,7 @@ foreach ($titles as $title){
 
 	
 		
-		<h1><?php echo $title['title']; ?></h1>
+		<a href=""><?php echo $title['title']; ?></a>
 			
 	
 <?php
