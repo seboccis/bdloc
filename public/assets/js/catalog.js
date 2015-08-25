@@ -26,28 +26,41 @@ function showRequestFailed(){
 	$('#showBooks').html('<span>La requête a échoué</span>');
 }
 
-function getBooks(){
+function getBooks(start){
 
 	var path = $('#sideBar').attr('data-ajax-catalog-getBooks-path');
 	$.ajax({
 		url: path,
-		data: $('#formSideBarFilters').serialize()+'&'+$('#formResultsBarFilters').serialize(),				
+		data: $('#formSideBarFilters').serialize()+'&'+$('#formResultsBarFilters').serialize()+'&start='+start,				
 		type: "POST",
 	})
 	.done(showBooks)
 	.fail(showRequestFailed);
 }
 
-
-$(window).on("load", getBooks);
+$(window).on("load", function(){
+	getBooks(0);
+})
 
 $('.checkbox').on('click', function(e){
-	getBooks();
+	getBooks(0);
 })
 
 $('#btnNumber').on('click', function(e){
 	e.preventDefault();
-	getBooks();
+	getBooks(0);
+})
+
+$('#prevBooks').on('click', function(e){
+	e.preventDefault();
+	var start = $('#showBooks > #dataRequest').attr('data-request-precStart');
+	getBooks(start);
+})
+
+$('#nextBooks').on('click', function(e){
+	e.preventDefault();
+	var start = $('#showBooks > #dataRequest').attr('data-request-nextStart');
+	getBooks(start);
 })
 
 $("#showBooks").on("click", ".detail", function(e){

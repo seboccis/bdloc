@@ -81,12 +81,16 @@ class BookController extends DefaultController
 		}
 
 		$first = $start + 1;
+		$precStart = $start - $number;
+		$nextStart = $start + $number;
 
 		$data = array(
-			'first' => $first,
-			'last'	=> $last,
-			'total'	=> $total,
-			'books' => $books,
+			'precStart'	=> $precStart,
+			'first' 	=> $first,
+			'last'		=> $last,
+			'total'		=> $total,
+			'nextStart'	=> $nextStart,
+			'books' 	=> $books,
 			);
 
 
