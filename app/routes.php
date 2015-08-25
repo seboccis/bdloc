@@ -24,6 +24,8 @@
 		// Page du compte
 		['GET', '/compte/', 'User#account', 'account'],
 		// Page de modification du profil
-		['GET|POST', '/compte/modifications/', 'User#editProfile', 'edit_profile'],
+		['GET|POST', '/compte/modifications/Utilisateur/', 'User#editProfile', 'edit_profile'],
+		// Page de modification du mot de passe
+		['GET|POST', '/compte/modifications/Password/', 'User#editPassword', 'edit_password'],
 
 	);

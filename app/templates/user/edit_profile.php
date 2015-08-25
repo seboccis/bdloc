@@ -8,7 +8,7 @@
 	<nav>
 		<a href="<?php echo $this->url('account')?>">Mes informations</a>
 		<a href="<?php echo $this->url('edit_profile')?>">Modifier mes informations personnelles</a>
-		<a href="#">Modifier mon mot de passe</a>
+		<a href="<?php echo $this->url('edit_password')?>">Modifier mon mot de passe</a>
 		<a href="#">Consulter mon historique de locations</a>
 		<a href="#">Payer une amende</a>
 		<a href="#">Me désabonner</a>

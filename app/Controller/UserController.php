@@ -254,4 +254,55 @@ class UserController extends DefaultController
 
 		$this->show('user/edit_profile', $data);
 	}
+
+	public function editPassword()
+	{
+
+		$authentificationManager = new AuthentificationManager;
+		$userManager = new UserManager;
+
+		$old_passwordError = "";
+		$passwordError = "";
+
+		if (!empty($_POST)) {
+			foreach ($_POST as $k => $v)
+			{
+				$$k = trim(strip_tags($v));
+			}
+
+			// On s'assure que l'ancien mot de passe est valide
+			$result = $authentificationManager->isValidLoginInfo($_SESSION['user']['username'], $old_password);
+
+			// Si c'est valide, 
+			if ($result > 0){
+				// On vérifie que les nouveaux mots de passe sont bien identiques
+				if ($password != $confirmPassword) {
+				$passwordError = "le mot de passe ne correspond pas !";
+				}
+				// On hache le nouveau mot de passe
+				$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+				if ($userManager->update(['password' => $hashedPassword],$_SESSION['user']['id'])) {
+					$refreshUser = $userManager->find($_SESSION['user']['id']);
+					$_SESSION['user'] = $refreshUser;
+					
+				}
+				
+
+				}
+
+
+			else {
+					$old_passwordError = "Mauvais mot de passe !";
+				}
+
+		}
+
+		$data = [
+			'old_passwordError' => $old_passwordError,
+			'passwordError' => $passwordError,
+			];
+
+		$this->show('user/edit_password', $data);
+	}
 }
