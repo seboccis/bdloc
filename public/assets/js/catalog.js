@@ -54,7 +54,7 @@ $("#keyword").on('keyup', function(){
 	var path = $('#keyword').attr('data');
 	console.log(path);
 	if (keyword.length < 2){
-		$('#showBooks').html('');
+		$('#result').html('');
 	}
 	else{
 
@@ -65,7 +65,7 @@ $("#keyword").on('keyup', function(){
 			}
 
 		}).done(function(response){
-			$('#showBooks').html(response);
+			$('#result').html(response);
 		});	
 	}
 });

@@ -53,7 +53,7 @@ class BookManager extends DefaultManager
 	{
 		$sql = "SELECT title
 				FROM books
-				WHERE title LIKE :keyword";
+				WHERE title LIKE :keyword LIMIT 10";
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindvalue(':keyword', $_GET['keyword'] . '%');
 		$sth->execute();
