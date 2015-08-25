@@ -34,4 +34,22 @@ $('#buttonChooseGenres').on('click', function(e){
 	e.preventDefault();
 
 	getBooksByGenres();
+	e.stopPropagation();
 })
+
+$("#showBooks").on("click", ".detail", function(e){
+	e.preventDefault();
+
+	var path = $('#showDetail').attr('value');
+	
+
+	$.ajax({
+		url: path,
+		data: {
+			id: $(this).attr('value'),
+		}
+	})
+	.done(function(response){
+		$('#showDetail').html(response);
+	})
+});

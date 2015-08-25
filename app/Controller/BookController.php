@@ -37,4 +37,9 @@ class BookController extends DefaultController
 		$this->show('book/ajax_catalog', $data);
 	}
 
+	public function ajaxDetail()
+	{
+		debug($_GET);
+	}
+
 }

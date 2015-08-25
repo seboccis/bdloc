@@ -15,5 +15,6 @@
 	</div>
 
 	<div id="showBooks"></div>
+	<div id="showDetail" value="<?php echo $this->url('ajax_detail'); ?>"></div>
 	
 <?php $this->stop('main_content') ?>
