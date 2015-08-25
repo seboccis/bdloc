@@ -8,6 +8,21 @@ body{
 	font: 16px sans-serif;
 }
 
+
+.table{
+	display: table;
+	border:solid 1px #000;
+}
+
+.row{
+	display: table-row;
+}
+
+.cell{
+	display: table-cell;
+	text-align:center;
+}
+
 .container{
 	width: 100%;
 	height: 100%;
@@ -68,8 +83,26 @@ body{
 				overflow-y: scroll;
 			}
 
-				.container section #content #showBooks .detail{}
+				.container section #content #showBooks .detail{
+					color: #000;
+				}
 
 					.container section #content #showBooks .detail .cover{
+						width: 440px;
+						height: 350px;
+						margin: 0 20px 20px 0;
 						float: left;
 					}
+
+						.container section #content #showBooks .detail .cover .row{}
+
+							.container section #content #showBooks .detail .cover .row .cell{
+								width: 220px;
+								vertical-align: middle;
+							}
+
+								.container section #content #showBooks .detail .cover .row .cell img{
+									display:block;
+									width: 200px;
+									margin: 0 auto;
+								}
