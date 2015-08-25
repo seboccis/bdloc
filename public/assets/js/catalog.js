@@ -8,7 +8,7 @@ function showRequestFailed(){
 
 function getBooks(){
 
-	var path = $('.sideBar').attr('data');
+	var path = $('.sideBar').attr('data-ajax-catalog-getBooks-path');
 	$.ajax({
 		url: path,
 		data: $('#formChooseGenres').serialize(),
@@ -28,7 +28,7 @@ $('.sideBar').on('click', '.checkbox', function(e){
 $("#showBooks").on("click", ".detail", function(e){
 	e.preventDefault();
 
-	var path = $('#showDetail').attr('data');
+	var path = $('#showDetail').attr('data-ajax-catalog-detail-path');
 	
 
 	$.ajax({

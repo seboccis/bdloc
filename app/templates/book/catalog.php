@@ -1,7 +1,7 @@
 <?php $this->layout('catalog_layout', ['title' => 'Catalogue']) ?>
 
 <?php $this->start('main_content') ?>
-	<div class="sideBar" data="<?= $this->url('ajax_catalog_getBooks');?>">
+	<div class="sideBar" data-ajax-catalog-getBooks-path="<?= $this->url('ajax_catalog_getBooks');?>">
 		<h2>Filtres</h2>
 
 		<form action="" method='POST' id="formChooseGenres">
@@ -26,6 +26,6 @@
 	</div>
 
 	<div id="showBooks"></div>
-	<div id="showDetail" data="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
+	<div id="showDetail" data-ajax-catalog-detail-path="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
 	
 <?php $this->stop('main_content') ?>

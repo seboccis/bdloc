@@ -26,7 +26,6 @@ class BookController extends DefaultController
 	{
 		$selectedGenresId = [];
 		$availability = 0;
-		$booksIdsToFind = [];
 		$start = 0;
 
 		if(!empty($_POST['genres'])){
@@ -37,6 +36,12 @@ class BookController extends DefaultController
 			$availability = $_POST['availability'];
 		}
 
+		if(!empty($_POST['start'])){
+			$start = $_POST['start'];
+		}
+
+		$booksIdsToFind = [];
+		
 		if(count($selectedGenresId) == 1){
 			$bookGenreManager = new BookGenreManager();
 			$booksIdsToFind = $bookGenreManager->findBooksIdsByGenresAndAvailability($selectedGenresId, $availability); 
@@ -51,6 +56,7 @@ class BookController extends DefaultController
 
 		if(count($booksIdsToFind) == 0){
 			$books = $bookManager->findBooks($start);
+			$max = $bookManager->count();
 		}
 		else{
 			$books = [];
@@ -69,7 +75,11 @@ class BookController extends DefaultController
 
 		}
 
-		$data = array('books' => $books);
+		$data = array(
+			'start' => $start,
+			'max'	=> $max,
+			'books' => $books,
+			);
 
 		$this->show('book/ajax_catalog_showBooks', $data);
 	}
