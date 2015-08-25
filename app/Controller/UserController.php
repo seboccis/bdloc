@@ -26,7 +26,12 @@ class UserController extends DefaultController
 		}
 		$address = "";
 		$phoneNumber = "";
-		$error = "";
+
+		$usernameError = "";
+		$emailError = "";
+		$zip_codeError = "";
+		$passwordError = "";
+		
 		
 		if (!empty($_POST))
 		{
@@ -37,35 +42,35 @@ class UserController extends DefaultController
 
 			if (strlen($username) < 4)
 			{
-				$error = "Pseudo trop court !";
+				$usernameError = "Pseudo trop court !";
 			}
 
 			if ($userManager->usernameExists($username))
 			{
-				$error = "Pseudo déjà utilisé !";
+				$usernameError = "Pseudo déjà utilisé !";
 			}
 
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
-				$error = "Email non valide";
+				$emailError = "Email non valide";
 			}
 
 			if ($userManager->emailExists($email))
 			{
-				$error = "Email déjà utilisé !";
+				$emailError = "Email déjà utilisé !";
 			}
 
 			if (!in_array($zip_code, $zip)) {
-				$error = "Vous devez indiquer un code postal parisien !";
+				$zip_codeError = "Vous devez indiquer un code postal parisien !";
 			}
 
 			if ($password != $confirmPassword)
 			{
-				$error = "le mot de passe ne correspond pas !";
+				$passwordError = "le mot de passe ne correspond pas !";
 			}
 
-			if (empty($error))
-			{
+			if (empty($usernameError) && empty($emailError) && empty($zip_codeError) && empty($passwordError)) {
+		
 				$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 				$newUser = [
@@ -91,8 +96,20 @@ class UserController extends DefaultController
 			}
 		}
 
-		$dataToPassToTheView = ['error' => $error, 'last_name' => $last_name, 'first_name' => $first_name, 'username' => $username, 'email' => $email];
-		$this->show('user/register', $dataToPassToTheView);
+		$data = [
+			'last_name' => $last_name, 
+			'first_name' => $first_name, 
+			'username' => $username, 
+			'email' => $email,
+			'zip_code' => $zip_code,
+			'address' => $address,
+			'phoneNumber' => $phoneNumber,
+			'usernameError' => $usernameError,
+			'emailError' => $emailError,
+			'passwordError' => $passwordError,
+			'zip_codeError' => $zip_codeError,
+			];
+		$this->show('user/register', $data);
 	}
 
 	public function login()
