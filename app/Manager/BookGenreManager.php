@@ -16,23 +16,31 @@ class BookGenreManager extends DefaultManager
 		$this->dbh = ConnectionManager::getDbh();
 	}
 
-	public function findBooksIdsByGenres($selectedGenresId)
+	public function findBooksIdsByGenresAndAvailability($selectedGenresId, $availability)
 	{
 		$selectedGenreId = $selectedGenresId[0];
 
-		$selectedGenresIdSQL = " WHERE genreId = ".$selectedGenreId;		
+		$selectedGenresIdSQL = " WHERE bg.genreId = ".$selectedGenreId;		
 		
 		if(count($selectedGenresId) > 1){
 
 			for($index = 1; $index < count($selectedGenresId); $index++){
 				$selectedGenreId = $selectedGenresId[$index];
 
-				$selectedGenresIdSQL .= " OR genreId = ".$selectedGenreId;
+				$selectedGenresIdSQL .= " OR bg.genreId = ".$selectedGenreId;
 			}
 		}
 
+		$availabilitySQL = "";
+
+		if($availability == 1){
+			$availabilitySQL .= " AND b.is_available = 1";
+		}
+
 		$sql = "SELECT bookId as id
-				FROM " . $this->table . $selectedGenresIdSQL;
+				FROM " . $this->table . " as bg 
+				LEFT JOIN books as b 
+				ON bg.bookId = b.id" . $selectedGenresIdSQL . $availabilitySQL;
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
