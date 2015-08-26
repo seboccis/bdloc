@@ -1,4 +1,4 @@
-<?php $this->layout('catalog_layout', ['title' => 'Catalogue']) ?>
+<?php $this->layout('main_layout', ['title' => 'Catalogue']) ?>
 
 <?php $this->start('main_content') ?>
 

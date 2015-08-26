@@ -1,4 +1,4 @@
-<?php $this->layout('catalog_layout', ['title' => 'Modifier le profile']) ?>
+<?php $this->layout('main_layout', ['title' => 'Modifier le profile']) ?>
 
 <?php $this->start('main_content') ?>
 
