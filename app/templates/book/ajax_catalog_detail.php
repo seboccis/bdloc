@@ -36,5 +36,6 @@
 					}
 				?>
 			</p>
+			<a href="<?= $this->url('add_to_cart',['bookId'=>$book['id']])?>">Ajouter au panier</a>
 	</figcaption>
 	</figure>

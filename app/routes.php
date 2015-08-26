@@ -28,4 +28,8 @@
 		// Page de modification du mot de passe
 		['GET|POST', '/compte/modifications/Password/', 'User#editPassword', 'edit_password'],
 
+		// Page d'ajout au panier
+		['GET', '/panier/[:bookId]/', 'Cart#addToCart', 'add_to_cart'],
+
+
 	);
