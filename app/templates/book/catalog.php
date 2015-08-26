@@ -3,12 +3,12 @@
 <?php $this->start('main_content') ?>
 
 	<div id="sideBar" data-ajax-catalog-getBooks-path="<?= $this->url('ajax_catalog_getBooks');?>">
-		
-		<div class="borderedWithTitle">
 
-			<h2>Filtres</h2>
+		<form action="" method='POST' id="formSideBarFilters" class='fieldset'>
 
-			<form action="" method='POST' id="formSideBarFilters">
+			<fieldset>
+
+				<legend>Filtres</legend>
 
 				<div>
 					<h3>Catégories</h3>
@@ -29,9 +29,9 @@
 					<div id="result"></div>
 				</div>
 
-			</form>
+			</fieldset>
 
-		</div>
+		</form>
 
 	</div>
 
@@ -39,11 +39,11 @@
 
 		<div id="resultsBar">
 
-			<div class="borderedWithTitle">
-
-				<h2>Résultats</h2>
-
-				<form action="" method='POST' id="formResultsBarFilters" class="elementOfResultsBar">
+			<form action="" method='POST' id="formResultsBarFilters" class="elementOfResultsBar fieldset">
+				
+				<fieldset>
+					
+					<legend>Résultats</legend>
 
 					<div>
 						<select name="number">
@@ -55,15 +55,15 @@
 
 					<button id="btnNumber">Valider</button>
 
-				</form>
+					<div id="paginationNav" class="elementOfResultsBar">
+						<a href="" id="prevBooks">&lsaquo; Précédentes</a>
+						<span id="pagination">#<span id="first">1</span>à#<span id="last">20</span>sur<span id="total"></span>BD</span>
+						<a href="" id="nextBooks">Suivantes &rsaquo;</a>
+					</div>
 
-				<div id="paginationNav" class="elementOfResultsBar">
-					<a href="" id="prevBooks">&lsaquo; Précédentes</a>
-					<span id="pagination">#<span id="first">1</span>à#<span id="last">20</span>sur<span id="total"></span>BD</span>
-					<a href="" id="nextBooks">Suivantes &rsaquo;</a>
-				</div>
+				</fieldset>
 
-			</div>
+			</form>
 			
 		</div>
 
