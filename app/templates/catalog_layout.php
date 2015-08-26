@@ -11,8 +11,11 @@
 	<div class="container">
 		<header>
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
-			<h2><?= $w_user['username'] ?></h2>
-			<a href="<?= $this->url('logout')?>">Se déconnecter</a>
+			<div class="logInfo">
+				<h2><?= $w_user['username'] ?></h2>
+				<a href="<?= $this->url('logout')?>">Se déconnecter</a>
+			</div>
+				
 			<nav>
 				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
 				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
