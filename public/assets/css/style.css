@@ -119,7 +119,33 @@ body{
 			position: absolute;
 			top: 0;
 			left: 0;
-		}	
+		}
+
+		.container section .navbarAccount nav a{
+			display: block;
+			width: 200px;
+			text-align: center;
+			border : 1px solid #000;
+			border-bottom: none;
+			background-color: #ccc;
+			padding: 10px;
+			text-decoration: none;
+			-webkit-transition: 0.5s;
+			-o-transition: 0.5s;
+			transition: 0.5s;
+			color: #000;
+		}
+		.container section .navbarAccount nav a:first-child{
+			margin-top: 25px;	
+		}
+		.container section .navbarAccount nav a:last-child{
+			border-bottom: 1px solid #000;	
+		}
+			
+		.container section .navbarAccount nav a:hover{
+			background-color: #333;
+			color: #fff;
+		}
 
 		.container section #content{
 			display: block;
