@@ -7,16 +7,4 @@ namespace Manager;
  * communes à toutes nos classes de manager
  */
 class DefaultManager extends \W\Manager\Manager
-{
-
-	public function count()
-	{
-		$sql = "SELECT COUNT(*)
-				FROM " . $this->table;
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-
-		return $sth->fetchColumn();
-	}
-
-}
+{}
