@@ -125,4 +125,7 @@ function attachKeyword(event)
 
 $("#result").on('click', 'a', attachKeyword);
 
-
+$('#btn').on('click', function(e){
+	e.preventDefault();
+	getBooks(0);
+})

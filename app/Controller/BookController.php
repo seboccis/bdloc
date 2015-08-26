@@ -5,6 +5,8 @@ namespace Controller;
 use \Manager\BookManager;
 use \Manager\GenreManager;
 use \Manager\BookGenreManager;
+use \Manager\KeywordManager;
+use \Manager\BookKeywordManager;
 
 class BookController extends DefaultController
 {
@@ -86,6 +88,8 @@ class BookController extends DefaultController
 		//// $filterExist est une variable booléenne
 		//// par défaut égale à false
 		$filterExist = false;
+		$filterGenreExist = false;
+		$filterKeywordExist = false;
 
 		//// Application du filtre de catégories
 		//// Recherche de $booksIdsToFindAccordingToGenres
@@ -102,7 +106,7 @@ class BookController extends DefaultController
 		// sinon application de la méthode BookGenreManager->findBooksIdsByGenres
 		// cette méthode renvoie un tableau d'ids de BD appartenant à au moins une catégorie recherchée  
 		else{
-			$filterExist = true;
+			$filterGenreExist = true;
 
 			$bookGenreManager = new BookGenreManager();
 			$booksIdsToFindAccordingToGenres = $bookGenreManager->findBooksIdsByGenres($selectedGenresId); 	
@@ -115,11 +119,41 @@ class BookController extends DefaultController
 		}
 
 		//// Application du filtre de mot-clé
+		//// Recherche de $booksIdsToFindAccordingToKeyword
+		//// par défaut (si pas de mot-clé) $booksIdsToFindAccordingToKeyword est un tableau vide
+
+		$booksIdsToFindAccordingToKeyword = [];
+
+		if(!empty($keyword)){
+			$filterKeywordExist = true;
+
+			$keywordManager = new KeywordManager();
+			$keywordId = $keywordManager->findIdByKeyword($keyword);
+
+			if(!empty($keywordId)){
+
+				$bookKeywordManager = new BookKeywordManager();
+				$booksIdsToFindAccordingToKeyword = $bookKeywordManager->findBooksIdByKeywordId($keywordId);
+
+			}
+		}
 
 		//// Synthèse de deux recherches filtrées précédentes
 
-		// pour l'instant
-		$booksIdsToFindAccordingToFilters = $booksIdsToFindAccordingToGenres;
+		$filterExist = $filterGenreExist || $filterKeywordExist;
+
+		if($filterExist){
+			if(!$filterGenreExist){
+				$booksIdsToFindAccordingToFilters = $booksIdsToFindAccordingToKeyword;
+			}
+			else if(!$filterKeywordExist){
+				$booksIdsToFindAccordingToFilters = $booksIdsToFindAccordingToGenres;
+			}
+			else{
+				$booksIdsToFindAccordingToFilters = $this->mergeBooksIds($booksIdsToFindAccordingToGenres, $booksIdsToFindAccordingToKeyword);
+			}
+
+		}
 
 
 		////// Application des critères de tri et de pagination et de disponibilité
@@ -247,6 +281,19 @@ class BookController extends DefaultController
 		array_multisort($occurence, SORT_DESC,$ids);
 
 		return $ids;
+	}
+
+	private function mergeBooksIds($booksIdsToFindAccordingToGenres, $booksIdsToFindAccordingToKeyword)
+	{
+		$booksIdsToFindAccordingToFilters = [];
+
+		foreach($booksIdsToFindAccordingToGenres as $bookId){
+			if(in_array($bookId, $booksIdsToFindAccordingToKeyword)){
+				$booksIdsToFindAccordingToFilters[] = $bookId;
+			}
+		}
+
+		return $booksIdsToFindAccordingToFilters;
 	}
 
 	public function ajaxCatalogkeyword()
