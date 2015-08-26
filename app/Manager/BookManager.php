@@ -54,18 +54,18 @@ class BookManager extends DefaultManager
 		return $sth->fetch();
 	}
 
-	public function showTitle($title)
+	public function showTitle()
 	{
-		$sql = "SELECT title
-				FROM books
-				WHERE title LIKE :keyword LIMIT 10";
+		$sql = "SELECT keyword
+				FROM keywords
+				WHERE keyword LIKE :keyword LIMIT 10";
 		$sth = $this->dbh->prepare($sql);
-		$sth->bindvalue(':keyword', '%' . $_GET['keyword'] . '%');
+		$sth->bindvalue(':keyword', $_GET['keyword'] . '%');
 		$sth->execute();
 
-		$titles = $sth->fetchAll();
+		$keywords = $sth->fetchAll();
 
-		return $titles;			
+		return $keywords;			
 	}
 
 	public function countBooks($availability)

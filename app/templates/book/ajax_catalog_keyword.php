@@ -1,12 +1,12 @@
 <?php 
 
-foreach ($titles as $title){
+foreach ($keywords as $keyword){
 
 ?>
 
 	
 		
-		<a href="#"><?php echo $title['title']; ?></a>
+		<a href="#"><?php echo $keyword['keyword']; ?></a>
 			
 	
 <?php

@@ -256,11 +256,11 @@ class BookController extends DefaultController
 		
 		$keyword = $_GET['keyword'];
 		
-		$titles = $bookManager->showTitle($keyword);
-		// debug($titles);
+		$keywords = $bookManager->showTitle($keyword);
+		// debug($keywords);
 		// die();
 
-		$data = array('titles' => $titles);
+		$data = array('keywords' => $keywords);
 
 
 		$this->show('book/ajax_catalog_keyword', $data);

@@ -126,14 +126,3 @@ function attachKeyword(event)
 $("#result").on('click', 'a', attachKeyword);
 
 
-// $("#btn").on("click", function(){
-// 	var data = $("keyword").attr('data');
-// 	if (empty(data))
-// 	{
-// 		$(".selector").button("disable");
-// 	}
-// 	else
-// 	{
-		
-// 	}
-// })
