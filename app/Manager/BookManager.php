@@ -60,7 +60,7 @@ class BookManager extends DefaultManager
 				FROM books
 				WHERE title LIKE :keyword LIMIT 10";
 		$sth = $this->dbh->prepare($sql);
-		$sth->bindvalue(':keyword', $_GET['keyword'] . '%');
+		$sth->bindvalue(':keyword', '%' . $_GET['keyword'] . '%');
 		$sth->execute();
 
 		$titles = $sth->fetchAll();

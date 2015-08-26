@@ -93,10 +93,10 @@ $("#showBooks").on("click", ".detail", function(e){
 
 $("#keyword").on('keyup', function(){
 	var keyword = $('#keyword').val();
-	console.log(keyword);
+	// console.log(keyword);
 	var path = $('#keyword').attr('data');
-	console.log(path);
-	if (keyword.length < 2){
+	// console.log(path);
+	if (keyword.length < 3){
 		$('#result').html('');
 	}
 	else{
@@ -113,3 +113,27 @@ $("#keyword").on('keyup', function(){
 		});	
 	}
 });
+
+
+function attachKeyword(event)
+{  
+   var data = $(this).html();
+   // console.log(data);
+   $("#keyword").val(data);
+   event.preventDefault();
+}
+
+$("#result").on('click', 'a', attachKeyword);
+
+
+// $("#btn").on("click", function(){
+// 	var data = $("keyword").attr('data');
+// 	if (empty(data))
+// 	{
+// 		$(".selector").button("disable");
+// 	}
+// 	else
+// 	{
+		
+// 	}
+// })
