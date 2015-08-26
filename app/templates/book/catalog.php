@@ -24,8 +24,8 @@
 
 				<div>
 					<h3>Recherche</h3>
-					<input type="text" id="keyword" name="keyword" placeholder="" data="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="">
-					<button id="btn">Rechercher</button>				
+					<input type="text" id="keyword" name="keyword" placeholder="" data="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
+					<button id="btnRefresh">Rafraîchir</button>				
 					<div id="result"></div>
 				</div>
 

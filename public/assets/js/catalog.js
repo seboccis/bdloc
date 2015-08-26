@@ -118,14 +118,16 @@ $("#keyword").on('keyup', function(){
 function attachKeyword(event)
 {  
    var data = $(this).html();
-   // console.log(data);
    $("#keyword").val(data);
    event.preventDefault();
+   getBooks(0);
+   $("#result").html('');
 }
 
 $("#result").on('click', 'a', attachKeyword);
 
-$('#btn').on('click', function(e){
+$('#btnRefresh').on('click', function(e){
 	e.preventDefault();
+	$("#keyword").val('');
 	getBooks(0);
 })
