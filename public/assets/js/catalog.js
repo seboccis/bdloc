@@ -80,13 +80,16 @@ $("#showBooks").on("click", ".detail", function(e){
 	})
 	$('#shadow').fadeIn(200);
 	e.stopPropagation();
+	$('#showDetail').on('click',function(e){
+		e.stopPropagation();
+	});
+	$('html').on("click",function(e){
+		$('#shadow').fadeOut(200);
+		e.stopPropagation();
+	});
 
 })
-	// $('html').on("click",function(e){
-	// 	$('.shadow').fadeOut(200);
-	// 	e.stopPropagation();
-	// });
-
+		
 
 $("#keyword").on('keyup', function(){
 	var keyword = $('#keyword').val();

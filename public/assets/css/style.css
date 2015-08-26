@@ -211,6 +211,10 @@ body{
 			transform: translateX(-50%)translateY(-50%);
 		}
 
+			.container #shadow #showDetail figure img{
+				display: block;
+			}
+
 			.container #shadow #showDetail figcaption{
 				background-color: #fff;
 				padding: 5px;
