@@ -240,6 +240,21 @@ body{
 			.container #shadow #showDetail figure img{
 				display: block;
 			}
+			.container #shadow #showDetail figure button{
+				position: absolute;
+				top: 15px;
+				right: 15px;
+				z-index: 11;
+				border:none;
+				background: rgba(255,255,255,0.6);
+				font-size: 1rem;
+				line-height: 15px;
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				text-shadow:0 0 1px #222;
+				cursor: pointer;
+			}
 
 			.container #shadow #showDetail figcaption{
 				background-color: #fff;

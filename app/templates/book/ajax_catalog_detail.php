@@ -3,6 +3,7 @@
 	<figure>
 		
 	<img src="<?php echo $this->assetUrl('img/covers/'.$book['cover']);?>">
+	<button class='btn'>&times;</button>
 	<figcaption>
 		
 			<h1><?php echo $this->e($book['title'])?></h1>
