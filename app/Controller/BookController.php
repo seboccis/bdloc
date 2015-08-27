@@ -30,6 +30,7 @@ class BookController extends DefaultController
 	 */
 	public function ajaxCatalogGetBooks()
 	{
+		
 		////// Définition des variables de recherche
 
 		//// Variables de filtres
@@ -210,16 +211,25 @@ class BookController extends DefaultController
 			$books = [];
 			$total = count($booksIdsToFindAccordingToFiltersAndAvailability);
 			
-			if($total >= $start + $number){
-				for($index = $start; $index < $start + $number; $index++){
-					$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
-				}				
+			if(empty($sort)){
+
+				if($total >= $start + $number){
+					for($index = $start; $index < $start + $number; $index++){
+						$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
+					}				
+				}
+				else{
+					for($index = $start; $index < $total; $index++){
+						$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
+					}
+					$last = $total;
+				}
+
 			}
 			else{
-				for($index = $start; $index < $total; $index++){
-					$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
-				}
-				$last = $total;
+
+				$books = $bookManager->findBooksByArrayIds($booksIdsToFindAccordingToFiltersAndAvailability, $start, $number, $sort);
+
 			}
 
 		}
@@ -248,6 +258,7 @@ class BookController extends DefaultController
 
 		////// Afficher ajax_catalog_showBooks.php avec $data
 		$this->show('book/ajax_catalog_showBooks', $data);
+		
 	}
 
 

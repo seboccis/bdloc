@@ -39,13 +39,21 @@
 
 		<div id="resultsBar">
 
-			<form action="" method='POST' id="formResultsBarFilters" class="elementOfResultsBar fieldset">
+			<form action="" method='POST' id="formResultsBarFilters" class="fieldset">
 				
 				<fieldset>
 					
 					<legend>Résultats</legend>
 
-					<div>
+					<div class="elementOfResultsBar">
+						<select name="sort">
+						  <option value="" selected>Trier par</option> 
+						  <option value="serie">Trier par série</option>
+						  <option value="title">Trier par titre</option>
+						</select>
+					</div>
+
+					<div class="elementOfResultsBar">
 						<select name="number">
 						  <option value="10">Afficher 10 résultats</option> 
 						  <option value="20" selected>Afficher 20 résultats</option>
@@ -53,7 +61,7 @@
 						</select>
 					</div>
 
-					<button id="btnNumber">Valider</button>
+					<button id="btnNumber" class="elementOfResultsBar">Valider</button>
 
 					<div id="paginationNav" class="elementOfResultsBar">
 						<a href="" id="prevBooks">&lsaquo; Précédentes</a>
