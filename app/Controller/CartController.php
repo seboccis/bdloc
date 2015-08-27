@@ -33,7 +33,8 @@ class CartController extends Controller
 
 
 		$cartManager->createRelation($cartId, $bookId);
-		$this->redirectToRoute('catalog');
+		
+		echo "Ajouté!";
 
 	}
 
