@@ -19,8 +19,8 @@
 				
 			<nav>
 				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
+				<a href="<?php echo $this->url('show_cart');?>">Mon Panier <em id="count">0</em></a>
 				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
-				<a href="<?php echo $this->url('show_cart');?>">Panier<em id="count"></em></a>
 			</nav>
 		</header>
 
