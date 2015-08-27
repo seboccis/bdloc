@@ -37,7 +37,7 @@
 					}
 				?>
 			</p>
-			<a class="addToCart" href="<?= $this->url('add_to_cart',['bookId'=>$book['id']])?>">Ajouter au panier</a>
+			<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
 			<p class="cartQuantity"></p>
 	</figcaption>
 	</figure>

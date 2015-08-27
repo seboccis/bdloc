@@ -12,8 +12,9 @@ class CartController extends Controller
 	/**
 	 * Page d'ajout au panier
 	 */
-	public function addToCart($bookId)
+	public function addToCart()
 	{
+		
 		$cartManager = new CartManager();
 		
 		// vérifier si un panier existe déjà 
@@ -32,7 +33,7 @@ class CartController extends Controller
 			
 
 
-		$cartManager->createRelation($cartId, $bookId);
+		$cartManager->createRelation($cartId, $_GET['id']);
 		
 		echo "Ajouté!";
 

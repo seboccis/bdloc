@@ -43,8 +43,12 @@ function getBooks(start){
 $('#showDetail').on('click', '.addToCart', function(event){
 	event.preventDefault();
 	var path = $(this).attr('href');
+	var bookId = $(this).attr('data-bookIdToCart');
 	$.ajax({
 		url: path,
+		data: {
+			id: bookId,
+		}
 	})
 	.done(function(response){
 		$('.cartQuantity').html(response);
@@ -79,6 +83,8 @@ $('#nextBooks').on('click', function(e){
 	getBooks(start);
 })
 
+
+// Afficher le détail de la BD sélectionnée avec une light-box
 $("#showBooks").on("click", ".detail", function(e){
 	e.preventDefault();
 

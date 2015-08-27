@@ -29,7 +29,7 @@
 		['GET|POST', '/compte/modifications/Password/', 'User#editPassword', 'edit_password'],
 
 		// Page d'ajout au panier
-		['GET', '/panier/Ajouter/[:bookId]/', 'Cart#addToCart', 'add_to_cart'],
+		['GET', '/panier/Ajouter/', 'Cart#addToCart', 'add_to_cart'],
 
 		// Page d'affichage du panier
 		['GET', '/panier/', 'Cart#showCart', 'show_cart'],
