@@ -15,7 +15,7 @@ class CartController extends Controller
 	public function addToCart($bookId)
 	{
 		$cartManager = new CartManager();
-
+		
 		// vérifier si un panier existe déjà 
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
 		
@@ -24,6 +24,14 @@ class CartController extends Controller
 			// créer une relation cart / book
 			$cartId = $cartManager->createCart($_SESSION['user']['id']);
 		}
+		// compter le nombre d'exemplaire présent dans le cart
+			$countBooks = $cartManager->countBooksInCart($cartId);
+			if ($countBooks > 10) {
+				$cartError = "Vous avez atteint la taille maximale de votre panier";
+			}
+			
+
+
 		$cartManager->createRelation($cartId, $bookId);
 		$this->redirectToRoute('catalog');
 
@@ -36,6 +44,7 @@ class CartController extends Controller
 
 		$books = [];
 		$cartEmpty = "";
+		$countBooks = "";
 
 		// Récupération du cart_id de l'utilisateur avec la méthode findCart()
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
@@ -55,6 +64,10 @@ class CartController extends Controller
 		$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
 		if (!empty($booksIds)) {
 			$books = $bookManager->showBooks($booksIds);
+
+			// Compter le nombre d'exemplaires dans le cart
+			$countBooks = $cartManager->countBooksInCart($cartId);
+
 		}
 		
 		$cartEmpty = "Votre panier est vide";
@@ -64,6 +77,7 @@ class CartController extends Controller
 		$data = [
 			'books' => $books,
 			'cartEmpty' => $cartEmpty,	
+			'countBooks' => $countBooks,
 		];
 		
 		$this->show('cart/show_cart', $data);

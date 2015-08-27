@@ -5,7 +5,7 @@
 <h2>Ceci est la page du panier.</h2>
 
 <?php if (!empty($books)) { ?>
-	
+<?php echo 'Le nombre d\'exemplaires dans votre panier est de : ' . $countBooks;?>	
 <table>
 	<thead>
 		<th>Titre</th>
