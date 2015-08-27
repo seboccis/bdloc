@@ -38,22 +38,6 @@ function getBooks(start){
 	.fail(showRequestFailed);
 }
 
-// Ajouter au CART
-
-$('#showDetail').on('click', '.addToCart', function(event){
-	event.preventDefault();
-	var path = $(this).attr('href');
-	$.ajax({
-		url: path,
-	})
-	.done(function(response){
-		$('.cartQuantity').html(response);
-		$('.addToCart').css({'display':'none'});
-	});
-})
-		
-// Fin de la fonction
-
 $(window).on("load", function(){
 	getBooks(0);
 })

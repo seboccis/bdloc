@@ -30,8 +30,11 @@ class CartController extends Controller
 				$cartError = "Vous avez atteint la taille maximale de votre panier";
 			}
 			
+
+
 		$cartManager->createRelation($cartId, $bookId);
-		echo "Ajouté!";
+		$this->redirectToRoute('catalog');
+
 	}
 
 	public function showCart()
