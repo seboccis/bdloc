@@ -4,8 +4,9 @@
 	<meta charset="UTF-8">
 	<title>BDLoc :: <?= $this->e($title) ?></title>
 	<script type="text/javascript" src="<?= $this->assetUrl('js/jQuery.min.js') ?>"></script>
-	<link rel="stylesheet" href="<?= $this->assetUrl('css/reset.css') ?>">
-	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
+	<link rel="icon" type="image/png" href="<?= $this->assetUrl('img/icons/favicon.png') ?>" />
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/reset.css') ?>" />
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>" />
 </head>
 <body>
 	<div class="container">

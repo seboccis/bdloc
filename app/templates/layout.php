@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?= $this->e($title) ?></title>
-	
-	<link rel="stylesheet" href="<?= $this->assetUrl('css/reset.css') ?>">
+	<link rel="icon" type="image/png" href="<?= $this->assetUrl('img/icons/favicon.png') ?>" />
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/reset.css') ?>" />
 </head>
 <body>
 	<div class="container">
