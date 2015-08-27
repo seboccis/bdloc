@@ -23,89 +23,9 @@ class BookManager extends DefaultManager
 		return $books;
 	}
 
-	public function findBooks($start, $number, $availability, $sort)
-	{
-		if($start == 0){
-			$startSQL = '';
-		}
-		else{
-			$startSQL = $start . ',';
-		}
-
-		$availabilitySQL = '';
-		if($availability == 1){
-			$availabilitySQL = ' WHERE b.is_available = 1';
-		}
-
-		$sortSQL = "";
-		if($sort == "serie"){
-			$sortSQL = ' ORDER BY b.serieId';
-		}
-		if($sort == "title"){
-			$sortSQL = ' ORDER BY b.title';
-		}
-
-		$sql = "SELECT b.id, b.serieId, b.title, b.num, b.publisher, b.isbn, b.cover, b.exlibris, b.pages, b.dateCreated, b.dateModified , s.id scenaristId, s.firstName scenaristFirstName, s.lastName scenaristLastName, s.aka scenaristAka, i.id illustratorId, i.firstName illustratorFirstName, i.lastName illustratorLastName, i.aka illustratorAka, c.id coloristId, c.firstName coloristFirstName, c.lastName coloristLastName, c.aka coloristAka
-				FROM books as b
-				LEFT JOIN authors as s
-				ON  b.scenarist = s.id
-				LEFT JOIN authors as i
-				ON  b.illustrator = i.id
-				LEFT JOIN authors as c
-				ON  b.colorist = c.id" . $availabilitySQL . $sortSQL.
-				" LIMIT " . $startSQL . " ".$number;
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-
-		return $sth->fetchAll();
-	}
-
-	public function findBooksByArrayIds($bookIds, $start, $number, $sort)
-	{
-		$idsSQL = '';
-		$nbIds = count($bookIds);
-		if($nbIds >= 1){
-			$idsSQL = ' WHERE b.id = ' . $bookIds[0];
-			if($nbIds >= 2){
-				for($index = 1; $index < $nbIds; $index++){
-					$idsSQL .= ' OR b.id = ' . $bookIds[$index];
-				}
-			}
-		}
-
-		if($start == 0){
-			$startSQL = '';
-		}
-		else{
-			$startSQL = $start . ',';
-		}
-
-		$sortSQL = "";
-		if($sort == "serie"){
-			$sortSQL = ' ORDER BY b.serieId';
-		}
-		if($sort == "title"){
-			$sortSQL = ' ORDER BY b.title';
-		}
-
-		$sql = "SELECT b.id, b.serieId, b.title, b.num, b.publisher, b.isbn, b.cover, b.exlibris, b.pages, b.dateCreated, b.dateModified , s.id scenaristId, s.firstName scenaristFirstName, s.lastName scenaristLastName, s.aka scenaristAka, i.id illustratorId, i.firstName illustratorFirstName, i.lastName illustratorLastName, i.aka illustratorAka, c.id coloristId, c.firstName coloristFirstName, c.lastName coloristLastName, c.aka coloristAka
-				FROM books as b
-				LEFT JOIN authors as s
-				ON  b.scenarist = s.id
-				LEFT JOIN authors as i
-				ON  b.illustrator = i.id
-				LEFT JOIN authors as c
-				ON  b.colorist = c.id" . $idsSQL . $sortSQL.
-				" LIMIT " . $startSQL . " ". $number;
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-
-		return $sth->fetchAll();	
-	}
-
 	public function extendedFind($id)
 	{
-		$sql = "SELECT b.id, b.serieId, b.title, b.num, b.publisher, b.isbn, b.cover, b.exlibris, b.pages, b.dateCreated, b.dateModified , s.id scenaristId, s.firstName scenaristFirstName, s.lastName scenaristLastName, s.aka scenaristAka, i.id illustratorId, i.firstName illustratorFirstName, i.lastName illustratorLastName, i.aka illustratorAka, c.id coloristId, c.firstName coloristFirstName, c.lastName coloristLastName, c.aka coloristAka
+		$sql = "SELECT b.id, b.serieId, b.title, b.num, b.publisher, b.isbn, b.cover, b.exlibris, b.pages, b.quantity_available, b.dateCreated, b.dateModified , s.id scenaristId, s.firstName scenaristFirstName, s.lastName scenaristLastName, s.aka scenaristAka, i.id illustratorId, i.firstName illustratorFirstName, i.lastName illustratorLastName, i.aka illustratorAka, c.id coloristId, c.firstName coloristFirstName, c.lastName coloristLastName, c.aka coloristAka
 				FROM books as b
 				LEFT JOIN authors as s
 				ON  b.scenarist = s.id
@@ -120,51 +40,96 @@ class BookManager extends DefaultManager
 		return $sth->fetch();
 	}
 
-	public function countBooks($availability)
+	public function findCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number)
 	{
-		$availabilitySQL = '';
-		if($availability == 1){
-			$availabilitySQL = ' WHERE is_available = 1';
-		}
+		$sql = $this->createSQLCatalog(1, $selectedGenresId, $availability, $keyword, $sort, $start, $number);
 
-		$sql = "SELECT COUNT(*)
-				FROM " . $this->table . $availabilitySQL;
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchAll();
+	}
+
+	public function countCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number)
+	{
+		$sql = $this->createSQLCatalog(2, $selectedGenresId, $availability, $keyword, $sort, $start, $number);
+
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
 		return $sth->fetchColumn();
 	}
 
-	public function findBooksdIdAvailable($booksIdsToFindAccordingToFilters)
+	private function createSQLCatalog($int, $selectedGenresId, $availability, $keyword, $sort, $start, $number)
 	{
-		$nbBooksId = count($booksIdsToFindAccordingToFilters);
 
-		if($nbBooksId == 0){
-			$authorizedBooksIdsToFindAccordingToFiltersAndAvailability = [];
-		}
-		else{
+		$genresSQL = ' ';
+		if(!empty($selectedGenresId)){
 
-			$stringId ='';
+			$underGenresSQL = '';
 
-			foreach($booksIdsToFindAccordingToFilters as $id){
-				$stringId .= $id . ' ,';
+			foreach($selectedGenresId as $genreId){
+				$underGenresSQL .= 'genreId = ' . $genreId . ' OR ';
 			}
 
-			$stringId = substr($stringId, 0, -2);
+			$underGenresSQL = substr($underGenresSQL, 0, -4);
 
-			$booksIdSQL = ' WHERE id IN (' . $stringId . ')';			
-
-			$sql = "SELECT id
-					FROM " . $this->table .
-					$booksIdSQL . " 
-					AND is_available = 1";
-			$sth = $this->dbh->prepare($sql);
-			$sth->execute();
-
-			$authorizedBooksIdsToFindAccordingToFiltersAndAvailability = $sth->fetchAll();
+			$genresSQL = ' AND b.id IN	(
+											SELECT bookId
+											FROM books_genres
+											WHERE ' . $underGenresSQL . ' 
+										)';
 		}
 
-		return $authorizedBooksIdsToFindAccordingToFiltersAndAvailability; 
+		$availabilitySQL = ' ';
+		if($availability == 1){
+			$availabilitySQL = ' AND b.is_available = 1';
+		}
+
+		$keywordSQL = ' ';
+		if(!empty($keyword)){
+			$keywordSQL = " AND b.id IN	(
+											SELECT bookId
+											FROM books_keywords
+											WHERE keywordId IN	(
+																	SELECT id
+																	FROM keywords
+																	WHERE keyword = '" . $keyword . "'
+																)
+										)";
+		}
+
+		$sortSQL = " ";
+		if($sort == "serie"){
+			$sortSQL = 'ORDER BY serieId';
+		}
+		if($sort == "title"){
+			$sortSQL = ' ORDER BY title';
+		}
+
+		$paginationSQL = ' LIMIT ' . $start . ', ' . $number;
+
+		$columnsSQL = 'COUNT(*) ';
+		if($int == 1){
+			$columnsSQL = 'b.id, b.serieId, b.title, b.num, b.publisher, b.isbn, b.cover, b.exlibris, b.pages, b.quantity_available,b.dateCreated, b.dateModified , s.id scenaristId, s.firstName scenaristFirstName, s.lastName scenaristLastName, s.aka scenaristAka, i.id illustratorId, i.firstName illustratorFirstName, i.lastName illustratorLastName, i.aka illustratorAka, c.id coloristId, c.firstName coloristFirstName, c.lastName coloristLastName, c.aka coloristAka ';
+		}
+		else if($int == 2){
+			$columnsSQL = 'COUNT(*) ';
+			$paginationSQL = '';
+		}
+
+		$sql = "SELECT " . $columnsSQL . "
+				FROM books as b
+				LEFT JOIN authors as s
+				ON  b.scenarist = s.id
+				LEFT JOIN authors as i
+				ON  b.illustrator = i.id
+				LEFT JOIN authors as c
+				ON  b.colorist = c.id
+				WHERE b.id >= 0"
+				. $genresSQL . $availabilitySQL . $keywordSQL . $sortSQL . $paginationSQL;
+
+		return $sql; 
 	}
 
 }

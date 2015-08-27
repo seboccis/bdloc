@@ -47,6 +47,7 @@
 							}
 						?>
 					</p>
+					<p><?php echo $this->e($book['quantity_available'])?> disponibles</p>
 			
 				</div>
 
