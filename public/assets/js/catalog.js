@@ -66,11 +66,6 @@ $('.checkbox').on('click', function(e){
 	getBooks(0);
 })
 
-$('#btnNumber').on('click', function(e){
-	e.preventDefault();
-	getBooks(0);
-})
-
 $('#prevBooks').on('click', function(e){
 	e.preventDefault();
 	var start = $('#showBooks > #dataRequest').attr('data-request-precStart');
@@ -81,6 +76,16 @@ $('#nextBooks').on('click', function(e){
 	e.preventDefault();
 	var start = $('#showBooks > #dataRequest').attr('data-request-nextStart');
 	getBooks(start);
+})
+
+$('#selectCatalogSort').on('change', function(e){
+  	e.preventDefault();
+	getBooks(0);
+})
+
+$('#selectCatalogNumber').on('change', function(e){
+  	e.preventDefault();
+	getBooks(0);
 })
 
 
