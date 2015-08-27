@@ -16,26 +16,39 @@ class CartController extends Controller
 	{
 		
 		$cartManager = new CartManager();
+		$cartError = "";
 		
 		// vérifier si un panier existe déjà 
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
 		
 		if (empty($cartId)) {
-			
 			// créer une relation cart / book
 			$cartId = $cartManager->createCart($_SESSION['user']['id']);
 		}
-		// compter le nombre d'exemplaire présent dans le cart
-			$countBooks = $cartManager->countBooksInCart($cartId);
-			if ($countBooks > 10) {
-				$cartError = "Vous avez atteint la taille maximale de votre panier";
-			}
-			
-
-
-		$cartManager->createRelation($cartId, $_GET['id']);
 		
-		echo "Ajouté!";
+		// compter le nombre d'exemplaire présent dans le cart
+		$countBooks = $cartManager->countBooksInCart($cartId);
+		if ($countBooks > 10) {
+			$cartError = "Vous avez atteint la taille maximale de votre panier";
+		}
+			
+		// vérifier si le livre est déjà dans le cart
+		if ($cartManager->findBook($_GET['id'],$cartId)) {
+			$cartError = "Le livre est déjà dans votre panier !";
+		}
+
+		if (empty($cartError)) {
+			$cartManager->createRelation($cartId, $_GET['id']);
+			$countBooks = $cartManager->countBooksInCart($cartId);
+		}
+
+		
+		$data = [
+			'cartError' => $cartError,
+			'countBooks' => $countBooks,
+		];
+
+		$this->showJson($data);
 
 	}
 

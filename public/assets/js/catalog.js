@@ -44,6 +44,7 @@ $('#showDetail').on('click', '.addToCart', function(event){
 	event.preventDefault();
 	var path = $(this).attr('href');
 	var bookId = $(this).attr('data-bookIdToCart');
+	$('#count').fadeIn(500);
 	$.ajax({
 		url: path,
 		data: {
@@ -51,7 +52,8 @@ $('#showDetail').on('click', '.addToCart', function(event){
 		}
 	})
 	.done(function(response){
-		$('.cartQuantity').html(response);
+		$('#count').html(response.countBooks);
+		$('#cartError').html(response.cartError);
 		$('.addToCart').css({'display':'none'});
 	});
 })
@@ -60,6 +62,7 @@ $('#showDetail').on('click', '.addToCart', function(event){
 
 $(window).on("load", function(){
 	getBooks(0);
+	$('#count').fadeIn(500);
 })
 
 $('.checkbox').on('click', function(e){
@@ -107,7 +110,11 @@ $("#showBooks").on("click", ".detail", function(e){
 	})
 	$('#shadow').fadeIn(200);
 	e.stopPropagation();
-	$('#showDetail').on('click',function(e){
+	$('#showDetail').on("click",function(e){
+	e.stopPropagation();
+	});
+	$('#btn').on("click",function(e){
+		$('#shadow').fadeOut(200);
 		e.stopPropagation();
 	});
 	$('html').on("click",function(e){

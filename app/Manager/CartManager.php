@@ -20,6 +20,17 @@ class CartManager extends DefaultManager
 		return $sth->fetchColumn();
 	}
 
+	public function findBook($bookId,$cartId)
+	{
+		$sql = "SELECT *
+				FROM cart_to_books
+				WHERE book_id = $bookId AND cart_id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetch();
+	}
+
 	public function createCart($id)
 	{
 		$sql = "INSERT INTO cart(id, user_id, status, begin_date, end_date)

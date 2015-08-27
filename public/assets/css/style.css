@@ -90,6 +90,19 @@ body{
 				transition: 0.5s;
 				color: #000;
 			}
+
+			.container header nav #count{
+				display: none;
+				margin-right: 5px;
+				border : 1px solid green;
+				width: 25px;
+				height: 25px;
+				border-radius: 50%;
+				background-color: green;
+				color: white;
+				font-weight: bolder;
+				padding: 3px;
+			}
 			.container header nav a:hover{
 				background-color: #333;
 				color: #fff;

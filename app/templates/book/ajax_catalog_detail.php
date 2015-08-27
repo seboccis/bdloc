@@ -38,6 +38,7 @@
 				?>
 			</p>
 			<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
-			<p class="cartQuantity"></p>
+			<p id="cartError"></p>
 	</figcaption>
 	</figure>
+	
