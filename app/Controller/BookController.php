@@ -82,6 +82,25 @@ class BookController extends DefaultController
 		$bookManager = new BookManager();
 		$books = $bookManager->findCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number);
 
+		$transformedBooks = [];
+		foreach($books as $book){
+			$nb = $book['quantity_available'];
+
+			unset($book['quantity_available']);
+
+			$string_quantity_available = $nb . ' disponibles';
+			if($nb == 0){
+				$string_quantity_available = 'Plus d\'exemplaires disponibles';
+			}
+			else if($nb == 1){
+				$string_quantity_available = 'Plus qu\'un exemplaire disponible !!';
+			}
+
+			$book['string_quantity_available'] = $string_quantity_available;
+
+			$transformedBooks[] = $book;
+		}
+
 		////// Définition des variables à envoyer sur la page ajax_catalog_showBooks.php
 
 		$total = $bookManager->countCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number);
@@ -107,7 +126,7 @@ class BookController extends DefaultController
 			'last'		=> $last,
 			'total'		=> $total,
 			'nextStart'	=> $nextStart,
-			'books' 	=> $books,
+			'books' 	=> $transformedBooks,
 			);
 
 		////// Afficher ajax_catalog_showBooks.php avec $data

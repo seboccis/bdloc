@@ -1,7 +1,7 @@
-<?php ?>
+<?php 									?>
 	<input type="hidden" id='dataRequest' data-request-precStart="<?= $precStart; ?>" data-request-first="<?= $first; ?>" data-request-last="<?= $last; ?>" data-request-total="<?= $total; ?>" data-request-nextStart="<?= $nextStart; ?>">
-		
-<?php foreach($books as $book){		?>
+	
+<?php foreach($books as $book){			?>
 	
 	<a href="" class="detail" value="<?php echo $book['id']; ?>">
 
@@ -47,7 +47,7 @@
 							}
 						?>
 					</p>
-					<p><?php echo $this->e($book['quantity_available'])?> disponibles</p>
+					<p><?php echo $this->e($book['string_quantity_available'])?></p>
 			
 				</div>
 
