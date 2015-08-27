@@ -173,10 +173,6 @@ class BookController extends DefaultController
 		if(!$filterExist){
 			$books = $bookManager->findBooks($start, $number, $availability, $sort);
 			$total = $bookManager->countBooks($availability);
-
-			if($last > $total){
-				$last = $total;
-			}
 		}
 
 		//// sinon, utilisation de $booksIdsToFindAccordingToFilters
@@ -210,25 +206,26 @@ class BookController extends DefaultController
 
 			$books = [];
 			$total = count($booksIdsToFindAccordingToFiltersAndAvailability);
-			
-			if(empty($sort)){
 
-				if($total >= $start + $number){
-					for($index = $start; $index < $start + $number; $index++){
-						$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
-					}				
+			if($total > 0){
+
+				if(empty($sort)){
+
+					if($total >= $start + $number){
+						for($index = $start; $index < $start + $number; $index++){
+							$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
+						}				
+					}
+					else{
+						for($index = $start; $index < $total; $index++){
+							$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
+						}
+					}
+
 				}
 				else{
-					for($index = $start; $index < $total; $index++){
-						$books[] = $bookManager->extendedFind($booksIdsToFindAccordingToFiltersAndAvailability[$index]);
-					}
-					$last = $total;
+					$books = $bookManager->findBooksByArrayIds($booksIdsToFindAccordingToFiltersAndAvailability, $start, $number, $sort);
 				}
-
-			}
-			else{
-
-				$books = $bookManager->findBooksByArrayIds($booksIdsToFindAccordingToFiltersAndAvailability, $start, $number, $sort);
 
 			}
 
@@ -241,6 +238,10 @@ class BookController extends DefaultController
 		$first = $start + 1;
 		if($total == 0){
 			$first = 0;
+		}
+
+		if($last > $total){
+			$last = $total;
 		}
 
 		$precStart = $start - $number;
