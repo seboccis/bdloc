@@ -4,6 +4,8 @@
 
 <h2>Ceci est la page du panier.</h2>
 
+<?php if (!empty($books)) { ?>
+	
 <table>
 	<thead>
 		<th>Titre</th>
@@ -24,5 +26,9 @@
 
 </table>
 
+<?php }
+	else{
+		echo '<span>'. $cartEmpty .'</span>' ;
+	} ?>
 
 <?php $this->stop('main_content') ?>

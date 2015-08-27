@@ -34,6 +34,7 @@ class CartController extends Controller
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
 
+		$books = [];
 		$cartEmpty = "";
 
 		// Récupération du cart_id de l'utilisateur avec la méthode findCart()
@@ -42,7 +43,11 @@ class CartController extends Controller
 		// Si le panier est vide, afficher un message
 		if (empty($cartId)) {
 			$cartEmpty = "Votre panier est vide";
-			$this->show('show_cart', ['cartEmpty' => $cartEmpty]);
+			$data = [
+				'books' => $books,
+				'cartEmpty' => $cartEmpty,
+			];
+			$this->show('cart/show_cart', $data);
 		}
 
 		// Sinon, récupérer les identifiants des books
@@ -52,7 +57,10 @@ class CartController extends Controller
 		$books = $bookManager->showBooks($booksIds);
 		// debug($books);
 		// die();
-		$data = ['books' => $books];
+		$data = [
+			'books' => $books,
+			'cartEmpty' => $cartEmpty,	
+		];
 		
 		$this->show('cart/show_cart', $data);
 
