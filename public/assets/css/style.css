@@ -109,6 +109,19 @@ body{
 			left: 0;
 		}
 
+			.container section #sideBar #resultKeywordResearch a{
+				color: #000;
+				text-decoration: none;
+			}
+
+				.container section #sideBar #resultKeywordResearch a span{
+					color: rgba(0,0,0,0.4);
+				}
+
+				.container section #sideBar #resultKeywordResearch a em{
+					color: #000;
+				}
+
 		.container section .navbarAccount nav a{
 			display: block;
 			width: 200px;

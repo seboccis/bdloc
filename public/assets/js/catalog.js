@@ -91,43 +91,39 @@ $("#showBooks").on("click", ".detail", function(e){
 })
 		
 
-$("#keyword").on('keyup', function(){
-	var keyword = $('#keyword').val();
-	// console.log(keyword);
-	var path = $('#keyword').attr('data');
-	// console.log(path);
-	if (keyword.length < 3){
-		$('#result').html('');
+$("#inputKeyword").on('keyup', function(){
+	var keywordBeginning = $('#inputKeyword').val();
+	var path = $('#inputKeyword').attr('data-ajax-catalog-keyword-path');
+	if (keywordBeginning.length < 3){
+		$('#resultKeywordResearch').html('');
 	}
 	else{
-
 		$.ajax({
 			url : path,
 			data : {
-			'keyword' : $('#keyword').val(),
+			'keywordBeginning' : keywordBeginning,
 			}
-
-		}).done(function(response){
-			$('#result').html(response);
-			
+		})
+		.done(function(response){
+			$('#resultKeywordResearch').html(response);			
 		});	
 	}
-});
+})
 
 
 function attachKeyword(event)
 {  
-   var data = $(this).html();
-   $("#keyword").val(data);
+   var data = $(this).attr('data-keyword');
+   $("#inputKeyword").val(data);
    event.preventDefault();
    getBooks(0);
-   $("#result").html('');
+   $("#resultKeywordResearch").html('');
 }
 
-$("#result").on('click', 'a', attachKeyword);
+$("#resultKeywordResearch").on('click', 'a', attachKeyword);
 
 $('#btnRefresh').on('click', function(e){
 	e.preventDefault();
-	$("#keyword").val('');
+	$("#inputKeyword").val('');
 	getBooks(0);
 })

@@ -16,10 +16,10 @@
 
 		// Requête AJAX pour afficher les BD
 		['GET|POST', '/ajax/catalogue/books/', 'Book#ajaxCatalogGetBooks', 'ajax_catalog_getBooks'],
-
-		//Requête AJAX pour afficher le detail de la BD
+		// Requête AJAX pour afficher le detail de la BD
 		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
-		['GET|POST', '/ajax/catalogue/keyword/', 'Book#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
+		// Requête AJAX pour afficher les résultats de l'autocomplétion sur le mot-clé
+		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
 
 		// Page du compte
 		['GET', '/compte/', 'User#account', 'account'],

@@ -8,7 +8,7 @@ namespace Manager;
 class BookManager extends DefaultManager
 {
 
-	public function findBooks($start, $number, $availability, $tri)
+	public function findBooks($start, $number, $availability, $sort)
 	{
 		if($start == 0){
 			$startSQL = '';
@@ -52,20 +52,6 @@ class BookManager extends DefaultManager
 		$sth->execute();
 
 		return $sth->fetch();
-	}
-
-	public function showTitle()
-	{
-		$sql = "SELECT keyword
-				FROM keywords
-				WHERE keyword LIKE :keyword LIMIT 10";
-		$sth = $this->dbh->prepare($sql);
-		$sth->bindvalue(':keyword', $_GET['keyword'] . '%');
-		$sth->execute();
-
-		$keywords = $sth->fetchAll();
-
-		return $keywords;			
 	}
 
 	public function countBooks($availability)

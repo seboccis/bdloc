@@ -60,9 +60,9 @@ class BookController extends DefaultController
 
 		// $tri définit le tri à appliquer,
 		// par défaut chaîne vide
-		$tri = '';
-		if(!empty($_POST['tri'])){
-			$tri = $_POST['tri'];
+		$sort = '';
+		if(!empty($_POST['sort'])){
+			$sort = $_POST['sort'];
 		}
 
 		//// Variables de pagination
@@ -170,7 +170,7 @@ class BookController extends DefaultController
 		//// si pas de filtres, recherche générale dans la table books
 		//// en appliquant le tri, la pagination et la disponibilité
 		if(!$filterExist){
-			$books = $bookManager->findBooks($start, $number, $availability, $tri);
+			$books = $bookManager->findBooks($start, $number, $availability, $sort);
 			$total = $bookManager->countBooks($availability);
 
 			if($last > $total){
@@ -229,6 +229,9 @@ class BookController extends DefaultController
 
 		// $first est le numéro par rapport à cette recherche de la première BD ramenée
 		$first = $start + 1;
+		if($total == 0){
+			$first = 0;
+		}
 
 		$precStart = $start - $number;
 		$nextStart = $start + $number;
@@ -294,23 +297,6 @@ class BookController extends DefaultController
 		}
 
 		return $booksIdsToFindAccordingToFilters;
-	}
-
-	public function ajaxCatalogkeyword()
-	{
-		$bookManager = new BookManager;
-
-		
-		$keyword = $_GET['keyword'];
-		
-		$keywords = $bookManager->showTitle($keyword);
-		// debug($keywords);
-		// die();
-
-		$data = array('keywords' => $keywords);
-
-
-		$this->show('book/ajax_catalog_keyword', $data);
 	}
 
 }

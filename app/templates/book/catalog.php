@@ -24,9 +24,9 @@
 
 				<div>
 					<h3>Recherche</h3>
-					<input type="text" id="keyword" name="keyword" placeholder="" data="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
+					<input type="text" id="inputKeyword" name="keyword" placeholder="mot-clé" data-ajax-catalog-keyword-path="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
 					<button id="btnRefresh">Rafraîchir</button>				
-					<div id="result"></div>
+					<div id="resultKeywordResearch"></div>
 				</div>
 
 			</fieldset>
