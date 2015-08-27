@@ -14,7 +14,7 @@
 					<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
 
 				</div>
-				<div class="cell">
+				<div class="cell cell-text">
 
 					<h1><?php echo $this->e($book['title'])?></h1>
 					<p>

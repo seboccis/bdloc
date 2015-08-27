@@ -22,6 +22,10 @@ body{
 	text-align:center;
 }
 
+.cell-text{
+	text-align: left;
+}
+
 .fieldset fieldset{
 	height: 95%;
 	width: 90%;
@@ -216,6 +220,8 @@ body{
 									width: 200px;
 									margin: 0 auto;
 								}
+
+								.container section #content #showBooks .detail .cover .row .cell-text{}
 
 	.container #shadow{
 		position: absolute;
