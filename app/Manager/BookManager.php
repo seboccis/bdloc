@@ -7,6 +7,21 @@ namespace Manager;
  */
 class BookManager extends DefaultManager
 {
+	public function showBooks($booksIds)
+	{
+		foreach ($booksIds as $bookId) {
+			$id =  $bookId['book_id'];
+			$sql = "SELECT cover, title
+					FROM books
+					WHERE id = $id";
+
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+
+			$books[] =  $sth->fetch();
+		}
+		return $books;
+	}
 
 	public function findBooks($start, $number, $availability, $sort)
 	{

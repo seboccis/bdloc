@@ -19,7 +19,7 @@
 			<nav>
 				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
 				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
-				<a href="#">Panier</a>
+				<a href="<?php echo $this->url('show_cart');?>">Panier</a>
 			</nav>
 		</header>
 
