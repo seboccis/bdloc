@@ -53,8 +53,12 @@ class CartController extends Controller
 		// Sinon, récupérer les identifiants des books
 
 		$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
+		if (!empty($booksIds)) {
+			$books = $bookManager->showBooks($booksIds);
+		}
+		
+		$cartEmpty = "Votre panier est vide";
 
-		$books = $bookManager->showBooks($booksIds);
 		// debug($books);
 		// die();
 		$data = [
@@ -64,6 +68,15 @@ class CartController extends Controller
 		
 		$this->show('cart/show_cart', $data);
 
+	}
+
+	public function removeBookFromCart($bookId)
+	{
+		$cartManager = new CartManager();
+		
+		$cartManager->removeBook($bookId);
+
+		$this->redirectToRoute('show_cart');
 	}
 
 }

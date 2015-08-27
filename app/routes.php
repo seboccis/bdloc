@@ -34,5 +34,8 @@
 		// Page d'affichage du panier
 		['GET', '/panier/', 'Cart#showCart', 'show_cart'],
 
+		// Retirer un article du panier
+		['GET', '/panier/Retirer/[:bookId]/', 'Cart#removeBookFromCart', 'remove_book_from_cart'],
+
 
 	);

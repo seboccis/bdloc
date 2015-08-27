@@ -11,7 +11,7 @@ class BookManager extends DefaultManager
 	{
 		foreach ($booksIds as $bookId) {
 			$id =  $bookId['book_id'];
-			$sql = "SELECT cover, title
+			$sql = "SELECT id, cover, title
 					FROM books
 					WHERE id = $id";
 

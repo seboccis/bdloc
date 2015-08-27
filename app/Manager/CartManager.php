@@ -47,4 +47,12 @@ class CartManager extends DefaultManager
 		$sth->execute();
 		return $sth->fetchAll();
 	}
+
+	public function removeBook($bookId)
+	{
+		$sql = "DELETE FROM cart_to_books
+				WHERE book_id = $bookId";
+		$sth = $this->dbh->prepare($sql);
+		return $sth->execute();
+	}
 }
