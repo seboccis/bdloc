@@ -28,7 +28,7 @@ class CartController extends DefaultController
 		
 		// compter le nombre d'exemplaire présent dans le cart
 		$countBooks = $cartManager->countBooksInCart($cartId);
-		if ($countBooks > 10) {
+		if ($countBooks >= 10) {
 			$cartError = "Vous avez atteint la taille maximale de votre panier";
 		}
 			
