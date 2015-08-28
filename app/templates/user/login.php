@@ -18,5 +18,7 @@
 			<div><?php echo $error; ?></div>
 
 		</form>
+
+		<a href="<?= $this->url('register') ?>">Créer un compte</a>
 	
 <?php $this->stop('main_content') ?>

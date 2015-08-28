@@ -67,6 +67,21 @@ class UserController extends DefaultController
 			{
 				$passwordError = "le mot de passe ne correspond pas !";
 			}
+			else if (strlen($password) < 6)
+			{
+				$passwordError = "Veuillez saisir un mot de passe d'au moins 7 caractere !";
+			}
+			else
+			{
+				$containsLetter = preg_match('/[a-zA-Z]/', $password);
+				$containsDigit = preg_match('/\d/', $password);
+				$containsSpecial = preg_match('/[^a-zA-Z\d]/', $password);
+
+				if (!$containsLetter || !$containsDigit || !$containsSpecial)
+				{
+					$passwordError = "Veuillez choisir un mot de passe avec au moins une lettre, un chiffre, un caractere special !";
+				}
+			}
 
 			if (empty($usernameError) && empty($emailError) && empty($zip_codeError) && empty($passwordError)) {
 		

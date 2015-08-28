@@ -26,7 +26,7 @@
 			<div class="form-row">
 				<label for="password">Mot de passe</label>
 				<input type="password" name="password" id="password">
-				<p><?= $emailError ?></p>
+				
 			</div>
 			<div class="form-row">
 				<label for="confirmPassword">Confirmation du mot de passe</label>
