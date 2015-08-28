@@ -7,6 +7,7 @@ use \Manager\GenreManager;
 use \Manager\BookGenreManager;
 use \Manager\KeywordManager;
 use \Manager\BookKeywordManager;
+use \Manager\CartManager;
 
 class BookController extends DefaultController
 {
@@ -86,6 +87,18 @@ class BookController extends DefaultController
 		$bookManager = new BookManager();
 		$books = $bookManager->findCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number);
 
+		$cartManager = new CartManager();
+		
+		// Récupère le panier de l'utilisateur
+		$cartId = $cartManager->findCart($this->getUser()['id']);
+
+		// Récupère les id des livres qui sont déjà dans le panier
+		$booksInCartIds = $cartManager->findAllBooksIdsInCart($cartId);
+		
+		$bookInCartIds= [];
+		foreach ($booksInCartIds as $array) {
+			$bookInCartIds[] = $array['book_id'];
+		}
 		$transformedBooks = [];
 		foreach($books as $book){
 			$nb = $book['quantity_available'];
@@ -101,6 +114,14 @@ class BookController extends DefaultController
 			}
 
 			$book['string_quantity_available'] = $string_quantity_available;
+
+			// Vérifie si les livres affichés dans le catalogue sont dans le panier 
+			$isBookInCart = 1;
+			if (in_array($book['id'], $bookInCartIds)) {
+				$isBookInCart = 0;
+			}
+
+			$book['isBookInCart'] = $isBookInCart;
 
 			$transformedBooks[] = $book;
 		}

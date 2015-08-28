@@ -1,6 +1,5 @@
 <?php 									?>
 	<input type="hidden" id='dataRequest' data-request-precStart="<?= $precStart; ?>" data-request-first="<?= $first; ?>" data-request-last="<?= $last; ?>" data-request-total="<?= $total; ?>" data-request-nextStart="<?= $nextStart; ?>">
-	
 <?php foreach($books as $book){			?>
 	
 	
@@ -49,7 +48,9 @@
 					</p>
 					<p><?php echo $this->e($book['string_quantity_available'])?></p>
 					<a href="<?php echo $this->url('ajax_catalog_detail'); ?>" class="detail" value="<?php echo $book['id']; ?>">Plus de détails</a>
-					<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+					<?php if ($book['isBookInCart'] == 1): ?>
+						<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+					<?php endif ?>
 					<p id="cartError"></p>
 				</div>
 
