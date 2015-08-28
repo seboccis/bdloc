@@ -123,12 +123,14 @@ $("#showBooks").on("click", ".detail", function(e){
 	.done(function(response){
 		$('#showDetail').html(response);
 	})
-	$('#shadow').fadeIn(200);
-	e.stopPropagation();
+		$('#shadow').fadeIn(200);
+		$('#showDetail').fadeIn(200);
+		e.stopPropagation();
 	$('#showDetail').on("click",function(e){
-	e.stopPropagation();
+		e.stopPropagation();
 	});
-	$('#btn').on("click",function(e){
+	$('#showDetail').on("click", '#btn',function(e){
+		$('#showDetail').fadeOut(200);
 		$('#shadow').fadeOut(200);
 		e.stopPropagation();
 	});
