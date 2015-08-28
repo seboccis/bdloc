@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use \Manager\CartManager;
 use \Manager\CartBookManager;
 
 class CartBookController extends DefaultController
@@ -15,13 +16,17 @@ class CartBookController extends DefaultController
 	{
 		$this->lock();
 
-		$user= $this->getUser();
+		$user = $this->getUser();
+
+		$cartManager = new CartManager();
+		$cartId = $cartManager->findCart($user['id']);
+
+		if(empty($cartId)){die('0');}
 
 		$cartBookManager = new CartBookManager();
-		$number = $cartBookManager->countBooksInCart($user['id']);
+		$number = $cartBookManager->countBooksInCart($cartId);
 
-		// pour l'instant
-		echo $number;
+		die($number);
 	}
 
 }

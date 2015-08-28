@@ -51,7 +51,7 @@ class CartManager extends DefaultManager
 	{
 		$sql ="SELECT book_id
 				FROM cart_to_books
-				WHERE cart_id = $cartId";
+				WHERE cart_id = " . $cartId;
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();

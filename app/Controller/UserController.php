@@ -128,7 +128,10 @@ class UserController extends DefaultController
 					'date_modified' => date('Y-m-d H:i:s')
 				];
 
-				if ($userManager->insert($newUser)) {
+				$id = $userManager->insert($newUser);
+
+				if(!empty($id)){
+					$newUser['id'] = $id;
 					$authentificationManager->logUserIn($newUser);
 					$this->redirectToRoute('catalog');
 				}

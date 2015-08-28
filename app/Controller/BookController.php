@@ -92,8 +92,12 @@ class BookController extends DefaultController
 		// Récupère le panier de l'utilisateur
 		$cartId = $cartManager->findCart($this->getUser()['id']);
 
+		if(empty($cartId))
 		// Récupère les id des livres qui sont déjà dans le panier
-		$booksInCartIds = $cartManager->findAllBooksIdsInCart($cartId);
+		$booksInCartIds = [];
+		if(!empty($cartId)){
+			$booksInCartIds = $cartManager->findAllBooksIdsInCart($cartId);
+		}
 		
 		$bookInCartIds= [];
 		foreach ($booksInCartIds as $array) {

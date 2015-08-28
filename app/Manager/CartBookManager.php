@@ -16,16 +16,11 @@ class CartBookManager extends DefaultManager
 		$this->dbh = ConnectionManager::getDbh();
 	}
 
-	public function countBooksInCart($userId)
+	public function countBooksInCart($cartId)
 	{
 		$sql = "SELECT COUNT(*)
 				FROM " . $this->table . " 
-				WHERE cart_id =	(
-									SELECT id
-									FROM carts
-									WHERE user_id = " . $userId . " 
-									AND status = 0
-								)";
+				WHERE cart_id =	" . $cartId;
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
