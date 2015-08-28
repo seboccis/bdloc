@@ -10,7 +10,7 @@ class CartManager extends DefaultManager
 	public function findCart($id)
 	{
 		$sql = "SELECT id
-				FROM cart
+				FROM " . $this->table . "
 				WHERE user_id = $id AND status = 0 ";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
@@ -31,7 +31,7 @@ class CartManager extends DefaultManager
 
 	public function createCart($id)
 	{
-		$sql = "INSERT INTO cart(id, user_id, status, begin_date, end_date)
+		$sql = "INSERT INTO " . $this->table . " (id, user_id, status, begin_date, end_date)
 				VALUES (NULL,$id,0,NULL,NULL)";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();

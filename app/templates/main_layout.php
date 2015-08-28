@@ -19,7 +19,7 @@
 				
 			<nav>
 				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
-				<a href="<?php echo $this->url('show_cart');?>">Mon Panier <em id="count">0</em></a>
+				<a href="<?php echo $this->url('show_cart');?>">Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
 				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
 			</nav>
 		</header>

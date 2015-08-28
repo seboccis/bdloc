@@ -38,13 +38,28 @@ function getBooks(start){
 	.fail(showRequestFailed);
 }
 
+function showCount(response)
+{
+	$('#numberBooksInCart').html(response);
+	$('#numberBooksInCart').fadeIn(500);
+}
+
+function countBooksInCart(){
+	var path = $('#numberBooksInCart').attr('data-ajax-main-countBooksInCart');
+	$.ajax({
+		url: path,				
+		type: "POST",
+	})
+	.done(showCount);
+}
+
 // Ajouter au CART
 
 $('#showDetail').on('click', '.addToCart', function(event){
 	event.preventDefault();
 	var path = $(this).attr('href');
 	var bookId = $(this).attr('data-bookIdToCart');
-	$('#count').fadeIn(500);
+	$('#numberBooksInCart').fadeIn(500);
 	$.ajax({
 		url: path,
 		data: {
@@ -52,7 +67,7 @@ $('#showDetail').on('click', '.addToCart', function(event){
 		}
 	})
 	.done(function(response){
-		$('#count').html(response.countBooks);
+		$('#numberBooksInCart').html(response.countBooks);
 		$('#cartError').html(response.cartError);
 		$('.addToCart').css({'display':'none'});
 	});
@@ -61,8 +76,8 @@ $('#showDetail').on('click', '.addToCart', function(event){
 // Fin de la fonction
 
 $(window).on("load", function(){
+	countBooksInCart();
 	getBooks(0);
-	$('#count').fadeIn(500);
 })
 
 $('.checkbox').on('click', function(e){

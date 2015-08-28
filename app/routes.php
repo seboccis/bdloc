@@ -14,13 +14,6 @@
 		['GET', '/securite/logout/', 'User#logout', 'logout'],
 
 
-		// Requête AJAX pour afficher les BD
-		['GET|POST', '/ajax/catalogue/books/', 'Book#ajaxCatalogGetBooks', 'ajax_catalog_getBooks'],
-		// Requête AJAX pour afficher le detail de la BD
-		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
-		// Requête AJAX pour afficher les résultats de l'autocomplétion sur le mot-clé
-		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
-
 		// Page du compte
 		['GET', '/compte/', 'User#account', 'account'],
 		// Page de modification du profil
@@ -38,4 +31,12 @@
 		['GET', '/panier/Retirer/[:bookId]/', 'Cart#removeBookFromCart', 'remove_book_from_cart'],
 
 
+		// Requête AJAX pour afficher le nombre de BD dans le panier
+		['GET|POST', '/ajax/nombre_bd_panier/', 'CartBook#ajaxMainCountBooksInCart', 'ajax_main_countBooksInCart'],
+		// Requête AJAX pour afficher les BD
+		['GET|POST', '/ajax/catalogue/books/', 'Book#ajaxCatalogGetBooks', 'ajax_catalog_getBooks'],
+		// Requête AJAX pour afficher le detail de la BD
+		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
+		// Requête AJAX pour afficher les résultats de l'autocomplétion sur le mot-clé
+		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
 	);
