@@ -69,7 +69,6 @@ $('#showDetail').on('click', '.addToCart', function(event){
 	.done(function(response){
 		$('#numberBooksInCart').html(response.countBooks);
 		$('#cartError').html(response.cartError);
-		$('.addToCart').css({'display':'none'});
 	});
 })
 
