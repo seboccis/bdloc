@@ -83,7 +83,7 @@ class BookManager extends DefaultManager
 
 		$availabilitySQL = ' ';
 		if($availability == 1){
-			$availabilitySQL = ' AND b.is_available = 1';
+			$availabilitySQL = ' AND b.quantity_available > 0';
 		}
 
 		$keywordSQL = ' ';
