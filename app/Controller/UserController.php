@@ -23,6 +23,13 @@ class UserController extends DefaultController
 		for ($i=75001; $i < 75021; $i++) { 
 			$zip[] = $i;
 		}
+		for ($i=1; $i < 10; $i++) { 
+			$zip[] = '75 00'.$i;
+		}
+		for ($i=10; $i < 21; $i++) { 
+			$zip[] = '75 0'.$i;
+		}
+
 		$address = "";
 		$phone_number = "";
 
@@ -87,24 +94,42 @@ class UserController extends DefaultController
 		
 				$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+				// Recherche des coordonnées de l'utilisateur
+
+				$googleAddress = urlencode($address . ", " . $zip_code ." Paris");
+
+				$response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=".$googleAddress);
+				$arrayResponse = json_decode($response, true);
+
+				$lat = NULL;
+				$lng = NULL;
+
+				if(!empty($arrayResponse['results'][0])){
+
+						$lat = $arrayResponse['results'][0]['geometry']['location']['lat'];
+						$lng = $arrayResponse['results'][0]['geometry']['location']['lng'];
+
+				}
+
 				$newUser = [
 
-					'last_name' => $last_name,
-					'first_name' => $first_name,
-					'username' => $username,
-					'email' => $email,
-					'password' => $hashedPassword,
-					'zip_code' => $zip_code,
-					'address' => $address,
-					'phone_number' => $phone_number,
-					'role' => 'client',
-					'date_created' => date('Y-m-d H:i:s'),
+					'last_name' 	=> $last_name,
+					'first_name' 	=> $first_name,
+					'username' 		=> $username,
+					'email' 		=> $email,
+					'password' 		=> $hashedPassword,
+					'zip_code'      => $zip_code,
+					'address'       => $address,
+					'lat'			=> $lat,
+					'lng'			=> $lng,
+					'phone_number'  => $phone_number,
+					'role' 			=> 'client',
+					'date_created'  => date('Y-m-d H:i:s'),
 					'date_modified' => date('Y-m-d H:i:s')
 				];
 
-				$userManager->insert($newUser);
-				$authentificationManager->logUserIn($user);
-				if ($userManager) {
+				if ($userManager->insert($newUser)) {
+					$authentificationManager->logUserIn($newUser);
 					$this->redirectToRoute('catalog');
 				}
 			}
