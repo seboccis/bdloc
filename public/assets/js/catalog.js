@@ -72,6 +72,24 @@ $('#showDetail').on('click', '.addToCart', function(event){
 		$('.addToCart').css({'display':'none'});
 	});
 })
+
+$('#showBooks').on('click', '.addToCart', function(event){
+	event.preventDefault();
+	$(this).css({'display':'none'});	
+	var path = $(this).attr('href');
+	var bookId = $(this).attr('data-bookIdToCart');
+	$('#numberBooksInCart').fadeIn(500);
+	$.ajax({
+		url: path,
+		data: {
+			id: bookId,
+		}
+	})
+	.done(function(response){
+		$('#numberBooksInCart').html(response.countBooks);
+		$('#cartError').html(response.cartError);
+	});
+})
 		
 // Fin de la fonction
 

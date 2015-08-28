@@ -3,7 +3,7 @@
 	
 <?php foreach($books as $book){			?>
 	
-	<a href="" class="detail" value="<?php echo $book['id']; ?>">
+	
 
 		<div class="cover table">
 
@@ -48,14 +48,16 @@
 						?>
 					</p>
 					<p><?php echo $this->e($book['string_quantity_available'])?></p>
-			
+					<a href="<?php echo $this->url('ajax_catalog_detail'); ?>" class="detail" value="<?php echo $book['id']; ?>">Plus de détails</a>
+					<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+					<p id="cartError"></p>
 				</div>
 
 			</div>
 
 		</div>
 
-	</a>
+	
 
 <?php }								?>
 
