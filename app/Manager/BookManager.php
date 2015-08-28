@@ -132,4 +132,27 @@ class BookManager extends DefaultManager
 		return $sql; 
 	}
 
+	public function decreaseQuantityAvailable($bookId)
+	{
+		
+		// réduire la quantité disponible
+		$sql = "UPDATE ".$this->table."
+				SET quantity_available = quantity_available - 1
+				WHERE id = $bookId";
+		$sth = $this->dbh->prepare($sql);
+		return $sth->execute();
+
+ 	}
+
+ 	public function increaseQuantityAvailable($bookId)
+	{
+		
+		// augmenter la quantité disponible
+		$sql = "UPDATE ".$this->table."
+				SET quantity_available = quantity_available + 1
+				WHERE id = $bookId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+ 	}
+
 }

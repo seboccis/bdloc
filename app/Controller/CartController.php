@@ -16,6 +16,7 @@ class CartController extends DefaultController
 		$this->lock();
 		
 		$cartManager = new CartManager();
+		$bookManager = new BookManager();
 		$cartError = "";
 		
 		// vérifier si un panier existe déjà 
@@ -40,6 +41,9 @@ class CartController extends DefaultController
 		if (empty($cartError)) {
 			$cartManager->createRelation($cartId, $_GET['id']);
 			$countBooks = $cartManager->countBooksInCart($cartId);
+		// Réduire la quantité de livres disponibles dans la table books
+
+			$bookManager->decreaseQuantityAvailable($_GET['id']);
 		}
 
 		
@@ -50,6 +54,24 @@ class CartController extends DefaultController
 
 		$this->showJson($data);
 
+	}
+	
+	/**
+	 * Page de retrait d'une bd du panier
+	 */
+	public function removeBookFromCart($bookId)
+	{
+		$this->lock();
+		
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		
+		$cartManager->removeBook($bookId);
+		// Réduire la quantité de livres disponibles dans la table books
+
+		$bookManager->increaseQuantityAvailable($bookId);
+
+		$this->redirectToRoute('show_cart');
 	}
 
 	public function showCart()
@@ -101,15 +123,5 @@ class CartController extends DefaultController
 
 	}
 
-	public function removeBookFromCart($bookId)
-	{
-		$this->lock();
-		
-		$cartManager = new CartManager();
-		
-		$cartManager->removeBook($bookId);
-
-		$this->redirectToRoute('show_cart');
-	}
 
 }
