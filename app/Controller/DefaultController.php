@@ -15,4 +15,14 @@ class DefaultController extends Controller
 		$this->show('default/home');
 	}
 
+	/**
+	 * Méthode empêchant d'accéder à une page si l'utilisateur n'est pas loggé
+	 */
+	protected function lock()
+	{
+		if(empty($this->getUser())){
+			$this->redirectToRoute('login');
+		}
+	}
+
 }
