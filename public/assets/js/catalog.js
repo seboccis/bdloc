@@ -57,6 +57,7 @@ function countBooksInCart(){
 
 $('#showDetail').on('click', '.addToCart', function(event){
 	event.preventDefault();
+	$(this).fadeOut(500);
 	var path = $(this).attr('href');
 	var bookId = $(this).attr('data-bookIdToCart');
 	$('#numberBooksInCart').fadeIn(500);
@@ -69,12 +70,13 @@ $('#showDetail').on('click', '.addToCart', function(event){
 	.done(function(response){
 		$('#numberBooksInCart').html(response.countBooks);
 		$('#cartError').html(response.cartError);
+		var start = $('#showBooks > #dataRequest').attr('data-request-first') - 1;
+		getBooks(start);
 	});
 })
 
 $('#showBooks').on('click', '.addToCart', function(event){
 	event.preventDefault();
-	$(this).css({'display':'none'});	
 	var path = $(this).attr('href');
 	var bookId = $(this).attr('data-bookIdToCart');
 	$('#numberBooksInCart').fadeIn(500);
@@ -87,10 +89,27 @@ $('#showBooks').on('click', '.addToCart', function(event){
 	.done(function(response){
 		$('#numberBooksInCart').html(response.countBooks);
 		$('#cartError').html(response.cartError);
+		var start = $('#showBooks > #dataRequest').attr('data-request-first') - 1;
+		getBooks(start);
 	});
 })
 		
 // Fin de la fonction
+
+// Remove from Cart
+
+$(".removeFromCart").on('click',function(event){
+	event.preventDefault();
+	var that = $(this);
+	var path = that.attr('href');
+	$.ajax({
+		url: path,
+	})
+	.done(function(){
+		that.parents('tr').fadeOut(200);
+	});
+
+})
 
 $(window).on("load", function(){
 	countBooksInCart();

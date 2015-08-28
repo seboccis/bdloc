@@ -21,7 +21,7 @@
 				<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
 			</td>
 			<td>
-				<a href="<?= $this->url('remove_book_from_cart',['bookId'=>$book['id']])?>">Retirer du panier</a>
+				<a class="removeFromCart" href="<?= $this->url('remove_book_from_cart',['bookId'=>$book['id']])?>">Retirer du panier</a>
 			</td>
 		</tr>
 	<?php endforeach ?>
