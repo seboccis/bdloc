@@ -175,6 +175,27 @@ class BookController extends DefaultController
 		
 		$book = $bookManager->extendedFind($_GET['id']);
 
+		$cartManager = new CartManager();
+		
+		// Récupère le panier de l'utilisateur
+		$cartId = $cartManager->findCart($this->getUser()['id']);
+
+		// Récupère les id des livres qui sont déjà dans le panier
+		$booksInCartIds = $cartManager->findAllBooksIdsInCart($cartId);
+		
+		$bookInCartIds= [];
+		foreach ($booksInCartIds as $array) {
+			$bookInCartIds[] = $array['book_id'];
+		}
+
+		// Vérifie si les livres affichés dans le catalogue sont dans le panier 
+			$isBookInCart = 1;
+			if (in_array($book['id'], $bookInCartIds)) {
+				$isBookInCart = 0;
+			}
+
+			$book['isBookInCart'] = $isBookInCart;
+
 		$data = array('book' => $book);
 
 		$this->show('book/ajax_catalog_detail', $data);

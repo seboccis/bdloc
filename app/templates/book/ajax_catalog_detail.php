@@ -37,7 +37,11 @@
 					}
 				?>
 			</p>
-			<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+			<?php if ($book['isBookInCart'] == 1): ?>
+				<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+			<?php else :?>
+				<p>Déjà dans le panier !</p>
+			<?php endif ?>
 			<p id="cartError"></p>
 	</figcaption>
 	</figure>
