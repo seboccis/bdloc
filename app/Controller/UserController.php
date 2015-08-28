@@ -4,7 +4,6 @@ namespace Controller;
 
 use \Manager\UserManager;
 use \W\Security\AuthentificationManager;
-use \W\Controller\Controller;
 
 class UserController extends DefaultController
 {
@@ -160,11 +159,14 @@ class UserController extends DefaultController
 
 	public function account()
 	{
+		$this->lock();
+
 		$this->show('user/account');
 	}
 
 	public function editProfile()
 	{
+		$this->lock();
 
 		$userManager = new UserManager;
 		$authentificationManager = new AuthentificationManager;
@@ -257,6 +259,7 @@ class UserController extends DefaultController
 
 	public function editPassword()
 	{
+		$this->lock();
 
 		$authentificationManager = new AuthentificationManager;
 		$userManager = new UserManager;

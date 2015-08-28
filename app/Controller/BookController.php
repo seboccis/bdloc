@@ -16,6 +16,8 @@ class BookController extends DefaultController
 	 */
 	public function catalog()
 	{
+		$this->lock();
+		
 		$genreManager = new GenreManager();
 		$genres= $genreManager->findAll();
 
@@ -30,6 +32,8 @@ class BookController extends DefaultController
 	 */
 	public function ajaxCatalogGetBooks()
 	{
+		$this->lock();
+
 		////// Définition des variables de recherche
 
 		//// Variables de filtres
@@ -134,52 +138,21 @@ class BookController extends DefaultController
 
 	}
 
+	/**
+	 * Requête AJAX pour trouver les informations sur la BD
+	 * à faire apparaître dans la fenêtre modale
+	 */
 	public function ajaxCatalogDetail()
 	{
-		$bookManager = new BookManager;
+		$this->lock();
 
+		$bookManager = new BookManager;
 		
 		$book = $bookManager->extendedFind($_GET['id']);
 
 		$data = array('book' => $book);
 
-
 		$this->show('book/ajax_catalog_detail', $data);
-	}
-
-	private function sortBooksIdsByOccurence($unsortedBooksIds)
-	{
-		$ids = [];
-		$occurence = [];
-
-		foreach($unsortedBooksIds as $id){
-
-			if(in_array($id, $ids)){
-				$occurence[array_search($id, $ids)]++;
-			}
-			else{
-				$ids[] = $id;
-				$occurence[array_search($id, $ids)] = 1;
-			}
-
-		}
-
-		array_multisort($occurence, SORT_DESC,$ids);
-
-		return $ids;
-	}
-
-	private function mergeBooksIds($booksIdsToFindAccordingToGenres, $booksIdsToFindAccordingToKeyword)
-	{
-		$booksIdsToFindAccordingToFilters = [];
-
-		foreach($booksIdsToFindAccordingToGenres as $bookId){
-			if(in_array($bookId, $booksIdsToFindAccordingToKeyword)){
-				$booksIdsToFindAccordingToFilters[] = $bookId;
-			}
-		}
-
-		return $booksIdsToFindAccordingToFilters;
 	}
 
 }

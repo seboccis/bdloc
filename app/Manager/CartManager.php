@@ -2,8 +2,6 @@
 
 namespace Manager;
 
-use \W\Manager\ConnectionManager;
-
 /**
  * Le manager de la table cart
  */

@@ -2,11 +2,10 @@
 
 namespace Controller;
 
-use \W\Controller\Controller;
 use \Manager\CartManager;
 use \Manager\BookManager;
 
-class CartController extends Controller
+class CartController extends DefaultController
 {
 
 	/**
@@ -14,6 +13,7 @@ class CartController extends Controller
 	 */
 	public function addToCart()
 	{
+		$this->lock();
 		
 		$cartManager = new CartManager();
 		$cartError = "";
@@ -54,6 +54,8 @@ class CartController extends Controller
 
 	public function showCart()
 	{
+		$this->lock();
+
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
 
@@ -101,6 +103,8 @@ class CartController extends Controller
 
 	public function removeBookFromCart($bookId)
 	{
+		$this->lock();
+		
 		$cartManager = new CartManager();
 		
 		$cartManager->removeBook($bookId);

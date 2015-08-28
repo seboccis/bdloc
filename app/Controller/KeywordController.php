@@ -8,8 +8,14 @@ use \Manager\BookKeywordManager;
 class KeywordController extends DefaultController
 {
 
+	/**
+	 * Requête AJAX pour l'autocomplétion sur la recherche par
+	 * mot-clé sur la page catalogue
+	 */
 	public function ajaxCatalogKeyword()
 	{
+		$this->lock();
+
 		$keywordManager = new KeywordManager;
 		
 		$keywordBeginning = $_GET['keywordBeginning'];

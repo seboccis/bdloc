@@ -16,23 +16,4 @@ class BookKeywordManager extends DefaultManager
 		$this->dbh = ConnectionManager::getDbh();
 	}
 
-	public function findBooksIdByKeywordId($keywordId)
-	{
-		$sql = "SELECT bookId
-				FROM " . $this->table . " 
-				WHERE keywordId = " . $keywordId;
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-
-		$arrayResponse = $sth->fetchAll();
-
-		$booksIdsToFindAccordingToKeyword = [];
-
-		foreach($arrayResponse as $rowResponse){
-			$booksIdsToFindAccordingToKeyword[] = $rowResponse['bookId'];
-		}
-
-		return $booksIdsToFindAccordingToKeyword;
-	}
-
 }

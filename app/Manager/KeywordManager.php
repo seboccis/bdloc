@@ -8,18 +8,6 @@ namespace Manager;
 class KeywordManager extends DefaultManager
 {
 
-	public function findIdByKeyword($keyword)
-	{
-
-		$sql = "SELECT id
-				FROM " . $this->table . " 
-				WHERE keyword = '" . $keyword . "'";
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		return $sth->fetchColumn();
-
-	}
-
 	public function findKeywords($keywordBeginnig)
 	{
 		$sql = "SELECT keyword

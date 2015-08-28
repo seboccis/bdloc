@@ -5,14 +5,14 @@ namespace Manager;
 use \W\Manager\ConnectionManager;
 
 /**
- * Le manager de la table books_genres
+ * Le manager de la table cart_to_books
  */
-class BookGenreManager extends DefaultManager
+class CartBookManager extends DefaultManager
 {
 
 	public function __construct()
 	{
-		$this->table = 'books_genres';
+		$this->table = 'cart_to_books';
 		$this->dbh = ConnectionManager::getDbh();
 	}
 
