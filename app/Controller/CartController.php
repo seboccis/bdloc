@@ -75,6 +75,7 @@ class CartController extends DefaultController
 
 		$books = [];
 		$cartEmpty = "";
+		$orderError = "";
 
 		// Récupération du cart_id de l'utilisateur avec la méthode findCart()
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
@@ -98,11 +99,11 @@ class CartController extends DefaultController
 		
 		$cartEmpty = "Votre panier est vide";
 
-		// debug($books);
-		// die();
+	
 		$data = [
 			'books' => $books,
-			'cartEmpty' => $cartEmpty,	
+			'cartEmpty' => $cartEmpty,
+			'orderError' => $orderError,	
 		];
 		
 		$this->show('cart/cart', $data);
@@ -132,5 +133,73 @@ class CartController extends DefaultController
 		$this->show('cart/cart', $data);
 	}
 
+	public function ajaxOrder()
+	{
+		$this->lock();
+		$cartEmpty = "";
+		$orderError = "";
+		$orderSuccess = "";
+
+
+		
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+			
+		// Vérifier le nombre de livres déjà empruntés
+		// Récupérer l'id des carts où le statut est égal à 1 (livres en cours)
+
+		$cartIdAlreadyOrdered = $cartManager->findOrder($_SESSION['user']['id']);
+		$cartIdToOrder = $cartManager->findCart($_SESSION['user']['id']);
+		
+		
+		// Compter le nombre de livres dans le cart_to_books avec le cartId récupéré
+		$countBooksAlreadyOrdered = 0;
+		if (!empty($cartIdAlreadyOrdered)) {
+			$countBooksAlreadyOrdered = $cartManager->countBooksInCart($cartIdAlreadyOrdered);
+			}
+
+		// 	// Compter le nombre de livre à emprunter
+			$countBooksToOrder = $cartManager->countBooksInCart($cartIdToOrder);
+			
+			$countOrderedAndToOrder = $countBooksAlreadyOrdered + $countBooksToOrder;
+
+		// 	// Si le nombre de livres à louer ajouté au nombre de livres déjà loués est supérieur à 10, on affiche un message d'erreur
+			if ($countOrderedAndToOrder > 10) {
+				$orderError = "Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier !";
+				// die('Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier ! !');
+
+				$data = [
+					'orderError' => $orderError,
+					'cartEmpty' => $cartEmpty,
+				];
+				$this->show('cart/ajax_order', $data);
+			}	
+			// sinon on modifie le statut du panier et on affiche un récapitulatif
+			else {
+				$cartManager->convertCartToOrder($cartIdToOrder);
+				$booksIds = $cartManager->findAllBooksIdsInCart($cartIdToOrder);
+
+				if (!empty($booksIds)) {
+				$books = $bookManager->showBooks($booksIds);
+		}
+
+				$orderSuccess = "Commande prête à être envoyée !";
+				$data = [
+					'books' => $books,
+					'orderError' => $orderError,
+					'cartEmpty' => $cartEmpty,
+					'orderSuccess' => $orderSuccess,
+				];
+					
+				$this->show('cart/ajax_order', $data);
+			}
+		
+
+	}
+
 
 }
+
+
+
+

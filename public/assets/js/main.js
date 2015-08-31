@@ -225,6 +225,30 @@ $('#btnRefresh').on('click', function(e){
 
 //// JS pour la page cart
 
+$('#order').on('click',function(e){
+	var path = $('#showOrder').attr('data-ajax-order-path');
+	e.preventDefault();
+	$.ajax({
+		url: path,
+	}).done(function(response){
+		$('#showOrder').html(response);
+	});
+	$('#shadow').fadeIn(200);
+		$('#showOrder').fadeIn(200);
+		e.stopPropagation();
+	$('#showOrder').on("click",function(e){
+		e.stopPropagation();
+	});
+	$('#showOrder').on("click", '#btn',function(e){
+		$('#showOrder').fadeOut(200);
+		$('#shadow').fadeOut(200);
+		e.stopPropagation();
+	});
+	$('html').on("click",function(e){
+		$('#shadow').fadeOut(200);
+		e.stopPropagation();
+	});
+});
 
 //// A l'ouverture de la page
 

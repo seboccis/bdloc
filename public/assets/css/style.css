@@ -247,7 +247,7 @@ body{
 		background-color: rgba(0,0,0,0.8);
 	}
 
-		.container #shadow #showDetail{
+		.container #shadow #showDetail, .container #shadow #showOrder{
 			position: absolute;
 			top:50%;
 			left: 50%;
@@ -277,7 +277,7 @@ body{
 				cursor: pointer;
 			}
 
-			.container #shadow #showDetail figcaption{
+			.container #shadow #showDetail figcaption, .container #shadow #showOrder{
 				background-color: #fff;
 				padding: 5px;
 			}
