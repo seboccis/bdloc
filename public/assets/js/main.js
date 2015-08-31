@@ -1,4 +1,4 @@
-//// JS pour toutes les pages dépendant de main_layout
+////// JS pour toutes les pages dépendant de main_layout
 
 	function showCount(response)
 	{
@@ -23,72 +23,66 @@
 		.done(showCount);
 	}
 
-//// JS pour la page catalog 
 
-	// Affichage des vignettes de BD correspondant aux critères de filtres et de tri
 
-	function showBooks(response){
+////// JS pour la page catalog
 
-		$('#showBooks').html(response);
 
-		var numberBooksInCart = document.getElementById('numberBooksInCart').innerHTML;
+	//// Functions
 
-		if(numberBooksInCart == 10){
-			$("#showBooks .addToCart").css({'display': 'none'});
-		}
-		
-		var first = $('#showBooks > #dataRequest').attr('data-request-first');
-		var last = $('#showBooks > #dataRequest').attr('data-request-last');
-		var total = $('#showBooks > #dataRequest').attr('data-request-total');
+		// Affichage des vignettes de BD correspondant aux critères de filtres et de tri
 
-		$('#first').html(first);
-		$('#last').html(last);
-		$('#total').html(total);
+		function showBooks(response){
 
-		if(first == 1){
-			$('#prevBooks').css({'display' : 'none'});
-		}
-		if(first > 1){
-			$('#prevBooks').css({'display' : 'inline'});
-		}
-		if(last == total){
-			$('#nextBooks').css({'display' : 'none'});
-		}
-		if(last < total){
-			$('#nextBooks').css({'display' : 'inline'});
-		}
-	}
+			$('#showBooks').html(response);
 
-	function showRequestFailed(){
-		$('#showBooks').html('<span>La requête a échoué</span>');
-	}
+			var numberBooksInCart = document.getElementById('numberBooksInCart').innerHTML;
 
-	function getBooks(start){
-
-		var path = $('#sideBar').attr('data-ajax-catalog-getBooks-path');
-		$.ajax({
-			url: path,
-			data: $('#formSideBarFilters').serialize()+'&'+$('#formResultsBarFilters').serialize()+'&start='+start,				
-			type: "POST",
-		})
-		.done(showBooks)
-		.fail(showRequestFailed);
-	}
-
-	// Affichage de la fenêtre modale
-
-	$("#showBooks").on("click", ".detail", function(event){
-		event.preventDefault();
-
-		var path = $('#showDetail').attr('data-ajax-catalog-detail-path');
-		
-		$.ajax({
-			url: path,
-			data: {
-				id: $(this).attr('value'),
+			if(numberBooksInCart == 10){
+				$("#showBooks .addToCart").css({'display': 'none'});
 			}
-		})
-		.done(function(response){
+			
+			var first = $('#showBooks > #dataRequest').attr('data-request-first');
+			var last = $('#showBooks > #dataRequest').attr('data-request-last');
+			var total = $('#showBooks > #dataRequest').attr('data-request-total');
+
+			$('#first').html(first);
+			$('#last').html(last);
+			$('#total').html(total);
+
+			if(first == 1){
+				$('#prevBooks').css({'display' : 'none'});
+			}
+			if(first > 1){
+				$('#prevBooks').css({'display' : 'inline'});
+			}
+			if(last == total){
+				$('#nextBooks').css({'display' : 'none'});
+			}
+			if(last < total){
+				$('#nextBooks').css({'display' : 'inline'});
+			}
+		}
+
+		function showRequestFailed(){
+			$('#showBooks').html('<span>La requête a échoué</span>');
+		}
+
+		function getBooks(start){
+
+			var path = $('#sideBar').attr('data-ajax-catalog-getBooks-path');
+			$.ajax({
+				url: path,
+				data: $('#formSideBarFilters').serialize()+'&'+$('#formResultsBarFilters').serialize()+'&start='+start,				
+				type: "POST",
+			})
+			.done(showBooks)
+			.fail(showRequestFailed);
+		}
+
+		// Affichage de la fenêtre modale
+
+		function showDetail(response){
 			$('#showDetail').html(response);
 
 			var numberBooksInCart = document.getElementById('numberBooksInCart').innerHTML;
@@ -100,7 +94,152 @@
 			$('#showDetail').fadeIn(200);
 
 			event.stopPropagation();
+		}
+
+		function getDetail(bookId){
+			var path = $('#showDetail').attr('data-ajax-catalog-detail-path');
 			
+			$.ajax({
+				url: path,
+				data: {
+					id: bookId,
+				}
+			})
+			.done(showDetail);
+		}
+
+		// Affichage des mots-clé
+
+		function showKeywords(response){
+			if(response.length > 0){
+				$('#resultKeywordResearch').html(response);							
+			}
+			else{
+				$('#resultKeywordResearch').html('Aucun mot-clé ne correspond à cette recherche.');
+			}
+		}
+
+		function getKeywords(keywordBeginning){
+			var keywordBeginning = $('#inputKeyword').val();
+			if (keywordBeginning.length < 3){
+				$('#resultKeywordResearch').html('');
+			}
+			else{
+				var path = $('#inputKeyword').attr('data-ajax-catalog-keyword-path');
+
+				$.ajax({
+						url : path,
+						data : {
+							'keywordBeginning' : keywordBeginning,
+					}
+				})
+				.done(showKeywords);	
+			}
+		}
+
+		// Choix du mot-clé
+
+		function attachKeyword(event)
+		{  
+		   event.preventDefault();
+		   var data = $(this).attr('data-keyword');
+		   $("#inputKeyword").val(data);
+		   $("#resultKeywordResearch").html('');
+		   getBooks(0);
+		}
+
+		// Ajouter au panier
+
+		function showAddToCart(response){
+			countBooksInCart();
+			$('#cartError').html(response);
+			var start = $('#showBooks > #dataRequest').attr('data-request-first') - 1;
+			getBooks(start);
+		}
+
+		function addToCart(that){
+			var path = that.attr('href');
+			var bookId = that.attr('data-bookIdToCart');
+			$.ajax({
+				url: path,
+				data: {
+					id: bookId,
+				}
+			})
+			.done(showAddToCart);
+		}
+
+
+	//// Gestion des événements
+
+		// Gestion des événements sur les vignettes
+
+		$("#showBooks").on("click", ".detail", function(event){
+			event.preventDefault();
+			var bookId = $(this).attr('value');		
+			getDetail(bookId);
+			
+		});
+
+		$('#showBooks').on('click', '.addToCart', function(event){
+			event.preventDefault();
+			var that = $(this);
+			addToCart(that);
+		});
+		
+		// Gestion des événements sur les checkboxes (appel de la fonction getBooks)
+
+		$('.checkbox').on('click', function(e){
+			getBooks(0);
+		});
+
+		// Gestion des événements sur la recherche par mot-clé (appel de la fonction getBooks)
+			
+		$("#inputKeyword").on('keyup', getKeywords);
+
+		$("#resultKeywordResearch").on('click', 'a', attachKeyword);
+
+		$('#btnRefresh').on('click', function(e){
+			e.preventDefault();
+			$("#inputKeyword").val('');
+			getBooks(0);
+		});
+
+		// Gestion des événements sur le tri (appel de la fonction getBooks)
+
+		$('#selectCatalogSort').on('change', function(e){
+		  	e.preventDefault();
+			getBooks(0);
+		});
+
+		// Gestion des événements sur le nombre de BD à afficher (appel de la fonction getBooks)
+
+		$('#selectCatalogNumber').on('change', function(e){
+		  	e.preventDefault();
+			getBooks(0);
+		});
+		
+		//Gestion des événements sur la pagination (appel de la fonction getBooks)
+
+		$('#prevBooks').on('click', function(e){
+			e.preventDefault();
+			var start = $('#showBooks > #dataRequest').attr('data-request-precStart');
+			getBooks(start);
+		});
+
+		$('#nextBooks').on('click', function(e){
+			e.preventDefault();
+			var start = $('#showBooks > #dataRequest').attr('data-request-nextStart');
+			getBooks(start);
+		});
+
+		// Gestion des événements sur la fenêtre modale
+		
+		$('#showDetail').on('click', '.addToCart', function(event){
+			event.preventDefault();
+			var that = $(this);
+			that.fadeOut(500);		
+			addToCart(that);
 		});
 
 		$('#showDetail').on("click",function(event){
@@ -117,150 +256,30 @@
 			$('#shadow').fadeOut(200);
 			event.stopPropagation();
 		});
-
-	})
-
-	// Ajouter au panier
-
-	function showAddToCart(response){
-		countBooksInCart();
-		$('#cartError').html(response);
-		var start = $('#showBooks > #dataRequest').attr('data-request-first') - 1;
-		getBooks(start);
-	}
-
-	function addToCart(that){
-		var path = that.attr('href');
-		var bookId = that.attr('data-bookIdToCart');
-		$.ajax({
-			url: path,
-			data: {
-				id: bookId,
-			}
-		})
-		.done(showAddToCart);
-	}
 	
-	// Gestion des événements sur les vignettes
 
-	$('#showBooks').on('click', '.addToCart', function(event){
-		event.preventDefault();
-		var that = $(this);
-		addToCart(that);
-	})
-	
-	// Gestion des événements sur les filtres (appel de la fonction getBooks)
+////// JS pour la page cart
 
-	$('.checkbox').on('click', function(e){
-		getBooks(0);
-	})
-		
-	$("#inputKeyword").on('keyup', function(){
-		var keywordBeginning = $('#inputKeyword').val();
-		var path = $('#inputKeyword').attr('data-ajax-catalog-keyword-path');
-		if (keywordBeginning.length < 3){
-			$('#resultKeywordResearch').html('');
-		}
-		else{
+		// Remove from Cart
+
+		$(".removeFromCart").on('click',function(event){
+			event.preventDefault();
+			var that = $(this);
+			var path = that.attr('href');
 			$.ajax({
-				url : path,
-				data : {
-				'keywordBeginning' : keywordBeginning,
-				}
+				url: path,
 			})
-			.done(function(response){
-				if(response.length > 0){
-					$('#resultKeywordResearch').html(response);							
-				}
-				else{
-					$('#resultKeywordResearch').html('Aucun mot-clé ne correspond à cette recherche.');
-				}
-			});	
-		}
-	})
+			.done(function(){
+				that.parents('tr').fadeOut(200);
+				countBooksInCart();
+			});
 
-	// Gestion des événements sur le tri (appel de la fonction getBooks)
+		});
 
-	$('#selectCatalogSort').on('change', function(e){
-	  	e.preventDefault();
-		getBooks(0);
-	})
-
-	// Gestion des événements sur le nombre de BD à afficher (appel de la fonction getBooks)
-
-	$('#selectCatalogNumber').on('change', function(e){
-	  	e.preventDefault();
-		getBooks(0);
-	})
-	
-	//Gestion des événements sur la pagination (appel de la fonction getBooks)
-
-	$('#prevBooks').on('click', function(e){
-		e.preventDefault();
-		var start = $('#showBooks > #dataRequest').attr('data-request-precStart');
-		getBooks(start);
-	})
-
-	$('#nextBooks').on('click', function(e){
-		e.preventDefault();
-		var start = $('#showBooks > #dataRequest').attr('data-request-nextStart');
-		getBooks(start);
-	})
-	
-
-	$('#showDetail').on('click', '.addToCart', function(event){
-		event.preventDefault();
-		var that = $(this);
-		that.fadeOut(500);		
-		addToCart(that);
-	})
-
-
-
-
-
-	
-
-
-
-function attachKeyword(event)
-{  
-   var data = $(this).attr('data-keyword');
-   $("#inputKeyword").val(data);
-   event.preventDefault();
-   getBooks(0);
-   $("#resultKeywordResearch").html('');
-}
-
-$("#resultKeywordResearch").on('click', 'a', attachKeyword);
-
-$('#btnRefresh').on('click', function(e){
-	e.preventDefault();
-	$("#inputKeyword").val('');
-	getBooks(0);
-})
-
-//// JS pour la page cart
-
-// Remove from Cart
-
-$(".removeFromCart").on('click',function(event){
-	event.preventDefault();
-	var that = $(this);
-	var path = that.attr('href');
-	$.ajax({
-		url: path,
-	})
-	.done(function(){
-		that.parents('tr').fadeOut(200);
-		countBooksInCart();
-	});
-
-})
-
-//// A l'ouverture de la page
+////// A l'ouverture de la page
 
 $(window).on("load", function(){
 	countBooksInCart();
 	getBooks(0);
-})
+});
+
