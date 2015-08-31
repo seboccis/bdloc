@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-	<div id="sideBar" data-ajax-catalog-getBooks-path="<?= $this->url('ajax_catalog_getBooks');?>">
+	<div id="sideBar">
 
 		<form action="" method='POST' id="formSideBarFilters" class='fieldset'>
 
@@ -24,7 +24,7 @@
 
 				<div>
 					<h3>Recherche</h3>
-					<input type="text" id="inputKeyword" name="keyword" placeholder="mot-clé" data-ajax-catalog-keyword-path="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
+					<input type="text" id="inputKeyword" name="keyword" placeholder="mot-clé" data-ajax-catalog-getKeywords-path="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
 					<button id="btnRefresh">Rafraîchir</button>				
 					<div id="resultKeywordResearch"></div>
 				</div>
@@ -73,7 +73,7 @@
 			
 		</div>
 
-		<div id="showBooks"></div>
+		<div id="showBooks" data-ajax-catalog-addToCart-path="<?= $this->url('ajax_catalog_add_to_cart')?>" data-ajax-catalog-getBooks-path="<?= $this->url('ajax_catalog_getBooks');?>"></div>
 
 	</div>
 	

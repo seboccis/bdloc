@@ -1,9 +1,9 @@
 <?php ?>
 
-	<figure>
+	<figure data-bookId="<?= $book['id'] ?>">
 		
 	<img src="<?php echo $this->assetUrl('img/covers/'.$book['cover']);?>">
-	<button id='btn'>&times;</button>
+	<button id='closeLightBox'>&times;</button>
 	<figcaption>
 		
 			<h1><?php echo $this->e($book['title'])?></h1>
@@ -38,7 +38,7 @@
 				?>
 			</p>
 			<?php if ($book['isBookInCart'] == 1): ?>
-				<a class="addToCart" href="<?= $this->url('ajax_catalog_add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+				<button class="addToCart">Ajouter au panier</a>
 			<?php else :?>
 				<p>Déjà dans le panier !</p>
 			<?php endif ?>
