@@ -3,6 +3,7 @@
 function showCount(response)
 {
 	$('#numberBooksInCart').html(response);
+	$('#showNumberBooksInCart').html(response);
 
 	if(response == 10){
 		$('#numberBooksInCart').css({'background-color' : 'red'});

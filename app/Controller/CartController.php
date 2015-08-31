@@ -75,7 +75,6 @@ class CartController extends DefaultController
 
 		$books = [];
 		$cartEmpty = "";
-		$countBooks = "";
 
 		// Récupération du cart_id de l'utilisateur avec la méthode findCart()
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
@@ -95,10 +94,6 @@ class CartController extends DefaultController
 		$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
 		if (!empty($booksIds)) {
 			$books = $bookManager->showBooks($booksIds);
-
-			// Compter le nombre d'exemplaires dans le cart
-			$countBooks = $cartManager->countBooksInCart($cartId);
-
 		}
 		
 		$cartEmpty = "Votre panier est vide";
@@ -108,7 +103,6 @@ class CartController extends DefaultController
 		$data = [
 			'books' => $books,
 			'cartEmpty' => $cartEmpty,	
-			'countBooks' => $countBooks,
 		];
 		
 		$this->show('cart/cart', $data);
