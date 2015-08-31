@@ -37,6 +37,7 @@
 		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
 		// Requête AJAX pour ajouter un article au panier
 		['GET', '/panier/Ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
+
 		// Requête AJAX pour retirer un article du panier
-		['GET', '/panier/Retirer/[:bookId]/', 'Cart#removeBookFromCart', 'remove_book_from_cart'],		
+		['GET', '/panier/Retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],		
 	);

@@ -51,7 +51,7 @@ class CartController extends DefaultController
 	/**
 	 * Page de retrait d'une bd du panier
 	 */
-	public function removeBookFromCart($bookId)
+	public function ajaxCartRemoveBookFromCart($bookId)
 	{
 		$this->lock();
 		
@@ -63,7 +63,7 @@ class CartController extends DefaultController
 
 		$bookManager->increaseQuantityAvailable($bookId);
 
-		$this->redirectToRoute('show_cart');
+		$this->redirectToRoute('cart');
 	}
 
 	public function cart()
