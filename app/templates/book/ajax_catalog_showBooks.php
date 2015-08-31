@@ -49,7 +49,7 @@
 					<p><?php echo $this->e($book['string_quantity_available'])?></p>
 					<a href="<?php echo $this->url('ajax_catalog_detail'); ?>" class="detail" value="<?php echo $book['id']; ?>">Plus de détails</a>
 					<?php if ($book['isBookInCart'] == 1): ?>
-						<a class="addToCart" href="<?= $this->url('add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
+						<a class="addToCart" href="<?= $this->url('ajax_catalog_add_to_cart')?>" data-bookIdToCart="<?= $book['id'] ?>">Ajouter au panier</a>
 					<?php else :?>
 						<p>Déjà dans le panier !</p>
 					<?php endif ?>

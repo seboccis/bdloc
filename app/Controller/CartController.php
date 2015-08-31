@@ -11,7 +11,7 @@ class CartController extends DefaultController
 	/**
 	 * Page d'ajout au panier
 	 */
-	public function addToCart()
+	public function ajaxCatalogAddToCart()
 	{
 		$this->lock();
 		
@@ -40,20 +40,12 @@ class CartController extends DefaultController
 
 		if (empty($cartError)) {
 			$cartManager->createRelation($cartId, $_GET['id']);
-			$countBooks = $cartManager->countBooksInCart($cartId);
-		// Réduire la quantité de livres disponibles dans la table books
 
+		// Réduire la quantité de livres disponibles dans la table books
 			$bookManager->decreaseQuantityAvailable($_GET['id']);
 		}
 
-		
-		$data = [
-			'cartError' => $cartError,
-			'countBooks' => $countBooks,
-		];
-
-		$this->showJson($data);
-
+		die($cartError);
 	}
 	
 	/**
@@ -74,7 +66,7 @@ class CartController extends DefaultController
 		$this->redirectToRoute('show_cart');
 	}
 
-	public function showCart()
+	public function cart()
 	{
 		$this->lock();
 
@@ -95,7 +87,7 @@ class CartController extends DefaultController
 				'books' => $books,
 				'cartEmpty' => $cartEmpty,
 			];
-			$this->show('cart/show_cart', $data);
+			$this->show('cart/cart', $data);
 		}
 
 		// Sinon, récupérer les identifiants des books
@@ -119,7 +111,7 @@ class CartController extends DefaultController
 			'countBooks' => $countBooks,
 		];
 		
-		$this->show('cart/show_cart', $data);
+		$this->show('cart/cart', $data);
 
 	}
 

@@ -19,7 +19,7 @@
 				
 			<nav>
 				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
-				<a href="<?php echo $this->url('show_cart');?>">Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
+				<a href="<?php echo $this->url('cart');?>">Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
 				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
 			</nav>
 		</header>
@@ -36,7 +36,8 @@
 			<div id="showDetail" data-ajax-catalog-detail-path="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
 		</div>
 
-		<script type="text/javascript" src="<?= $this->assetUrl('js/catalog.js') ?>"></script>
+		<script type="text/javascript" src="<?= $this->assetUrl('js/main.js') ?>"></script>
+		
 	</div>
 </body>
 </html>

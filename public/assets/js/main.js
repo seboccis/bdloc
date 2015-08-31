@@ -1,3 +1,28 @@
+//// JS pour toutes les pages dépendant de main_layout
+
+function showCount(response)
+{
+	$('#numberBooksInCart').html(response);
+
+	if(response == 10){
+		$('#numberBooksInCart').css({'background-color' : 'red'});
+	}
+
+	$('#numberBooksInCart').fadeIn(500);
+}
+
+function countBooksInCart(){
+	var path = $('#numberBooksInCart').attr('data-ajax-main-countBooksInCart');
+	$.ajax({
+		url: path,				
+		type: "POST",
+	})
+	.done(showCount);
+}
+
+//// JS pour la page catalog 
+
+// Affichage des vignettes de BD correspondant aux critères de filtres et de tri
 function showBooks(response){
 
 	$('#showBooks').html(response);
@@ -38,22 +63,7 @@ function getBooks(start){
 	.fail(showRequestFailed);
 }
 
-function showCount(response)
-{
-	$('#numberBooksInCart').html(response);
-	$('#numberBooksInCart').fadeIn(500);
-}
-
-function countBooksInCart(){
-	var path = $('#numberBooksInCart').attr('data-ajax-main-countBooksInCart');
-	$.ajax({
-		url: path,				
-		type: "POST",
-	})
-	.done(showCount);
-}
-
-// Ajouter au CART
+// Ajouter au panier
 
 $('#showDetail').on('click', '.addToCart', function(event){
 	event.preventDefault();
@@ -68,8 +78,8 @@ $('#showDetail').on('click', '.addToCart', function(event){
 		}
 	})
 	.done(function(response){
-		$('#numberBooksInCart').html(response.countBooks);
-		$('#cartError').html(response.cartError);
+		countBooksInCart();
+		$('#cartError').html(response);
 		var start = $('#showBooks > #dataRequest').attr('data-request-first') - 1;
 		getBooks(start);
 	});
@@ -87,8 +97,8 @@ $('#showBooks').on('click', '.addToCart', function(event){
 		}
 	})
 	.done(function(response){
-		$('#numberBooksInCart').html(response.countBooks);
-		$('#cartError').html(response.cartError);
+		countBooksInCart();
+		$('#cartError').html(response);
 		var start = $('#showBooks > #dataRequest').attr('data-request-first') - 1;
 		getBooks(start);
 	});
@@ -111,10 +121,6 @@ $(".removeFromCart").on('click',function(event){
 
 })
 
-$(window).on("load", function(){
-	countBooksInCart();
-	getBooks(0);
-})
 
 $('.checkbox').on('click', function(e){
 	getBooks(0);
@@ -212,5 +218,15 @@ $("#resultKeywordResearch").on('click', 'a', attachKeyword);
 $('#btnRefresh').on('click', function(e){
 	e.preventDefault();
 	$("#inputKeyword").val('');
+	getBooks(0);
+})
+
+//// JS pour la page cart
+
+
+//// A l'ouverture de la page
+
+$(window).on("load", function(){
+	countBooksInCart();
 	getBooks(0);
 })

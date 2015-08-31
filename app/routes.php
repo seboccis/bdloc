@@ -1,17 +1,21 @@
 <?php
 	
 	$w_routes = array(
-		// Page d'accueil
-		['GET', '/', 'Default#home', 'home'],
-		// Page de catalogue
-		['GET|POST', '/catalogue/', 'Book#catalog', 'catalog'],
-
 		// Page d'inscription
 		['GET|POST', '/securite/inscription/', 'User#register', 'register'],
 		// Page de login
 		['GET|POST', '/securite/login/', 'User#login', 'login'],
 		// Page de logout
 		['GET', '/securite/logout/', 'User#logout', 'logout'],
+
+
+		// Page d'accueil
+		['GET', '/', 'Default#home', 'home'],
+		// Page de catalogue
+		['GET|POST', '/catalogue/', 'Book#catalog', 'catalog'],
+		// Page du panier
+		['GET', '/panier/', 'Cart#cart', 'cart'],
+
 
 
 		// Page du compte
@@ -21,14 +25,6 @@
 		// Page de modification du mot de passe
 		['GET|POST', '/compte/modifications/Password/', 'User#editPassword', 'edit_password'],
 
-		// Page d'ajout au panier
-		['GET', '/panier/Ajouter/', 'Cart#addToCart', 'add_to_cart'],
-
-		// Page d'affichage du panier
-		['GET', '/panier/', 'Cart#showCart', 'show_cart'],
-
-		// Retirer un article du panier
-		['GET', '/panier/Retirer/[:bookId]/', 'Cart#removeBookFromCart', 'remove_book_from_cart'],
 
 
 		// Requête AJAX pour afficher le nombre de BD dans le panier
@@ -39,4 +35,8 @@
 		['GET|POST', '/ajax/catalogue/detail/', 'Book#ajaxCatalogDetail', 'ajax_catalog_detail'],
 		// Requête AJAX pour afficher les résultats de l'autocomplétion sur le mot-clé
 		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
+		// Requête AJAX pour ajouter un article au panier
+		['GET', '/panier/Ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
+		// Requête AJAX pour retirer un article du panier
+		['GET', '/panier/Retirer/[:bookId]/', 'Cart#removeBookFromCart', 'remove_book_from_cart'],		
 	);
