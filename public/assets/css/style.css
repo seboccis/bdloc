@@ -237,7 +237,10 @@ body{
 									color: blue;
 								}
 
-								.container section #content #showBooks .card .row .cell-text button{}
+								.container section #content #showBooks .card .row .cell-text .btn-long{
+									width: 200px;
+									height: 30px;
+								}
 
 	.container #shadow{
 		position: absolute;
@@ -271,13 +274,23 @@ body{
 				border:none;
 				background: rgba(255,255,255,0.6);
 				font-size: 1rem;
-				line-height: 15px;
+				line-height: 20px;
 				display: inline-block;
 				width: 20px;
 				height: 20px;
 				text-shadow:0 0 1px #222;
 				cursor: pointer;
 			}
+
+				.container #shadow #lightBox figure #closeLightBox span{
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					-webkit-transform: translateX(-50%)translateY(-50%);
+					-ms-transform: translateX(-50%)translateY(-50%);
+					-o-transform: translateX(-50%)translateY(-50%);
+					transform: translateX(-50%)translateY(-50%);
+				}
 
 			.container #shadow #lightBox figcaption{
 				background-color: #fff;

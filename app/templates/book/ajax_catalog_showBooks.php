@@ -45,9 +45,9 @@
 					?>
 				</p>
 				<p><?php echo $this->e($book['string_quantity_available'])?></p>
-				<button class="detail" data-book-id="<?= $book['id']; ?>">Plus de détails</button>
+				<button class="detail btn-long" data-book-id="<?= $book['id']; ?>">Plus de détails</button>
 				<?php if ($book['isBookInCart'] == 0): ?>
-					<button class="addToCart">Ajouter au panier</button>
+					<button class="addToCart btn-long">Ajouter au panier</button>
 				<?php else :?>
 					<p id="msgInCart">Déjà dans le panier !</p>
 				<?php endif ?>
