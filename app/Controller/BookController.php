@@ -106,8 +106,6 @@ class BookController extends DefaultController
 		foreach($books as $book){
 			$nb = $book['quantity_available'];
 
-			unset($book['quantity_available']);
-
 			$string_quantity_available = $nb . ' disponibles';
 			if($nb == 0){
 				$string_quantity_available = 'Plus d\'exemplaires disponibles';
@@ -194,9 +192,9 @@ class BookController extends DefaultController
 		}
 
 		// Vérifie si les livres affichés dans le catalogue sont dans le panier 
-			$isBookInCart = 1;
+			$isBookInCart = 0;
 			if (in_array($book['id'], $bookInCartIds)) {
-				$isBookInCart = 0;
+				$isBookInCart = 1;
 			}
 
 			$book['isBookInCart'] = $isBookInCart;

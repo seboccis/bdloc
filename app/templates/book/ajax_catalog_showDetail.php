@@ -39,11 +39,11 @@
 						}
 					?>
 				</p>
-				<?php if ($book['isBookInCart'] == 1): ?>
+				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
 					<button class="addToCart">Ajouter au panier</a>
-				<?php else :?>
+				<?php }else if($book['isBookInCart'] == 1){									 ?>
 					<p>Déjà dans le panier !</p>
-				<?php endif ?>
+				<?php }																		 ?>
 				<p id="cartError"></p>
 		</figcaption>
 

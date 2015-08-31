@@ -46,11 +46,11 @@
 				</p>
 				<p><?php echo $this->e($book['string_quantity_available'])?></p>
 				<button class="detail btn-long" data-book-id="<?= $book['id']; ?>">Plus de détails</button>
-				<?php if ($book['isBookInCart'] == 0): ?>
+				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	?>
 					<button class="addToCart btn-long">Ajouter au panier</button>
-				<?php else :?>
+				<?php }else if ($book['isBookInCart'] == 1){								?>
 					<p id="msgInCart">Déjà dans le panier !</p>
-				<?php endif ?>
+				<?php }																		?>
 				<p id="cartError"></p>
 			</div>
 
