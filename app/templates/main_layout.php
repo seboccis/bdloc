@@ -33,10 +33,7 @@
 		</footer>
 		
 		<div id='shadow'>
-			<div id="showDetail" data-ajax-catalog-detail-path="<?php echo $this->url('ajax_catalog_detail'); ?>"></div>
-			<div id="showOrder" data-ajax-order-path="<?php echo $this->url('ajax_order'); ?>"></div>
-
-
+			<div id="lightBox" data-ajax-catalog-getDetail-path="<?php echo $this->url('ajax_catalog_detail'); ?>" data-ajax-order-path="<?php echo $this->url('ajax_order'); ?>"></div>
 		</div>
 
 		<script type="text/javascript" src="<?= $this->assetUrl('js/main.js') ?>"></script>

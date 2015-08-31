@@ -86,10 +86,9 @@ class BookController extends DefaultController
 
 		$bookManager = new BookManager();
 		$books = $bookManager->findCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number);
-
-		$cartManager = new CartManager();
 		
 		// Récupère le panier de l'utilisateur
+		$cartManager = new CartManager();
 		$cartId = $cartManager->findCart($this->getUser()['id']);
 
 		
@@ -120,15 +119,17 @@ class BookController extends DefaultController
 			$book['string_quantity_available'] = $string_quantity_available;
 
 			// Vérifie si les livres affichés dans le catalogue sont dans le panier 
-			$isBookInCart = 1;
+			$isBookInCart = 0;
 			if (in_array($book['id'], $bookInCartIds)) {
-				$isBookInCart = 0;
+				$isBookInCart = 1;
 			}
 
 			$book['isBookInCart'] = $isBookInCart;
 
 			$transformedBooks[] = $book;
 		}
+
+		// debug($transformedBooks);die();
 
 		////// Définition des variables à envoyer sur la page ajax_catalog_showBooks.php
 
@@ -202,7 +203,7 @@ class BookController extends DefaultController
 
 		$data = array('book' => $book);
 
-		$this->show('book/ajax_catalog_detail', $data);
+		$this->show('book/ajax_catalog_showDetail', $data);
 	}
 
 }

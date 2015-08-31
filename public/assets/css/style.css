@@ -211,31 +211,33 @@ body{
 				overflow-y: scroll;
 			}
 
-				.container section #content #showBooks .detail{
-					color: #000;
+				.container section #content #showBooks .card{
+					width: 440px;
+					height: 350px;
+					margin: 0 20px 20px 0;
+					float: left;
 				}
 
-					.container section #content #showBooks .detail .cover{
-						width: 440px;
-						height: 350px;
-						margin: 0 20px 20px 0;
-						float: left;
-					}
+					.container section #content #showBooks .card .row{}
 
-						.container section #content #showBooks .detail .cover .row{}
+						.container section #content #showBooks .card .row .cell{
+							width: 220px;
+							vertical-align: middle;
+						}
 
-							.container section #content #showBooks .detail .cover .row .cell{
-								width: 220px;
-								vertical-align: middle;
+							.container section #content #showBooks .card .row .cell img{
+								display:block;
+								width: 200px;
+								margin: 0 auto;
 							}
 
-								.container section #content #showBooks .detail .cover .row .cell img{
-									display:block;
-									width: 200px;
-									margin: 0 auto;
+							.container section #content #showBooks .card .row .cell-text{}
+
+								.container section #content #showBooks .card .row .cell-text #msgInCart{
+									color: blue;
 								}
 
-								.container section #content #showBooks .detail .cover .row .cell-text{}
+								.container section #content #showBooks .card .row .cell-text button{}
 
 	.container #shadow{
 		position: absolute;
@@ -247,7 +249,8 @@ body{
 		background-color: rgba(0,0,0,0.8);
 	}
 
-		.container #shadow #showDetail, .container #shadow #showOrder{
+		.container #shadow #lightBox{
+			background-color: #fff;
 			position: absolute;
 			top:50%;
 			left: 50%;
@@ -258,10 +261,10 @@ body{
 			transform: translateX(-50%)translateY(-50%);
 		}
 
-			.container #shadow #showDetail figure img{
+			.container #shadow #lightBox figure img{
 				display: block;
 			}
-			.container #shadow #showDetail figure button{
+			.container #shadow #lightBox figure #closeLightBox{
 				position: absolute;
 				top: 15px;
 				right: 15px;
@@ -277,11 +280,10 @@ body{
 				cursor: pointer;
 			}
 
-			.container #shadow #showDetail figcaption, .container #shadow #showOrder{
-				background-color: #fff;
+			.container #shadow #lightBox figcaption{
 				padding: 5px;
 			}
 
-				.container #shadow #showDetail figcaption h1{
+				.container #shadow #lightBox figcaption h1{
 					font-size: 1.2rem;
 				}
