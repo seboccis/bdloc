@@ -109,5 +109,28 @@ class CartController extends DefaultController
 
 	}
 
+	public function removeAllFromCart()
+	{
+		$this->lock();
+		$cartEmpty = "";
+
+		// récupérer l'id du cart en cours
+		$cartManager = new CartManager();
+		$cartId = $cartManager->findCart($_SESSION['user']['id']);
+
+		// Une fois les lignes du cart_to_books détruites, détruire le cart en cours
+		if ($cartManager->removeBooks($cartId)) {
+			if ($cartManager->removeCart($cartId)) {
+				$cartEmpty = "Votre panier est vide";
+			}
+		}
+
+		$data = [
+			'cartEmpty' => $cartEmpty,	
+		];
+
+		$this->show('cart/cart', $data);
+	}
+
 
 }

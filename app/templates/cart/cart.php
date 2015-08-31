@@ -6,6 +6,7 @@
 
 <?php if (!empty($books)) { ?>
 <?php echo 'Le nombre d\'exemplaires dans votre panier est de : <em id="showNumberBooksInCart"></em>'; ?>	
+<a href="<?= $this->url('remove_cart') ?>">Vider le panier</a>
 <table>
 	<thead>
 		<th>Titre</th>
