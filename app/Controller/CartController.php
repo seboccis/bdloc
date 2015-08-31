@@ -117,9 +117,19 @@ class CartController extends DefaultController
 
 		// récupérer l'id du cart en cours
 		$cartManager = new CartManager();
+		$bookManager = new BookManager();
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
 
 		if(!empty($cartId)){
+			// Augmenter la quantité disponible des livres ...
+
+			// ... en récupérant les livres du panier ...
+			$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
+			
+			// ... pour ajouter un à la quantité disponible
+			foreach ($booksIds as $bookId) {
+				$bookManager->increaseQuantityAvailable($bookId['book_id']);
+			}
 
 			// Une fois les lignes du cart_to_books détruites, détruire le cart en cours
 			if ($cartManager->removeBooks($cartId)) {
