@@ -117,6 +117,7 @@ $(".removeFromCart").on('click',function(event){
 	})
 	.done(function(){
 		that.parents('tr').fadeOut(200);
+		countBooksInCart();
 	});
 
 })
