@@ -87,7 +87,7 @@ class CartManager extends DefaultManager
 
 	public function removeBooks($cartId)
 	{
-		$sql = "DELETE FROM `cart_to_books` WHERE cart_id = $cartId";
+		$sql = "DELETE FROM cart_to_books WHERE cart_id = ". $cartId;
 		$sth = $this->dbh->prepare($sql);
 		return $sth->execute();
 

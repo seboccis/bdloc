@@ -39,9 +39,9 @@
 		['GET', '/panier/Ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
 
 		// Requête AJAX pour retirer un article du panier
-		['GET', '/panier/Retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	
+		['GET|POST', '/panier/Retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	
 
 		// Vider le panier
-		['GET', '/panier/Vider/', 'Cart#removeAllFromCart', 'remove_cart'],	
+		['GET|POST', '/panier/Vider/', 'Cart#removeAllFromCart', 'remove_cart'],	
 
 	);
