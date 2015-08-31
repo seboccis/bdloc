@@ -17,7 +17,6 @@
 		['GET|POST', '/panier/', 'Cart#cart', 'cart'],
 
 
-
 		// Page du compte
 		['GET', '/compte/', 'User#account', 'account'],
 		// Page de modification du profil
@@ -36,7 +35,11 @@
 		// Requête AJAX pour afficher les résultats de l'autocomplétion sur le mot-clé
 		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
 		// Requête AJAX pour ajouter un article au panier
-		['GET', '/panier/ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
+
+		['GET|POST', '/panier/Ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
+		// Requête AJAX Valider la commande
+		['GET|POST', '/ajax/Commande/', 'Cart#ajaxOrder', 'ajax_order'],	
+
 
 		// Requête AJAX pour retirer un article du panier
 		['GET|POST', '/panier/retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	

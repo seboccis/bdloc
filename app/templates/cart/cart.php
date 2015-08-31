@@ -4,9 +4,11 @@
 
 <h2>Ceci est la page du panier.</h2>
 
+
 <?php if (!empty($books)) { ?>
 <?php echo 'Le nombre d\'exemplaires dans votre panier est de : <em id="showNumberBooksInCart"></em>'; ?>	
 <a href="<?= $this->url('remove_cart') ?>">Vider le panier</a>
+<button id="order">Valider la commande</button>
 <table>
 	<thead>
 		<th>Titre</th>
@@ -34,5 +36,6 @@
 	else{
 		echo '<span>'. $cartEmpty .'</span>' ;
 	} ?>
+
 
 <?php $this->stop('main_content') ?>

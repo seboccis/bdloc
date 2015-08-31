@@ -18,6 +18,18 @@ class CartManager extends DefaultManager
 		return $sth->fetchColumn();
 	}
 
+	// insérer éventuellement un argument supplémentaire à findCart pour pouvoir trouver les paniers en cours et les commandes
+	public function findOrder($id)
+	{
+		$sql = "SELECT id
+				FROM " . $this->table . "
+				WHERE user_id = $id AND status = 1 ";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchColumn();
+	}
+
 	public function findBook($bookId,$cartId)
 	{
 		$sql = "SELECT *
@@ -87,9 +99,19 @@ class CartManager extends DefaultManager
 
 	public function removeBooks($cartId)
 	{
-		$sql = "DELETE FROM cart_to_books WHERE cart_id = ". $cartId;
+		$sql = "DELETE FROM cart_to_books WHERE cart_id = $cartId";
 		$sth = $this->dbh->prepare($sql);
 		return $sth->execute();
 
 	}
+
+	public function convertCartToOrder($cartId)
+	{
+		$sql = "UPDATE " . $this->table . " 
+				SET status = 1, begin_date = NOW() 
+				WHERE id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+	}
+
 }

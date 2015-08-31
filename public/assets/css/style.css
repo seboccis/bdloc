@@ -253,6 +253,7 @@ body{
 	}
 
 		.container #shadow #lightBox{
+			background-color: #fff;
 			position: absolute;
 			top:50%;
 			left: 50%;
@@ -293,7 +294,6 @@ body{
 				}
 
 			.container #shadow #lightBox figcaption{
-				background-color: #fff;
 				padding: 5px;
 			}
 
