@@ -36,7 +36,7 @@
 		['GET|POST', '/ajax/catalogue/keyword/', 'Keyword#ajaxCatalogKeyword', 'ajax_catalog_keyword'],
 		// Requête AJAX pour ajouter un article au panier
 
-		['GET|POST', '/panier/Ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
+		['GET|POST', '/panier/ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
 		// Requête AJAX Valider la commande
 		['GET|POST', '/ajax/Commande/', 'Cart#ajaxOrder', 'ajax_order'],	
 

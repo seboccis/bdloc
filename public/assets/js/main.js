@@ -272,6 +272,7 @@
 				that.parents('tr').fadeOut(200);
 				countBooksInCart();
 			});
+		});
 
 
 $('#order').on('click',function(e){
