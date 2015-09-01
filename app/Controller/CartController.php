@@ -148,7 +148,7 @@ class CartController extends DefaultController
 		$this->show('cart/cart', $data);
 	}
 
-	public function ajaxSubmitOrder()
+	public function submitOrder()
 	{
 		$this->lock();
 		$cartEmpty = "";
@@ -189,7 +189,7 @@ class CartController extends DefaultController
 					'orderError' => $orderError,
 					'cartEmpty' => $cartEmpty,
 				];
-				$this->show('cart/ajax_submit_order', $data);
+				$this->show('cart/submit_order', $data);
 			}	
 			// sinon on affiche le récapitulatif
 			else {
@@ -227,7 +227,7 @@ class CartController extends DefaultController
 				];
 
 						
-				$this->show('cart/ajax_submit_order', $data);
+				$this->show('cart/submit_order', $data);
 			
 			}
 		

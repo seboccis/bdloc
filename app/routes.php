@@ -37,13 +37,13 @@
 		// Requête AJAX pour ajouter un article au panier
 
 		['GET|POST', '/panier/ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
-		// Requête AJAX Soumettre la commande
-		['GET|POST', '/ajax/Commande/', 'Cart#ajaxSubmitOrder', 'ajax_submit_order'],	
 
 
 		// Requête AJAX pour retirer un article du panier
 		['GET|POST', '/panier/retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	
 
+		// Requête pour soumettre la commande
+		['GET|POST', '/Commande/', 'Cart#submitOrder', 'submit_order'],	
 		// Vider le panier
 		['GET|POST', '/panier/vider/', 'Cart#removeAllFromCart', 'remove_cart'],	
 

@@ -1,3 +1,7 @@
+<?php $this->layout('main_layout', ['title' => 'Panier']) ?>
+
+<?php $this->start('main_content') ?>
+
 <h2>Ceci est la page de la commande.</h2>
 
 <?php echo $orderError . '<br />' . $orderSuccess?>
@@ -45,3 +49,6 @@
 
 	<input type="submit" value="Poursuivre">
 </form>
+
+
+<?php $this->stop('main_content') ?>
