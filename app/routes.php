@@ -37,8 +37,8 @@
 		// Requête AJAX pour ajouter un article au panier
 
 		['GET|POST', '/panier/ajouter/', 'Cart#ajaxCatalogAddToCart', 'ajax_catalog_add_to_cart'],
-		// Requête AJAX Valider la commande
-		['GET|POST', '/ajax/Commande/', 'Cart#ajaxOrder', 'ajax_order'],	
+		// Requête AJAX Soumettre la commande
+		['GET|POST', '/ajax/Commande/', 'Cart#ajaxSubmitOrder', 'ajax_submit_order'],	
 
 
 		// Requête AJAX pour retirer un article du panier

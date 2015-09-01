@@ -274,19 +274,20 @@
 			});
 		});
 
+		// Submit Order
 
-$('#order').on('click',function(e){
-	var path = $('#lightBox').attr('data-ajax-order-path');
-	e.preventDefault();
-	$.ajax({
-		url: path,
-	}).done(function(response){
-		$('#lightBox').html(response);
-	});
-	$('#shadow').fadeIn(200);
-		$('#lightBox').fadeIn(200);
-		e.stopPropagation();
-});
+		$('#order').on('click',function(e){
+			var path = $('#lightBox').attr('data-ajax-submit-order-path');
+			e.preventDefault();
+			$.ajax({
+				url: path,
+			}).done(function(response){
+				$('#lightBox').html(response);
+			});
+			$('#shadow').fadeIn(200);
+				$('#lightBox').fadeIn(200);
+				e.stopPropagation();
+		});
 
 		
 ////// A l'ouverture de la page

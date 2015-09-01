@@ -4,6 +4,7 @@ namespace Controller;
 
 use \Manager\CartManager;
 use \Manager\BookManager;
+use \Manager\DeliveryPlaceManager;
 
 class CartController extends DefaultController
 {
@@ -147,7 +148,7 @@ class CartController extends DefaultController
 		$this->show('cart/cart', $data);
 	}
 
-	public function ajaxOrder()
+	public function ajaxSubmitOrder()
 	{
 		$this->lock();
 		$cartEmpty = "";
@@ -158,6 +159,7 @@ class CartController extends DefaultController
 		
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
+		$deliveryPlaceManager = new deliveryPlaceManager();
 			
 		// Vérifier le nombre de livres déjà empruntés
 		// Récupérer l'id des carts où le statut est égal à 1 (livres en cours)
@@ -183,29 +185,50 @@ class CartController extends DefaultController
 				// die('Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier ! !');
 
 				$data = [
+					'orderSuccess' => $orderSuccess,
 					'orderError' => $orderError,
 					'cartEmpty' => $cartEmpty,
 				];
-				$this->show('cart/ajax_order', $data);
+				$this->show('cart/ajax_submit_order', $data);
 			}	
-			// sinon on modifie le statut du panier et on affiche un récapitulatif
+			// sinon on affiche le récapitulatif
 			else {
-				$cartManager->convertCartToOrder($cartIdToOrder);
 				$booksIds = $cartManager->findAllBooksIdsInCart($cartIdToOrder);
 
 				if (!empty($booksIds)) {
 				$books = $bookManager->showBooks($booksIds);
-		}
+				}
 
+				// et la liste de tous les points de livraisons existants
+
+				$deliveryPlaces = $deliveryPlaceManager->findAll();
+
+				// Récupérer les codes postaux
+				
+				$codesAndCities = [];
+				foreach ($deliveryPlaces as $deliveryPlace) {
+					$codesAndCities[] = substr($deliveryPlace['address'], -11);
+				}
+
+				for ($i=0; $i <  count($deliveryPlaces); $i++) { 
+					$deliveryPlaces[$i]['code'] =  substr($codesAndCities[$i], 0,5);
+				}
+
+				// debug($deliveryPlaces);
+				
 				$orderSuccess = "Commande prête à être envoyée !";
+				
 				$data = [
 					'books' => $books,
 					'orderError' => $orderError,
 					'cartEmpty' => $cartEmpty,
 					'orderSuccess' => $orderSuccess,
+					'deliveryPlaces' => $deliveryPlaces,
 				];
-					
-				$this->show('cart/ajax_order', $data);
+
+						
+				$this->show('cart/ajax_submit_order', $data);
+			
 			}
 		
 
