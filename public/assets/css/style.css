@@ -300,3 +300,17 @@ body{
 				.container #shadow #lightBox figcaption h1{
 					font-size: 1.2rem;
 				}
+
+/*CSS de la page deliveryPlace*/
+#showMap{
+	width: 80%;
+	height: 60%;
+	margin: 0 auto;
+}
+	#showMap #mapDeliveryPlacesChoice {
+					height: 100%
+	}
+
+#validateChoicedDeliveryPlace{
+	display: none;
+}

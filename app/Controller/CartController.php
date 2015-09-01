@@ -172,54 +172,71 @@ class CartController extends DefaultController
 		$countBooksAlreadyOrdered = 0;
 		if (!empty($cartIdAlreadyOrdered)) {
 			$countBooksAlreadyOrdered = $cartManager->countBooksInCart($cartIdAlreadyOrdered);
-			}
+		}
 
-		// 	// Compter le nombre de livre à emprunter
-			$countBooksToOrder = $cartManager->countBooksInCart($cartIdToOrder);
+		// Compter le nombre de livre à emprunter
+		$countBooksToOrder = $cartManager->countBooksInCart($cartIdToOrder);
+		
+		$countOrderedAndToOrder = $countBooksAlreadyOrdered + $countBooksToOrder;
+
+		// Si le nombre de livres à louer ajouté au nombre de livres déjà loués est supérieur à 10, on affiche un message d'erreur
+		if ($countOrderedAndToOrder > 10) {
+			$orderError = "Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier !";
 			
-			$countOrderedAndToOrder = $countBooksAlreadyOrdered + $countBooksToOrder;
+			$data = [
+				'orderSuccess' => $orderSuccess,
+				'orderError' => $orderError,
+				'cartEmpty' => $cartEmpty,
+			];
+			$this->show('cart/submit_order', $data);
+		}
 
-		// 	// Si le nombre de livres à louer ajouté au nombre de livres déjà loués est supérieur à 10, on affiche un message d'erreur
-			if ($countOrderedAndToOrder > 10) {
-				$orderError = "Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier !";
+		// On vérifie que les coordonnées de l'utilisateur existent
+		$user = $this->getUser();
+
+		$lat = $user['lat'];
+		$lng = $user['lng'];
+
+		if(!empty($lat) && !empty($lng)){
+			$data = array(
+							'orderError' => $orderError,
+							'orderSuccess' => $orderSuccess,
+							'cartIdToOrder' => $cartIdToOrder,
+						);
+			$this->show('googleAPI/deliveryPlace', $data);
+///////////// ce devrait être une utimlisation de redirectToRoute, mais je n'arrive pas à récupérer le paramètre
+///////////// DEMANDER à GUILLAUME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
+		}	
+		
+		// On affiche la liste de tous les points de livraisons existants
+
+		$deliveryPlaces = $deliveryPlaceManager->findAll();
+
+		// Récupérer les codes postaux
+		
+		$codesAndCities = [];
+		foreach ($deliveryPlaces as $deliveryPlace) {
+			$codesAndCities[] = substr($deliveryPlace['address'], -11);
+		}
+
+		for ($i=0; $i <  count($deliveryPlaces); $i++) { 
+			$deliveryPlaces[$i]['code'] =  substr($codesAndCities[$i], 0,5);
+		}
+
+		// debug($deliveryPlaces);
+		
+		$orderSuccess = "Commande prête à être envoyée !";
+		
+		$data = [
+			'orderError' => $orderError,
+			'cartEmpty' => $cartEmpty,
+			'orderSuccess' => $orderSuccess,
+			'deliveryPlaces' => $deliveryPlaces,
+			'cartIdToOrder' => $cartIdToOrder,
+		];
+
 				
-				$data = [
-					'orderSuccess' => $orderSuccess,
-					'orderError' => $orderError,
-					'cartEmpty' => $cartEmpty,
-				];
-				$this->show('cart/submit_order', $data);
-			}	
-			
-				// On affiche la liste de tous les points de livraisons existants
-
-				$deliveryPlaces = $deliveryPlaceManager->findAll();
-
-				// Récupérer les codes postaux
-				
-				$codesAndCities = [];
-				foreach ($deliveryPlaces as $deliveryPlace) {
-					$codesAndCities[] = substr($deliveryPlace['address'], -11);
-				}
-
-				for ($i=0; $i <  count($deliveryPlaces); $i++) { 
-					$deliveryPlaces[$i]['code'] =  substr($codesAndCities[$i], 0,5);
-				}
-
-				// debug($deliveryPlaces);
-				
-				$orderSuccess = "Commande prête à être envoyée !";
-				
-				$data = [
-					'orderError' => $orderError,
-					'cartEmpty' => $cartEmpty,
-					'orderSuccess' => $orderSuccess,
-					'deliveryPlaces' => $deliveryPlaces,
-					'cartIdToOrder' => $cartIdToOrder,
-				];
-
-						
-				$this->show('cart/submit_order', $data);
+		$this->show('cart/submit_order', $data);
 			
 	}
 
