@@ -28,6 +28,9 @@
 			#mapDeliveryPlacesChoice {
 				height: 100%
 			}
+			#validateChoicedDeliveryPlace{
+				display: none;
+			}
 		</style>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

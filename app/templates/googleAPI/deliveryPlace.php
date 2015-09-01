@@ -4,7 +4,11 @@
 
 	<!-- <button id="btnShowMarkers" data-ajax-deliveryPlace-getMap-path="">Afficher le plan</button> -->
 
-	<div id="mapDeliveryPlacesChoice" data-ajax-deliveryPlace-getMap-path="<?php echo $this->url('ajax_deliveryPlace_getMap'); ?>"></div>
+	<div id="mapDeliveryPlacesChoice" data-ajax-deliveryPlace-getMap-path="<?php echo $this->url('ajax_deliveryPlace_getMap'); ?>" data-ajax-deliveryPlace-getDeliveryPlace-path="<?php echo $this->url('ajax_deliveryPlace_getDeliveryPlace'); ?>"></div>
+
+	<div id="choicedDeliveryPlace" data-id-choicedDeliveryPlace="0"></div>
+
+	<button id="validateChoicedDeliveryPlace">Valider votre point-relais</button>
 
 	<noscript>
 		<p>Attention : </p>
@@ -13,6 +17,21 @@
 		<p>Pour afficher Google Maps, activez JavaScript en modifiant les options de votre navigateur, puis essayez à nouveau.</p>
 	</noscript>
 	<script type="text/javascript">
+
+	function showDeliveryPlace(response){
+		$('#choicedDeliveryPlace').html(response);
+	}
+
+	function getDeliveryPlace(id){
+		var path = $('#mapDeliveryPlacesChoice').attr('data-ajax-deliveryPlace-getDeliveryPlace-path');
+		$.ajax({
+			url: path,
+			data:{
+				id: id,
+			}
+		})
+		.done(showDeliveryPlace);
+	}
 
 	function showMap(response){
 
@@ -26,17 +45,24 @@
 		
 		var mapDeliveryPlacesChoice = new google.maps.Map(document.getElementById("mapDeliveryPlacesChoice"), mapOptions);
 
-		var userMarker = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"00ff00",text:"Vous êtes ici"}),position:mapDeliveryPlacesChoice.getCenter(),map:mapDeliveryPlacesChoice});
+		var userMarker = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"00ff00",text:"Vous habité ici"}),position:mapDeliveryPlacesChoice.getCenter(),map:mapDeliveryPlacesChoice});
 
 		for(var i = 0; i < numberDeliveryPlaces; i++){
+			var data = response.deliveryPlaces[i].id;
 			var position = new google.maps.LatLng(response.deliveryPlaces[i].lat, response.deliveryPlaces[i].lng);
 			var marker = new google.maps.Marker({
 	   												position: position,
 	    											map: mapDeliveryPlacesChoice,
 	    											title: response.deliveryPlaces[i].name + '\n' + response.deliveryPlaces[i].address
 	  											});
+			(function (marker, data) {
+			                google.maps.event.addListener(marker, "click", function (e) {
+			                			$('#choicedDeliveryPlace').attr('data-id-choicedDeliveryPlace', data);
+			                			$('#validateChoicedDeliveryPlace').fadeIn(400);
+		                   				getDeliveryPlace(data);
+			 						});
+			})(marker, data);
 		}
-
 
 	}
 
@@ -49,6 +75,11 @@
 	}
 
 	$(window).on('load',getMap);
+
+	$('#validateChoicedDeliveryPlace').on('click', function(event){
+		var id = $('#choicedDeliveryPlace').attr('data-id-choicedDeliveryPlace');
+		alert(id);
+	});
 
 	</script>
 	<script type="text/javascript">
