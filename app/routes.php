@@ -23,6 +23,11 @@
 		['GET|POST', '/compte/modifications/Utilisateur/', 'User#editProfile', 'edit_profile'],
 		// Page de modification du mot de passe
 		['GET|POST', '/compte/modifications/Password/', 'User#editPassword', 'edit_password'],
+		// Page de confirmation de la commande
+		['GET|POST', '/Commande/Confirmation/', 'Cart#confirmOrder', 'confirm_order'],
+		// Page de validation de la commande
+		['GET', '/Commande/Confirmation/[:cartIdToOrder]/[:deliveryPlace]/', 'Cart#saveOrder', 'save_order'],
+		
 
 
 
@@ -42,7 +47,7 @@
 		// Requête AJAX pour retirer un article du panier
 		['GET|POST', '/panier/retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	
 
-		// Requête pour soumettre la commande
+		// Soumettre la commande
 		['GET|POST', '/Commande/', 'Cart#submitOrder', 'submit_order'],	
 		// Vider le panier
 		['GET|POST', '/panier/vider/', 'Cart#removeAllFromCart', 'remove_cart'],	

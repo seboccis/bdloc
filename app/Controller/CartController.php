@@ -182,8 +182,7 @@ class CartController extends DefaultController
 		// 	// Si le nombre de livres à louer ajouté au nombre de livres déjà loués est supérieur à 10, on affiche un message d'erreur
 			if ($countOrderedAndToOrder > 10) {
 				$orderError = "Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier !";
-				// die('Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier ! !');
-
+				
 				$data = [
 					'orderSuccess' => $orderSuccess,
 					'orderError' => $orderError,
@@ -191,15 +190,8 @@ class CartController extends DefaultController
 				];
 				$this->show('cart/submit_order', $data);
 			}	
-			// sinon on affiche le récapitulatif
-			else {
-				$booksIds = $cartManager->findAllBooksIdsInCart($cartIdToOrder);
-
-				if (!empty($booksIds)) {
-				$books = $bookManager->showBooks($booksIds);
-				}
-
-				// et la liste de tous les points de livraisons existants
+			
+				// On affiche la liste de tous les points de livraisons existants
 
 				$deliveryPlaces = $deliveryPlaceManager->findAll();
 
@@ -219,18 +211,62 @@ class CartController extends DefaultController
 				$orderSuccess = "Commande prête à être envoyée !";
 				
 				$data = [
-					'books' => $books,
 					'orderError' => $orderError,
 					'cartEmpty' => $cartEmpty,
 					'orderSuccess' => $orderSuccess,
 					'deliveryPlaces' => $deliveryPlaces,
+					'cartIdToOrder' => $cartIdToOrder,
 				];
 
 						
 				$this->show('cart/submit_order', $data);
 			
-			}
+	}
+
+	public function confirmOrder()
+	{
+		$this->lock();
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$deliveryPlaceManager = new DeliveryPlaceManager();
+
+		// Récupérer le point de livraison sélectionné 
+		if(!empty($_POST)) {
+			
+			$deliveryPlaceId = trim(strip_tags($_POST['deliveryplace']));
+			$cartIdToOrder = trim(strip_tags($_POST['cartIdToOrder']));
+
+			// Récupération du nom et de l'adresse du point de livraison
+				$deliveryPlace = $deliveryPlaceManager->find($deliveryPlaceId);
+
+			// Récupération de tous les livres du cart
+				$booksIds = $cartManager->findAllBooksIdsInCart($cartIdToOrder);
+
+			// 	if (!empty($booksIds)) {
+				$books = $bookManager->showBooks($booksIds);
+			// 	}
+
+			$data = [
+				'deliveryPlace' => $deliveryPlace,
+				'books' => $books,
+				'cartIdToOrder' => $cartIdToOrder,
+			];
+
+		}
 		
+		$this->show('cart/confirm_order', $data);
+	}
+
+	public function saveOrder($cartIdToOrder, $deliveryPlaceId)
+	{
+		// Modifier le statut du cart et insérer le point de livraison sélectionné 
+		$cartManager = new CartManager();
+
+		if ($cartManager->convertCartToOrder($cartIdToOrder, $deliveryPlaceId)) {
+			$this->redirectToRoute('catalog');
+					
+		}
+
 
 	}
 

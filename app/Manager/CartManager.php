@@ -105,13 +105,14 @@ class CartManager extends DefaultManager
 
 	}
 
-	public function convertCartToOrder($cartId)
+	public function convertCartToOrder($cartId, $deliveryplaceId)
 	{
 		$sql = "UPDATE " . $this->table . " 
-				SET status = 1, begin_date = NOW() 
+				SET status = 1, deliveryplace_id = :deliveryplaceId, begin_date = NOW() 
 				WHERE id = $cartId";
 		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
+		$sth->bindValue(':deliveryplaceId',$deliveryplaceId);
+		return $sth->execute();
 	}
 
 }

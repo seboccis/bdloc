@@ -1,4 +1,4 @@
-<?php $this->layout('main_layout', ['title' => 'Panier']) ?>
+<?php $this->layout('main_layout', ['title' => 'Vérification de la commande']) ?>
 
 <?php $this->start('main_content') ?>
 
@@ -6,30 +6,21 @@
 
 <?php echo $orderError . '<br />' . $orderSuccess?>
 
-<?php if (!empty($books)) {
-		foreach ($books as $book) :
-?>
-
-	<p><?= $this->e($book['title'])?></p>
-
-<?php endforeach ?>
-<?php } ?> 
-	
-
-<form action="">
+<form action="<?=$this->url('confirm_order')?>" method="POST">
 	<legend>Choisissez le point de livraison</legend>
 <?php 
 		if (!empty($deliveryPlaces)) {
 ?>
-			<select name="deliveryplaces" id="deliveryplaces">
+			<select name="deliveryplace" id="deliveryplace">
 <?php
 			for ($i=1; $i <= 20 ; $i++) { 
-				$arr = 75000 + $i;
+				$arr = $i.($i==1 ? "er arrondissement" : "ème arrondissement");
+				$code = $i + 75000;
 ?>
 				<optgroup label="<?= $arr ?>">
 <?php
 					foreach ($deliveryPlaces as $deliveryPlace) {
-						if ($deliveryPlace['code'] == $arr) {
+						if ($deliveryPlace['code'] == $code) {
 ?>
 							<option value="<?=$deliveryPlace['id']?>"><?= $deliveryPlace['name']?></option>
 <?php
@@ -41,13 +32,11 @@
 			}
 ?>
 			</select>
+			<input type="hidden" name="cartIdToOrder" value="<?= $cartIdToOrder ?>">
 <?php
 		}
 ?>
-			
-			
-
-	<input type="submit" value="Poursuivre">
+			<button>Poursuivre</button>
 </form>
 
 
