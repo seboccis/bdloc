@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use \Manager\DeliveryplaceManager;
+
 class GoogleAPIController extends DefaultController
 {
 
@@ -23,6 +25,31 @@ class GoogleAPIController extends DefaultController
 		}
 
 		return [$lat, $lng];
+	}
+
+	public function deliveryPlace()
+	{
+		$this->lock();
+
+		$this->show('googleAPI/deliveryPlace');
+	}
+
+	public function ajaxDeliveryPlaceGetMap()
+	{
+		$user = $this->getUser();
+
+		$deliveryplaceManager = new DeliveryplaceManager();
+		$deliveryPlaces = $deliveryplaceManager->findAll();
+
+		$numberDeliveryPlaces = count($deliveryPlaces);
+
+		$data = [
+					'user'					=> $user,
+					'numberDeliveryPlaces'	=> $numberDeliveryPlaces,
+					'deliveryPlaces'		=> $deliveryPlaces,
+				];
+
+		$this->showJson($data);
 	}
 
 }
