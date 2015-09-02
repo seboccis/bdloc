@@ -7,7 +7,7 @@ use \Manager\DeliveryplaceManager;
 class GoogleAPIController extends DefaultController
 {
 
-	public function getCoordinates($address, $zipcode)
+	public function getCoordinates($address, $zip_code)
 	{
 		$googleAddress = urlencode($address . ", " . $zip_code ." Paris");
 
