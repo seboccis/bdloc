@@ -100,11 +100,20 @@ class UserController extends DefaultController
 
 				// Recherche des coordonnées de l'utilisateur
 
-				$googleAPIController = new GoogleAPIController();
-				$arrayCoordinates = $googleAPIController->getCoordinates($address, $zip_code);
+				$googleAddress = urlencode($address . ", " . $zip_code ." Paris");
 
-				$lat = $arrayCoordinates[0];
-				$lng = $arrayCoordinates[1];
+				$response = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=".$googleAddress);
+				$arrayResponse = json_decode($response, true);
+
+				$lat = NULL;
+				$lng = NULL;
+
+				if(!empty($arrayResponse['results'][0])){
+
+						$lat = $arrayResponse['results'][0]['geometry']['location']['lat'];
+						$lng = $arrayResponse['results'][0]['geometry']['location']['lng'];
+
+				}
 
 				$newUser = [
 
@@ -265,24 +274,18 @@ class UserController extends DefaultController
 					}
 				}
 				
-				$googleAPIController = new GoogleAPIController();
-				$arrayCoordinates = $googleAPIController->getCoordinates($address, $zip_code);
-
-				$lat = $arrayCoordinates[0];
-				$lng = $arrayCoordinates[1];
-
 				$newUser = [
-					'last_name' 	=> $last_name,
-					'first_name' 	=> $first_name,
-					'username' 		=> $username,
-					'email' 		=> $email,
-					'zip_code' 		=> $zip_code,
-					'address' 		=> $address,
-					'lat'			=> $lat,
-					'lng'			=> $lng,
-					'phone_number'  => $phone_number,
+					'last_name' => $last_name,
+					'first_name' => $first_name,
+					'username' => $username,
+					'email' => $email,
+					'zip_code' => $zip_code,
+					'address' => $address,
+					'phone_number' => $phone_number,
 					'date_modified' => date('Y-m-d H:i:s')
 				];
+
+
 				
 				if ($userManager->update($newUser,$_SESSION['user']['id'])) {
 					$refreshUser = $userManager->find($_SESSION['user']['id']);
