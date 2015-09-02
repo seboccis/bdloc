@@ -261,18 +261,24 @@ class UserController extends DefaultController
 					}
 				}
 				
+				$googleAPIController = new GoogleAPIController();
+				$arrayCoordinates = $googleAPIController->getCoordinates($address, $zip_code);
+
+				$lat = $arrayCoordinates[0];
+				$lng = $arrayCoordinates[1];
+
 				$newUser = [
-					'last_name' => $last_name,
-					'first_name' => $first_name,
-					'username' => $username,
-					'email' => $email,
-					'zip_code' => $zip_code,
-					'address' => $address,
-					'phone_number' => $phone_number,
+					'last_name' 	=> $last_name,
+					'first_name' 	=> $first_name,
+					'username' 		=> $username,
+					'email' 		=> $email,
+					'zip_code' 		=> $zip_code,
+					'address' 		=> $address,
+					'lat'			=> $lat,
+					'lng'			=> $lng,
+					'phone_number'  => $phone_number,
 					'date_modified' => date('Y-m-d H:i:s')
 				];
-
-
 				
 				if ($userManager->update($newUser,$_SESSION['user']['id'])) {
 					$refreshUser = $userManager->find($_SESSION['user']['id']);
