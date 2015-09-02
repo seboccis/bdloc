@@ -218,6 +218,10 @@ body{
 					float: left;
 				}
 
+				.container section #content #showBooks .card-bookNotAvailable{
+					background: red;
+				}
+
 					.container section #content #showBooks .card .row{}
 
 						.container section #content #showBooks .card .row .cell{
@@ -232,6 +236,10 @@ body{
 							}
 
 							.container section #content #showBooks .card .row .cell-text{}
+
+								.container section #content #showBooks .card .row .cell-text .pNotAvailable{
+									color: white;
+								}
 
 								.container section #content #showBooks .card .row .cell-text #msgInCart{
 									color: blue;

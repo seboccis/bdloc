@@ -2,7 +2,7 @@
 	<input type="hidden" id='dataRequest' data-request-precStart="<?= $precStart; ?>" data-request-first="<?= $first; ?>" data-request-last="<?= $last; ?>" data-request-total="<?= $total; ?>" data-request-nextStart="<?= $nextStart; ?>">
 <?php foreach($books as $book){			?>
 	
-	<div class="card table" data-bookId="<?= $book['id'] ?>">
+	<div class="card<?php if($book['quantity_available'] == 0){ echo ' card-bookNotAvailable';} ?> table" data-bookId="<?= $book['id'] ?>">
 
 		<div class="row">
 
@@ -44,7 +44,7 @@
 						}
 					?>
 				</p>
-				<p><?php echo $this->e($book['string_quantity_available'])?></p>
+				<p<?php if($book['quantity_available'] == 0){ echo ' class="pNotAvailable"';} ?>><?php echo $this->e($book['string_quantity_available'])?></p>
 				<button class="detail btn-long" data-book-id="<?= $book['id']; ?>">Plus de détails</button>
 				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	?>
 					<button class="addToCart btn-long">Ajouter au panier</button>
