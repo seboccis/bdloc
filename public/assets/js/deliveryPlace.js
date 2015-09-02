@@ -31,10 +31,10 @@ function showMap(response){
 		var data = response.deliveryPlaces[i].id;
 		var position = new google.maps.LatLng(response.deliveryPlaces[i].lat, response.deliveryPlaces[i].lng);
 		var marker = new google.maps.Marker({
-   												position: position,
+												position: position,
     											map: mapDeliveryPlacesChoice,
     											title: response.deliveryPlaces[i].name + '\n' + response.deliveryPlaces[i].address
-  											});
+   											});
 		(function (marker, data) {
 		                google.maps.event.addListener(marker, "click", function (e) {
 		                			$('#inputChoicedDeliveryPlace').attr('value', data);
@@ -43,7 +43,7 @@ function showMap(response){
 		 						});
 		})(marker, data);
 	}
-
+  						
 }
 
 function getMap(){
