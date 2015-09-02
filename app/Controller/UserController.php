@@ -3,7 +3,11 @@
 namespace Controller;
 
 use \Manager\UserManager;
+use \W\Controller\Controller;
 use \W\Security\AuthentificationManager;
+use \W\Security\StringUtils;
+
+
 
 class UserController extends DefaultController
 {
@@ -347,5 +351,122 @@ class UserController extends DefaultController
 			];
 
 		$this->show('user/edit_password', $data);
+	}
+
+	public function forgotPassword()
+	{
+		$userManager = new UserManager;
+
+		$email = "";
+		$errorEmail = "";
+
+		if (!empty($_POST)){
+
+			
+			$string = new StringUtils;
+			$token = $string->randomString();
+			$hashedToken = password_hash($token, PASSWORD_DEFAULT);
+			$email = trim(strip_tags($_POST['email']));
+
+			if ($userManager->emailExists($email)){
+
+				$user = $userManager->getUserByUsernameOrEmail($email);
+				$username = $user['username'];
+				$userManager->update(array("token"=>$hashedToken),$user['id']);
+
+				$mail = new \PHPMailer;
+					$mail->isSMTP();
+					$mail->setLanguage('fr');
+					$mail->CharSet = 'UTF-8';
+					$mail->SMTPDebug = 2;	//0 pour désactiver les infos de débug
+					$mail->Debugoutput = 'html';
+					$mail->Host = 'smtp.gmail.com';
+					$mail->Port = 587;
+					$mail->SMTPSecure = 'tls';
+					$mail->SMTPAuth = true;
+					$mail->Username = "tony.wf3.nanterre@gmail.com";
+					$mail->Password = "nanterre1";
+					$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
+					$mail->addAddress('tony.wf3.nanterre@gmail.com', 'tony SEPEROUMAL');
+					$mail->isHTML(true); 	
+					$mail->Subject = 'Envoyé par PHP !';					
+    				
+					$mail->Body = '<a href="www.bdloc.dev/change_password/?token='.$token.'&username='.$username.'">Cliquer ici pour créer un nouveau mot de passe</a>';
+
+				if (!$mail->send()) {
+						echo "Mailer Error: " . $mail->ErrorInfo;
+					} else {
+						echo "Message sent!";
+					}
+				$this->redirectToRoute('forgot_password');
+
+			}
+			else {
+
+				$errorEmail = "Email non valide !";
+			}			
+		}
+
+
+		$data['errorEmail'] = $errorEmail;
+		$this->show('user/forgot_Password', $data);
+		
+
+
+	}
+
+	public function changePassword()
+	{
+		$token = $_GET['token'];
+		$username = $_GET['username'];		
+		$userManager = new UserManager();
+		
+		$user = $userManager->getUsername($username);
+
+		if (!password_verify($token, $user['token'])){
+			echo('die mutherfucker');
+		}
+
+		
+		$confirm_password = "";
+		$errorConfirm_password = "";		
+
+		if (!empty($_POST)){			
+			
+
+			$password = trim(strip_tags($_POST['password']));
+			$confirm_password = trim(strip_tags($_POST['confirm_password']));
+			
+
+			if ($password != $confirm_password){
+				$errorConfirm_password = "Vos mots de passe ne correspondent pas !";
+			}
+			else if (strlen($password) < 6){
+				$errorConfirm_password = "Veuillez saisir un mot de passe d'au moins 7 caracteres !";
+			}
+			else{
+				$containsLetter = preg_match('/[a-zA-Z]/', $password);
+				$containsDigit = preg_match('/\d/', $password);
+				$containsSpecial = preg_match('/[^a-zA-Z\d]/', $password);
+
+				if (!$containsLetter || !$containsDigit || !$containsSpecial){
+					$errorConfirm_password = "Veuillez choisir un mot de passe avec au moins une lettre, un chiffre et un caractere spécial.";
+				}
+			}
+
+			if (empty($errorConfirm_password)){
+
+				$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+				
+				$id = $user['id'];
+				$newPassword = [
+				"password" => $hashedPassword,
+				];	
+				
+				$userManager->update($newPassword, $id);											
+			}
+		}
+		$data['errorConfirm_password'] = $errorConfirm_password;
+		$this->show('user/change_password', $data);
 	}
 }

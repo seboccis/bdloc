@@ -17,6 +17,8 @@
 
 			<div><?php echo $error; ?></div>
 
+			<a href="<?= $this->url('forgot_password') ?>">Mot de passe oublié</a>
+
 		</form>
 
 		<a href="<?= $this->url('register') ?>">Créer un compte</a>

@@ -35,4 +35,20 @@ class UserManager extends \W\Manager\UserManager
 
 		return $this->dbh->lastInsertId();
 	}
+
+	public function getUsername($username)
+	{
+		
+		$sql = "SELECT * FROM users
+				WHERE username = :username";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":username", $username);
+
+		$sth->execute();
+
+		$user = $sth->fetch();
+		return $user;
+	}
+
+	
 }

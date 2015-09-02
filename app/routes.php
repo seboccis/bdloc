@@ -25,6 +25,10 @@
 		['GET|POST', '/compte/modifications/Password/', 'User#editPassword', 'edit_password'],
 		
 
+		['GET|POST', '/forgot_password/', 'User#forgotPassword', 'forgot_password'],
+
+		['GET|POST', '/change_password/', 'User#changePassword', 'change_password'],
+
 
 
 		// Requête AJAX pour afficher le nombre de BD dans le panier
