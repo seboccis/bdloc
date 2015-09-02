@@ -55,9 +55,9 @@
 
 					<div class="elementOfResultsBar">
 						<select name="number" id="selectCatalogNumber">
-						  <option value="10">Afficher 10 résultats</option> 
 						  <option value="20" selected>Afficher 20 résultats</option>
 						  <option value="40">Afficher 40 résultats</option>
+						  <option value="60">Afficher 60 résultats</option>
 						</select>
 					</div>
 
