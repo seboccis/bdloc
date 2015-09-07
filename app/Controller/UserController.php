@@ -390,7 +390,7 @@ class UserController extends DefaultController
 					$mail->Username = "tony.wf3.nanterre@gmail.com";
 					$mail->Password = "nanterre1";
 					$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
-					$mail->addAddress('tony.wf3.nanterre@gmail.com', 'tony SEPEROUMAL');
+					$mail->addAddress($user['email']);
 					$mail->isHTML(true); 	
 					$mail->Subject = 'Envoyé par PHP !';					
     				
@@ -401,7 +401,7 @@ class UserController extends DefaultController
 					} else {
 						echo "Message sent!";
 					}
-				$this->redirectToRoute('forgot_password');
+				$this->redirectToRoute('login');
 
 			}
 			else {
