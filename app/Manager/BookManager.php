@@ -155,4 +155,18 @@ class BookManager extends DefaultManager
 		$sth->execute();
  	}
 
+ 	public function bookCarousel($id)
+ 	{
+
+ 		$sql = "SELECT id, cover, title, serieId
+ 				FROM books
+ 				WHERE serieId = (SELECT serieId
+ 								FROM books
+ 								WHERE id = $id)";
+ 		$sth = $this->dbh->prepare($sql);
+ 		$sth->execute();
+
+ 		return $sth->fetchAll();
+ 	}
+
 }

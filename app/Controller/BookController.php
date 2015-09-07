@@ -198,8 +198,11 @@ class BookController extends DefaultController
 			}
 
 			$book['isBookInCart'] = $isBookInCart;
+		//livres de la meme serie
+		$bookC = $bookManager->bookCarousel($_GET['id']);
+		debug($bookC);
 
-		$data = array('book' => $book);
+		$data = array('book' => $book, 'bookC' => $bookC);
 
 		$this->show('book/ajax_catalog_showDetail', $data);
 	}
