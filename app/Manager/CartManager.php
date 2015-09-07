@@ -7,6 +7,17 @@ namespace Manager;
  */
 class CartManager extends DefaultManager
 {
+
+	public function findCartDelay($cartId)
+	{
+		$sql = "SELECT UNIX_TIMESTAMP(modified_date) - UNIX_TIMESTAMP(date_sub(NOW(),INTERVAL 10 MINUTE))
+				FROM $this->table
+				WHERE id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchColumn();
+	} 
+
 	public function findCart($id)
 	{
 		$sql = "SELECT id
@@ -62,8 +73,8 @@ class CartManager extends DefaultManager
 
 	public function createCart($id)
 	{
-		$sql = "INSERT INTO " . $this->table . " (id, user_id, status, begin_date, end_date)
-				VALUES (NULL,$id,0,NULL,NULL)";
+		$sql = "INSERT INTO " . $this->table . " (id, user_id, status, begin_date, modified_date, end_date)
+				VALUES (NULL, $id, 0, NULL, NOW(), NULL)";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $this->dbh->lastInsertId();
