@@ -18,16 +18,35 @@ class CartManager extends DefaultManager
 		return $sth->fetchColumn();
 	}
 
-	// insérer éventuellement un argument supplémentaire à findCart pour pouvoir trouver les paniers en cours et les commandes
-	public function findOrder($id)
+	public function showCarts($cartIds)
 	{
-		$sql = "SELECT id
+		$ids = "";
+		foreach ($cartIds as $cartId) {
+			$ids .= $cartId . ", "; 
+		}
+
+		$stringId = substr($ids, 0, -2);
+		
+		$sql = "SELECT *
 				FROM " . $this->table . "
-				WHERE user_id = $id AND status = 1 ";
+				WHERE id IN ($stringId)";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
-		return $sth->fetchColumn();
+		return $sth->fetchAll();
+	}
+
+	// insérer éventuellement un argument supplémentaire à findCart pour pouvoir trouver les paniers en cours et les commandes
+	public function findOrder($id, $status)
+	{
+		$sql = "SELECT id
+				FROM " . $this->table . "
+				WHERE user_id = $id AND status = :status ";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":status", $status);
+		$sth->execute();
+
+		return $sth->fetchAll();
 	}
 
 	public function findBook($bookId,$cartId)
@@ -69,6 +88,24 @@ class CartManager extends DefaultManager
 		return $sth->fetchAll();
 	}
 
+	public function findAllBooksIdsInCarts($cartIds)
+	{
+		$ids = "";
+		foreach ($cartIds as $cartId) {
+			$ids .= $cartId . ", "; 
+		}
+
+		$stringId = substr($ids, 0, -2);
+
+
+		$sql = "SELECT book_id
+				FROM cart_to_books
+				WHERE cart_id IN ($stringId)";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll();
+	}
+
 	public function removeBook($bookId)
 	{
 		$sql = "DELETE FROM cart_to_books
@@ -82,6 +119,24 @@ class CartManager extends DefaultManager
 		$sql = "SELECT COUNT(*)
 				FROM cart_to_books
 				WHERE cart_id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchColumn();
+	}
+
+	public function countBooksInCarts($cartIds)
+	{
+		$ids = "";
+		foreach ($cartIds as $cartId) {
+			$ids .= $cartId . ", "; 
+		}
+
+		$stringId = substr($ids, 0, -2);
+
+
+		$sql = "SELECT COUNT(*)
+				FROM cart_to_books
+				WHERE cart_id IN ($stringId)";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchColumn();

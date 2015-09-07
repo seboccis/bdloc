@@ -1,8 +1,9 @@
-<?php $this->layout('main_layout', ['title' => 'Informations personnelles']) ?>
+<?php $this->layout('main_layout', ['title' => 'Historique des commandes']) ?>
 
 <?php $this->start('main_content') ?>
 
-	<h2>Ceci est la page du compte</h2>
+
+	<h2>Ceci est la page d'historique des commandes.</h2>
 
 	<div id="sideBar" class="navbarAccount">
 		<nav>
@@ -16,13 +17,31 @@
 	</div>
 
 	<div id="content">
-		<p>Prénom : <?= $w_user['first_name'] ?></p>
-		<p>Nom : <?= $w_user['last_name'] ?></p>
-		<p>Pseudo : <?= $w_user['username'] ?></p>
-		<p>Email : <?= $w_user['email']?></p>
-		<p>Adresse : <?= $w_user['address'] ?></p>
-		<p>Code postal : <?= $w_user['zip_code'] ?></p>
-		<p>Numéro de téléphone : <?= $w_user['phone_number'] ?></p>
-	</div>
+		<?= $orderEmpty ?>
+		<?php foreach ($cartToBooks as $cartToBook) :?>
 		
+		<h1>Commande du <?= $cartToBook['cartBeginDate']?> au <?= $cartToBook['cartEndDate']?></h1>
+		<table>
+			<thead>
+				Titre
+			</thead>
+			<?php 
+			
+			foreach ($cartToBook['books'] as $book) : ?>
+			<tbody>
+				<tr>
+					<td>
+						<?=$book['title']?>
+					</td>
+				</tr>
+						
+			</tbody>
+		
+
+		<?php endforeach ?>
+		</table>
+		
+		<?php endforeach ?>
+	</div>
+	
 <?php $this->stop('main_content') ?>

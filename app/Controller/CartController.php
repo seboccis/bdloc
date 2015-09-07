@@ -4,6 +4,7 @@ namespace Controller;
 
 use \Manager\CartManager;
 use \Manager\BookManager;
+use \Manager\CartBookManager;
 use \Manager\DeliveryPlaceManager;
 
 class CartController extends DefaultController
@@ -164,14 +165,21 @@ class CartController extends DefaultController
 		// Vérifier le nombre de livres déjà empruntés
 		// Récupérer l'id des carts où le statut est égal à 1 (livres en cours)
 
-		$cartIdAlreadyOrdered = $cartManager->findOrder($_SESSION['user']['id']);
+		$status = 1;
+		$cartsAlreadyOrdered = $cartManager->findOrder($_SESSION['user']['id'], $status);
 		$cartIdToOrder = $cartManager->findCart($_SESSION['user']['id']);
+
+		$cartsIdsAlreadyOrdered = [];
+		foreach ($cartsAlreadyOrdered as $cartAlreadyOrdered) {
+			$cartsIdsAlreadyOrdered[] = $cartAlreadyOrdered['id'];
+		}
 		
 		
-		// Compter le nombre de livres dans le cart_to_books avec le cartId récupéré
+		
+		// Compter le nombre de livres dans le cart_to_books avec les ids récupérés
 		$countBooksAlreadyOrdered = 0;
-		if (!empty($cartIdAlreadyOrdered)) {
-			$countBooksAlreadyOrdered = $cartManager->countBooksInCart($cartIdAlreadyOrdered);
+		if (!empty($cartsIdsAlreadyOrdered)) {
+			$countBooksAlreadyOrdered = $cartManager->countBooksInCarts($cartsIdsAlreadyOrdered);
 		}
 
 		// Compter le nombre de livre à emprunter
@@ -284,6 +292,62 @@ class CartController extends DefaultController
 					
 		}
 
+
+	}
+
+	public function orderHistory()
+	{
+		$this->lock();
+
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$cartBookManager = new CartBookManager();
+		$cartToBooks = [];
+		$orderEmpty = "";
+	
+		// Récupérer tous les Ids des carts de l'user dont le statut est "2"
+
+		$status = 2;
+		$cartsAlreadyReturned = $cartManager->findOrder($_SESSION['user']['id'], $status);
+
+		if (!empty($cartsIdsAlreadyReturned)) {
+			
+			$cartsIdsAlreadyReturned = [];
+			foreach ($cartsAlreadyReturned as $cartAlreadyReturned) {
+				$cartsIdsAlreadyReturned[] = $cartAlreadyReturned['id'];
+			}
+			// Récupérer les infos des Carts
+
+			$carts = $cartManager->showCarts($cartsIdsAlreadyReturned);
+
+
+			foreach ($carts as $cart) {
+				$cartBeginDate = $cart['begin_date'];
+				$cartEndDate = $cart['end_date'];
+
+				$bookIds = $cartManager->findAllBooksIdsInCarts($cartsIdsAlreadyReturned);
+				$books = $bookManager->showBooks($bookIds);
+
+				$cartToBooks[] = [
+					'cartBeginDate' => $cartBeginDate,
+					'cartEndDate' => $cartEndDate,
+					'books' => $books,
+				];
+
+			}
+
+		}
+
+		else{
+			$orderEmpty = "Vous n'avez pas encore effectué de commandes";
+		}
+		
+		$data = [
+			'cartToBooks' => $cartToBooks,
+			'orderEmpty' => $orderEmpty,
+		];
+
+		$this->show('user/order_history', $data);
 
 	}
 
