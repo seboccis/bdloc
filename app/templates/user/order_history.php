@@ -17,6 +17,7 @@
 	</div>
 
 	<div id="content">
+		<?= $orderEmpty ?>
 		<?php foreach ($cartToBooks as $cartToBook) :?>
 		
 		<h1>Commande du <?= $cartToBook['cartBeginDate']?> au <?= $cartToBook['cartEndDate']?></h1>

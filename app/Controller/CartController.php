@@ -302,44 +302,49 @@ class CartController extends DefaultController
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
 		$cartBookManager = new CartBookManager();
+		$cartToBooks = [];
+		$orderEmpty = "";
 	
 		// Récupérer tous les Ids des carts de l'user dont le statut est "2"
 
 		$status = 2;
 		$cartsAlreadyReturned = $cartManager->findOrder($_SESSION['user']['id'], $status);
 
-		$cartsIdsAlreadyReturned = [];
-		foreach ($cartsAlreadyReturned as $cartAlreadyReturned) {
-			$cartsIdsAlreadyReturned[] = $cartAlreadyReturned['id'];
-		}
-		// Récupérer les infos des Carts
-
-		$carts = $cartManager->showCarts($cartsIdsAlreadyReturned);
-
-		$cartToBooks = [];
-
-		foreach ($carts as $cart) {
-			$cartBeginDate = $cart['begin_date'];
-			$cartEndDate = $cart['end_date'];
-
-			$bookIds = $cartManager->findAllBooksIdsInCarts($cartsIdsAlreadyReturned);
-			$books = $bookManager->showBooks($bookIds);
-
-			$cartToBooks[] = [
-				'cartBeginDate' => $cartBeginDate,
-				'cartEndDate' => $cartEndDate,
-				'books' => $books,
-			];
+		if (!empty($cartsIdsAlreadyReturned)) {
 			
+			$cartsIdsAlreadyReturned = [];
+			foreach ($cartsAlreadyReturned as $cartAlreadyReturned) {
+				$cartsIdsAlreadyReturned[] = $cartAlreadyReturned['id'];
+			}
+			// Récupérer les infos des Carts
+
+			$carts = $cartManager->showCarts($cartsIdsAlreadyReturned);
+
+
+			foreach ($carts as $cart) {
+				$cartBeginDate = $cart['begin_date'];
+				$cartEndDate = $cart['end_date'];
+
+				$bookIds = $cartManager->findAllBooksIdsInCarts($cartsIdsAlreadyReturned);
+				$books = $bookManager->showBooks($bookIds);
+
+				$cartToBooks[] = [
+					'cartBeginDate' => $cartBeginDate,
+					'cartEndDate' => $cartEndDate,
+					'books' => $books,
+				];
+
+			}
+
 		}
 
+		else{
+			$orderEmpty = "Vous n'avez pas encore effectué de commandes";
+		}
 		
-
-
-		
-
 		$data = [
 			'cartToBooks' => $cartToBooks,
+			'orderEmpty' => $orderEmpty,
 		];
 
 		$this->show('user/order_history', $data);
