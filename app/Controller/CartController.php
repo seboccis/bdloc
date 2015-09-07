@@ -164,14 +164,21 @@ class CartController extends DefaultController
 		// Vérifier le nombre de livres déjà empruntés
 		// Récupérer l'id des carts où le statut est égal à 1 (livres en cours)
 
-		$cartIdAlreadyOrdered = $cartManager->findOrder($_SESSION['user']['id']);
+		$status = 1;
+		$cartsAlreadyOrdered = $cartManager->findOrder($_SESSION['user']['id'], $status);
 		$cartIdToOrder = $cartManager->findCart($_SESSION['user']['id']);
+
+		$cartsIdsAlreadyOrdered = [];
+		foreach ($cartsAlreadyOrdered as $cartAlreadyOrdered) {
+			$cartsIdsAlreadyOrdered[] = $cartAlreadyOrdered['id'];
+		}
 		
 		
-		// Compter le nombre de livres dans le cart_to_books avec le cartId récupéré
+		
+		// Compter le nombre de livres dans le cart_to_books avec les ids récupérés
 		$countBooksAlreadyOrdered = 0;
-		if (!empty($cartIdAlreadyOrdered)) {
-			$countBooksAlreadyOrdered = $cartManager->countBooksInCart($cartIdAlreadyOrdered);
+		if (!empty($cartsIdsAlreadyOrdered)) {
+			$countBooksAlreadyOrdered = $cartManager->countBooksInCarts($cartsIdsAlreadyOrdered);
 		}
 
 		// Compter le nombre de livre à emprunter
