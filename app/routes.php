@@ -55,6 +55,9 @@
 		['GET|POST', '/Commande/Confirmation/', 'Cart#confirmOrder', 'confirm_order'],
 		// Page de validation de la commande
 		['GET', '/Commande/Confirmation/[:cartIdToOrder]/[:deliveryPlace]/', 'Cart#saveOrder', 'save_order'],
+		// Page d'affichage de l'historique des commandes
+		['GET', '/Commande/Historique/', 'Cart#orderHistory', 'order_history'],
+
 
 
 

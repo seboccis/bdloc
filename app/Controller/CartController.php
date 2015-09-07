@@ -4,6 +4,7 @@ namespace Controller;
 
 use \Manager\CartManager;
 use \Manager\BookManager;
+use \Manager\CartBookManager;
 use \Manager\DeliveryPlaceManager;
 
 class CartController extends DefaultController
@@ -291,6 +292,57 @@ class CartController extends DefaultController
 					
 		}
 
+
+	}
+
+	public function orderHistory()
+	{
+		$this->lock();
+
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$cartBookManager = new CartBookManager();
+	
+		// Récupérer tous les Ids des carts de l'user dont le statut est "2"
+
+		$status = 2;
+		$cartsAlreadyReturned = $cartManager->findOrder($_SESSION['user']['id'], $status);
+
+		$cartsIdsAlreadyReturned = [];
+		foreach ($cartsAlreadyReturned as $cartAlreadyReturned) {
+			$cartsIdsAlreadyReturned[] = $cartAlreadyReturned['id'];
+		}
+		// Récupérer les infos des Carts
+
+		$carts = $cartManager->showCarts($cartsIdsAlreadyReturned);
+
+		$cartToBooks = [];
+
+		foreach ($carts as $cart) {
+			$cartBeginDate = $cart['begin_date'];
+			$cartEndDate = $cart['end_date'];
+
+			$bookIds = $cartManager->findAllBooksIdsInCarts($cartsIdsAlreadyReturned);
+			$books = $bookManager->showBooks($bookIds);
+
+			$cartToBooks[] = [
+				'cartBeginDate' => $cartBeginDate,
+				'cartEndDate' => $cartEndDate,
+				'books' => $books,
+			];
+			
+		}
+
+		
+
+
+		
+
+		$data = [
+			'cartToBooks' => $cartToBooks,
+		];
+
+		$this->show('user/order_history', $data);
 
 	}
 

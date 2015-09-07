@@ -18,6 +18,24 @@ class CartManager extends DefaultManager
 		return $sth->fetchColumn();
 	}
 
+	public function showCarts($cartIds)
+	{
+		$ids = "";
+		foreach ($cartIds as $cartId) {
+			$ids .= $cartId . ", "; 
+		}
+
+		$stringId = substr($ids, 0, -2);
+		
+		$sql = "SELECT *
+				FROM " . $this->table . "
+				WHERE id IN ($stringId)";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchAll();
+	}
+
 	// insérer éventuellement un argument supplémentaire à findCart pour pouvoir trouver les paniers en cours et les commandes
 	public function findOrder($id, $status)
 	{
@@ -65,6 +83,24 @@ class CartManager extends DefaultManager
 		$sql ="SELECT book_id
 				FROM cart_to_books
 				WHERE cart_id = " . $cartId;
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll();
+	}
+
+	public function findAllBooksIdsInCarts($cartIds)
+	{
+		$ids = "";
+		foreach ($cartIds as $cartId) {
+			$ids .= $cartId . ", "; 
+		}
+
+		$stringId = substr($ids, 0, -2);
+
+
+		$sql = "SELECT book_id
+				FROM cart_to_books
+				WHERE cart_id IN ($stringId)";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();
