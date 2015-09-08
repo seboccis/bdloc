@@ -65,8 +65,6 @@
 		// Vider le panier
 		['GET|POST', '/panier/vider/', 'Cart#removeAllFromCart', 'remove_cart'],	
 
-		// Page de choix de point-relais
-		['GET|POST','/commande/point_relais/','GoogleAPI#deliveryPlace', 'deliveryPlace'],
 		// Requête AJAX pour aller chercher les coordonnées pertinentes
 		['GET','/commande/plan/','GoogleAPI#ajaxDeliveryPlaceGetMap', 'ajax_deliveryPlace_getMap'],
 		// Requête AJAX pour aller chercher le point-relais choisi

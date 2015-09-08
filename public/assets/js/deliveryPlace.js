@@ -47,11 +47,13 @@ function showMap(response){
 }
 
 function getMap(){
-	path = $('#mapDeliveryPlacesChoice').attr('data-ajax-deliveryPlace-getMap-path');
-	$.ajax({
-		url: path,
-	})
-	.done(showMap);
+	if($('#mapDeliveryPlacesChoice').attr('data-showMap') == 1){
+		path = $('#mapDeliveryPlacesChoice').attr('data-ajax-deliveryPlace-getMap-path');
+		$.ajax({
+			url: path,
+		})
+		.done(showMap);
+	}
 }
 
 $(window).on('load',getMap);

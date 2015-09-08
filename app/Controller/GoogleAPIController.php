@@ -27,17 +27,6 @@ class GoogleAPIController extends DefaultController
 		return [$lat, $lng];
 	}
 
-	public function deliveryPlace()
-	{
-		$this->lock();
-
-		debug($_POST); debug($_GET); die($cartIdToOrder);
-
-		$cartIdToOrder = $_POST['cartIdToOrder'];
-
-		$this->show('googleAPI/deliveryPlace', ['cartIdToOrder' => $cartIdToOrder,]);
-	}
-
 	public function ajaxDeliveryPlaceGetMap()
 	{
 		$user = $this->getUser();

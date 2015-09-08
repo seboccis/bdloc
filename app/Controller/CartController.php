@@ -155,6 +155,7 @@ class CartController extends DefaultController
 		$cartEmpty = "";
 		$orderError = "";
 		$orderSuccess = "";
+		$showMap = 0;
 
 
 		
@@ -192,9 +193,10 @@ class CartController extends DefaultController
 			$orderError = "Vous avez dépassé le nombre de bd autorisées en location (10), merci de réduire la taille de votre panier !";
 			
 			$data = [
-				'orderSuccess' => $orderSuccess,
-				'orderError' => $orderError,
-				'cartEmpty' => $cartEmpty,
+				'orderSuccess' 	=> $orderSuccess,
+				'orderError' 	=> $orderError,
+				'cartEmpty' 	=> $cartEmpty,
+				'showMap'		=> $showMap,
 			];
 			$this->show('cart/submit_order', $data);
 		}
@@ -206,12 +208,13 @@ class CartController extends DefaultController
 		$lng = $user['lng'];
 
 		if(!empty($lat) && !empty($lng)){
-			$data = array(
-							'orderError' => $orderError,
-							'orderSuccess' => $orderSuccess,
-							'cartIdToOrder' => $cartIdToOrder,
-						);
-			$this->show('googleAPI/deliveryPlace', $data);
+			$showMap = 1;
+			// $data = array(
+			// 				'orderError' => $orderError,
+			// 				'orderSuccess' => $orderSuccess,
+			// 				'cartIdToOrder' => $cartIdToOrder,
+			// 			);
+			// $this->show('googleAPI/deliveryPlace', $data);
 ///////////// ce devrait être une utimlisation de redirectToRoute, mais je n'arrive pas à récupérer le paramètre
 ///////////// DEMANDER à GUILLAUME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
 		}	
@@ -241,6 +244,7 @@ class CartController extends DefaultController
 			'orderSuccess' => $orderSuccess,
 			'deliveryPlaces' => $deliveryPlaces,
 			'cartIdToOrder' => $cartIdToOrder,
+			'showMap'		=> $showMap,
 		];
 
 				
