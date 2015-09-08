@@ -20,7 +20,7 @@
 		<?= $orderEmpty ?>
 		<?php foreach ($cartToBooks as $cartToBook) :?>
 		
-		<h1>Commande du <?= $cartToBook['cartBeginDate']?> au <?= $cartToBook['cartEndDate']?></h1>
+		<h2>Commande du <?= $cartToBook['cartBeginDate']?> au <?= $cartToBook['cartEndDate']?></h2>
 		<table>
 			<thead>
 				Titre
@@ -28,6 +28,32 @@
 			<?php 
 			
 			foreach ($cartToBook['books'] as $book) : ?>
+			<tbody>
+				<tr>
+					<td>
+						<?=$book['title']?>
+					</td>
+				</tr>
+						
+			</tbody>
+		
+
+		<?php endforeach ?>
+		</table>
+		
+		<?php endforeach ?>
+		
+		<?= $orderInRentEmpty ?>
+		<?php foreach ($cartToBooksInRent as $cartToBookInRent) :?>
+		
+		<h2>Commande du <?= $cartToBookInRent['cartInRentBeginDate']?> au <?= '<em>'."En cours de location".'</em>'?></h2>
+		<table>
+			<thead>
+				Titre
+			</thead>
+			<?php 
+			
+			foreach ($cartToBookInRent['booksInRent'] as $book) : ?>
 			<tbody>
 				<tr>
 					<td>

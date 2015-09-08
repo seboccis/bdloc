@@ -306,7 +306,44 @@ class CartController extends DefaultController
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
 		$cartToBooks = [];
+		$cartToBooksInRent= [];
 		$orderEmpty = "";
+		$orderInRentEmpty= "";
+
+		// Récupérer tous les Ids des carts de l'user dont le statut est "1"
+		$status = 1;
+		$cartsInRent = $cartManager->findOrder($_SESSION['user']['id'], $status);
+
+		if (!empty($cartsInRent)) {
+			$cartsIdsInRent = [];
+			foreach ($cartsInRent as $cartInRent) {
+				$cartsIdsInRent[] = $cartInRent['id'];
+			}
+
+			// Récupérer les infos des Carts
+
+			$carts = $cartManager->showCarts($cartsIdsInRent);
+
+			// Associer les carts et les livres correspondants
+			foreach ($carts as $cart) {
+				$cartInRentBeginDate = $cart['begin_date'];
+				// $cartEndDate = $cart['end_date'];
+				$cartId = $cart['id'];
+
+				$bookIds = $cartManager->findAllBooksIdsInCart($cartId);
+				$booksInRent = $bookManager->showBooks($bookIds);
+
+				$cartToBooksInRent[] = [
+					'orderInRentEmpty' => $orderInRentEmpty,
+					'cartInRentBeginDate' => $cartInRentBeginDate,
+					'booksInRent' => $booksInRent,
+				];
+			}
+		}
+		else {
+			$orderInRentEmpty = "Vous n'avez pas de commande en cours.";
+		}
+
 	
 		// Récupérer tous les Ids des carts de l'user dont le statut est "2"
 
@@ -352,7 +389,9 @@ class CartController extends DefaultController
 		
 		$data = [
 			'cartToBooks' => $cartToBooks,
+			'cartToBooksInRent' => $cartToBooksInRent,
 			'orderEmpty' => $orderEmpty,
+			'orderInRentEmpty' => $orderInRentEmpty,
 		];
 
 		$this->show('user/order_history', $data);
