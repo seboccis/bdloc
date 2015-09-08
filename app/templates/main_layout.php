@@ -6,6 +6,7 @@
 	<title>BDLoc :: <?= $this->e($title) ?></title>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript" src="<?= $this->assetUrl('js/jQuery.min.js') ?>"></script>
+	<script type="text/javascript" src="<?= $this->assetUrl('js/markerIconsLibrary.js'); ?>"></script>
 	<link rel="icon" type="image/png" href="<?= $this->assetUrl('img/icons/favicon.png') ?>" />
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/reset.css') ?>" />
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>" />

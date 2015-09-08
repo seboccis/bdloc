@@ -322,3 +322,7 @@ body{
 #validateChoicedDeliveryPlace{
 	display: none;
 }
+
+.container section p.legendShowMap{
+	display: none;
+}
