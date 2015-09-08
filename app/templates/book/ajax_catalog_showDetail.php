@@ -40,7 +40,7 @@
 					?>
 				</p>
 				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
-					<button class="addToCart">Ajouter au panier</a>
+					<button class="addToCart btn btn-success">Ajouter au panier</a>
 				<?php }else if($book['isBookInCart'] == 1){									 ?>
 					<p>Déjà dans le panier !</p>
 				<?php }																		 ?>

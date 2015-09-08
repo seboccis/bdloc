@@ -7,8 +7,8 @@
 
 <?php if (!empty($books)) { ?>
 <?php echo 'Le nombre d\'exemplaires dans votre panier est de : <em id="showNumberBooksInCart"></em>'; ?>	
-<a href="<?= $this->url('remove_cart') ?>">Vider le panier</a>
-<a href="<?= $this->url('submit_order') ?>">Soumettre la commande</a>
+<a class="btn btn-danger" href="<?= $this->url('remove_cart') ?>">Vider le panier</a>
+<a class="btn btn-success" href="<?= $this->url('submit_order') ?>">Commander</a>
 <table class="cartTable">
 	<thead>
 		<tr>
@@ -27,7 +27,7 @@
 				<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
 			</td>
 			<td>
-				<a class="removeFromCart" href="<?= $this->url('ajax_cart_remove_book_from_cart',['bookId'=>$book['id']])?>">Retirer du panier</a>
+				<a class="removeFromCart btn btn-danger" href="<?= $this->url('ajax_cart_remove_book_from_cart',['bookId'=>$book['id']])?>">Retirer</a>
 			</td>
 		</tr>
 	<?php endforeach ?>
