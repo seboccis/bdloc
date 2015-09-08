@@ -66,7 +66,11 @@
 		['GET|POST', '/panier/vider/', 'Cart#removeAllFromCart', 'remove_cart'],	
 
 		// Requête AJAX pour aller chercher les coordonnées pertinentes
-		['GET','/commande/plan/','GoogleAPI#ajaxDeliveryPlaceGetMap', 'ajax_deliveryPlace_getMap'],
+		['GET', '/commande/plan/', 'GoogleAPI#ajaxDeliveryPlaceGetMap', 'ajax_deliveryPlace_getMap'],
 		// Requête AJAX pour aller chercher le point-relais choisi
-		['GET','/commande/point_relais_choisi/','DeliveryPlace#ajaxDeliveryPlaceGetDeliveryPlace', 'ajax_deliveryPlace_getDeliveryPlace'],
+		['GET', '/commande/point_relais_choisi/', 'DeliveryPlace#ajaxDeliveryPlaceGetDeliveryPlace', 'ajax_deliveryPlace_getDeliveryPlace'],
+
+
+		// Gestion des paniers périmés
+		['GET', '/gestion_paniers/', 'Cart#deleteExpiredCarts', 'delete_expiredCarts'],
 	);

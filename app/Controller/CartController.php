@@ -209,14 +209,6 @@ class CartController extends DefaultController
 
 		if(!empty($lat) && !empty($lng)){
 			$showMap = 1;
-			// $data = array(
-			// 				'orderError' => $orderError,
-			// 				'orderSuccess' => $orderSuccess,
-			// 				'cartIdToOrder' => $cartIdToOrder,
-			// 			);
-			// $this->show('googleAPI/deliveryPlace', $data);
-///////////// ce devrait être une utimlisation de redirectToRoute, mais je n'arrive pas à récupérer le paramètre
-///////////// DEMANDER à GUILLAUME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
 		}	
 		
 		// On affiche la liste de tous les points de livraisons existants
@@ -398,6 +390,38 @@ class CartController extends DefaultController
 
 	}
 
+	/**
+	 * Programme de gestion des paniers périmés
+	**/
+	public function deleteExpiredCarts()
+	{
+
+		$cartManager = new CartManager();
+		$deepIdsExpiredCarts = $cartManager->getIdsExpiredCarts();
+
+		if(!empty($deepIdsExpiredCarts)){
+
+			$idsExpiredCarts = [];
+
+			foreach($deepIdsExpiredCarts as $arrayId){
+				$idsExpiredCarts[] = $arrayId['id'];
+			}
+
+			$bookManager = new BookManager();
+
+			foreach($idsExpiredCarts as $idExpiredCart){
+				$bookManager->increaseQuantityAvailableByIdCart($idExpiredCart);
+			}
+
+
+			$cartBookManager = new CartBookManager();
+			$cartBookManager->deleteSeveral('cart_id', $idsExpiredCarts);
+
+			$cartManager->deleteSeveral('id', $idsExpiredCarts);
+			
+		}
+
+	}
 
 }
 

@@ -25,28 +25,28 @@ class CartBookController extends DefaultController
 
 		if(empty($cartId)){die('0');}
 
-		$remainingTime = $cartManager->findCartDelay($cartId);
+		// $remainingTime = $cartManager->findCartDelay($cartId);
 
-		if($remainingTime < 0){
-			// Augmenter la quantité disponible des livres ...
+		// if($remainingTime < 0){
+		// 	// Augmenter la quantité disponible des livres ...
 
-			// ... en récupérant les livres du panier ...
-			$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
+		// 	// ... en récupérant les livres du panier ...
+		// 	$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
 			
-			// ... pour ajouter un à la quantité disponible
-			$bookManager = new BookManager();
-			foreach ($booksIds as $bookId) {
-				$bookManager->increaseQuantityAvailable($bookId['book_id']);
-			}
+		// 	// ... pour ajouter un à la quantité disponible
+		// 	$bookManager = new BookManager();
+		// 	foreach ($booksIds as $bookId) {
+		// 		$bookManager->increaseQuantityAvailable($bookId['book_id']);
+		// 	}
 
-			// Une fois les lignes du cart_to_books détruites, détruire le cart en cours
-			if ($cartManager->removeBooks($cartId)) {
-				if ($cartManager->removeCart($cartId)) {
-				}
-			}
+		// 	// Une fois les lignes du cart_to_books détruites, détruire le cart en cours
+		// 	if ($cartManager->removeBooks($cartId)) {
+		// 		if ($cartManager->removeCart($cartId)) {
+		// 		}
+		// 	}
 
-			die('0');
-		}
+		// 	die('0');
+		// }
 
 		$cartBookManager = new CartBookManager();
 		$number = $cartBookManager->countBooksInCart($cartId);

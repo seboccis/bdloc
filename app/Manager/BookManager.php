@@ -155,6 +155,21 @@ class BookManager extends DefaultManager
 		$sth->execute();
  	}
 
+ 	public function increaseQuantityAvailableByIdCart($idExpiredCart)
+ 	{
+
+ 		$sql = "UPDATE " . $this->table . "
+				SET quantity_available = quantity_available + 1
+				WHERE id IN (
+								SELECT book_id
+								FROM cart_to_books
+								WHERE cart_id = $idExpiredCart
+							)";
+		$sth = $this->dbh->prepare($sql);
+		return $sth->execute();
+
+ 	}
+
  	public function bookCarousel($id)
  	{
 

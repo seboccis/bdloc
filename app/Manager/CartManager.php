@@ -8,15 +8,15 @@ namespace Manager;
 class CartManager extends DefaultManager
 {
 
-	public function findCartDelay($cartId)
-	{
-		$sql = "SELECT UNIX_TIMESTAMP(modified_date) - UNIX_TIMESTAMP(date_sub(NOW(),INTERVAL 10 MINUTE))
-				FROM $this->table
-				WHERE id = $cartId";
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-		return $sth->fetchColumn();
-	} 
+	// public function findCartDelay($cartId)
+	// {
+	// 	$sql = "SELECT UNIX_TIMESTAMP(modified_date) - UNIX_TIMESTAMP(date_sub(NOW(),INTERVAL 10 MINUTE))
+	// 			FROM $this->table
+	// 			WHERE id = $cartId";
+	// 	$sth = $this->dbh->prepare($sql);
+	// 	$sth->execute();
+	// 	return $sth->fetchColumn();
+	// } 
 
 	public function findCart($id)
 	{
@@ -179,6 +179,18 @@ class CartManager extends DefaultManager
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(':deliveryplaceId',$deliveryplaceId);
 		return $sth->execute();
+	}
+
+	public function getIdsExpiredCarts()
+	{
+		$sql = "SELECT id
+				FROM " . $this->table . "
+    			WHERE modified_date < date_sub(NOW(),INTERVAL 10 MINUTE)
+    			AND status = 0";
+    	$sth = $this->dbh->prepare($sql);
+    	$sth->execute();
+
+    	return $sth->fetchAll();
 	}
 
 }
