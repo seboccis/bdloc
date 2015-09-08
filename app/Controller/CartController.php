@@ -305,7 +305,6 @@ class CartController extends DefaultController
 
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
-		$cartBookManager = new CartBookManager();
 		$cartToBooks = [];
 		$orderEmpty = "";
 	
@@ -314,7 +313,8 @@ class CartController extends DefaultController
 		$status = 2;
 		$cartsAlreadyReturned = $cartManager->findOrder($_SESSION['user']['id'], $status);
 
-		if (!empty($cartsIdsAlreadyReturned)) {
+
+		if (!empty($cartsAlreadyReturned)) {
 			
 			$cartsIdsAlreadyReturned = [];
 			foreach ($cartsAlreadyReturned as $cartAlreadyReturned) {
@@ -323,22 +323,26 @@ class CartController extends DefaultController
 			// Récupérer les infos des Carts
 
 			$carts = $cartManager->showCarts($cartsIdsAlreadyReturned);
+			// debug($carts);
+			
 
-
+			// Associer les carts et les livres correspondants
 			foreach ($carts as $cart) {
 				$cartBeginDate = $cart['begin_date'];
 				$cartEndDate = $cart['end_date'];
+				$cartId = $cart['id'];
 
-				$bookIds = $cartManager->findAllBooksIdsInCarts($cartsIdsAlreadyReturned);
+				$bookIds = $cartManager->findAllBooksIdsInCart($cartId);
 				$books = $bookManager->showBooks($bookIds);
 
 				$cartToBooks[] = [
+					'orderEmpty' => $orderEmpty,
 					'cartBeginDate' => $cartBeginDate,
 					'cartEndDate' => $cartEndDate,
 					'books' => $books,
 				];
-
 			}
+			
 
 		}
 
