@@ -39,13 +39,30 @@
 						}
 					?>
 				</p>
-				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
-					<button class="addToCart">Ajouter au panier</a>
-				<?php }else if($book['isBookInCart'] == 1){									 ?>
+				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	?>
+					<button class="addToCart">Ajouter au panier</button>
+				<?php }else if($book['isBookInCart'] == 1){									?>
 					<p>Déjà dans le panier !</p>
-				<?php }																		 ?>
+				<?php }																		?>
 				<p id="cartError"></p>
+
+				<div id="carousel" data-numberBooksInSerie="<?php echo count($booksCarousel); ?>" data-increment="1">
+
+<?php 	foreach($booksCarousel as $bookC){													?>
+
+					<figure class="cardCarousel">
+						<div class="coverCardCarousel">
+							<img src="<?php echo $this->assetUrl('img/mini-covers/'.$bookC['cover']); ?>" alt="<?php echo $bookC['title']; ?>">
+						</div>
+						<figcaption>
+							<span><?php echo $bookC['title']; ?></span>
+						</figcaption>
+					</figure>
+
+<?php 	}																					?>				
+				    
+				</div>
+
 		</figcaption>
 
-	</figure>
-	
+	</figure>	

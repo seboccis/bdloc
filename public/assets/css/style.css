@@ -345,3 +345,46 @@ thead tr th, tbody tr td{
 .cartTable tr td{
 	line-height: -50px;
 }
+
+
+
+#carousel{
+	width: 200px;
+	height: 350px;
+	overflow: hidden;
+	background: red;
+}
+
+	#carousel .cardCarousel{
+		display: block;
+		width: inherit;
+		height: inherit;
+		float: left;
+	}
+
+		#carousel .cardCarousel .coverCardCarousel{
+			height: 313px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+			#carousel .cardCarousel .coverCardCarousel img{
+				display: block;
+				max-width: 100%;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translateX(-50%)translateY(-50%);
+				-ms-transform: translateX(-50%)translateY(-50%);
+				-o-transform: translateX(-50%)translateY(-50%);
+				transform: translateX(-50%)translateY(-50%);
+			}
+
+		#carousel .cardCarousel figcaption{
+			height: 37px;
+			position: absolute;
+			top: 313px;
+			left: 0;
+			background: blue;
+		}

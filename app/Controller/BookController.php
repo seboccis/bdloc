@@ -168,8 +168,6 @@ class BookController extends DefaultController
 	 */
 	public function ajaxCatalogDetail()
 	{
-		$this->lock();
-
 		$bookManager = new BookManager;
 		
 		$book = $bookManager->extendedFind($_GET['id']);
@@ -192,17 +190,17 @@ class BookController extends DefaultController
 		}
 
 		// Vérifie si les livres affichés dans le catalogue sont dans le panier 
-			$isBookInCart = 0;
-			if (in_array($book['id'], $bookInCartIds)) {
-				$isBookInCart = 1;
-			}
+		$isBookInCart = 0;
+		if (in_array($book['id'], $bookInCartIds)) {
+			$isBookInCart = 1;
+		}
 
-			$book['isBookInCart'] = $isBookInCart;
+		$book['isBookInCart'] = $isBookInCart;
+
 		//livres de la meme serie
-		$bookC = $bookManager->bookCarousel($_GET['id']);
-		debug($bookC);
+		$booksCarousel = $bookManager->bookCarousel($_GET['id']);
 
-		$data = array('book' => $book, 'bookC' => $bookC);
+		$data = array('book' => $book, 'booksCarousel' => $booksCarousel);
 
 		$this->show('book/ajax_catalog_showDetail', $data);
 	}
