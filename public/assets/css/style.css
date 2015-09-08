@@ -326,3 +326,22 @@ body{
 .container section p.legendShowMap{
 	display: none;
 }
+table{
+	margin-bottom: 30px;
+}
+table thead tr th, table tbody tr td{
+	border: 1px solid #ccc;
+	padding: 5px;
+	line-height: 50px;
+} 
+
+thead tr th, tbody tr td{
+	border-collapse: collapse;
+	width: 200px;
+	height: 30px;
+	text-align: center;
+}
+
+.cartTable tr td{
+	line-height: -50px;
+}

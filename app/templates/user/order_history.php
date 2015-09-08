@@ -18,56 +18,76 @@
 
 	<div id="content">
 		<?= $orderEmpty ?>
-		<?php foreach ($cartToBooks as $cartToBook) :?>
 		
-		<h2>Commande du <?= $cartToBook['cartBeginDate']?> au <?= $cartToBook['cartEndDate']?></h2>
+		<h2>Commandes terminées</h2>
 		<table>
 			<thead>
-				Titre
+				<tr>
+					<th>Titre</th>
+					<th>Date de location</th>
+					<th>Date de retour</th>
+				</tr>
 			</thead>
+			<tbody>
+		<?php foreach ($cartToBooks as $cartToBook) :?>
 			<?php 
 			
 			foreach ($cartToBook['books'] as $book) : ?>
-			<tbody>
 				<tr>
 					<td>
 						<?=$book['title']?>
 					</td>
+					<td>
+						<?= $cartToBook['cartBeginDate']?>
+					</td>
+					<td>
+						<?= $cartToBook['cartEndDate']?>
+					</td>
 				</tr>
 						
-			</tbody>
 		
 
 		<?php endforeach ?>
+			</tbody>
+		<?php endforeach ?>
 		</table>
 		
-		<?php endforeach ?>
 		
 		<?= $orderInRentEmpty ?>
-		<?php foreach ($cartToBooksInRent as $cartToBookInRent) :?>
 		
-		<h2>Commande du <?= $cartToBookInRent['cartInRentBeginDate']?> au <?= '<em>'."En cours de location".'</em>'?></h2>
+		<h2>Commandes en cours</h2>
 		<table>
 			<thead>
-				Titre
+				<tr>
+					<th>Titre</th>
+					<th>Date de location</th>
+					<th>Date de retour</th>
+				</tr>
 			</thead>
+			<tbody>
+		<?php foreach ($cartToBooksInRent as $cartToBookInRent) :?>
 			<?php 
 			
 			foreach ($cartToBookInRent['booksInRent'] as $book) : ?>
-			<tbody>
 				<tr>
 					<td>
 						<?=$book['title']?>
 					</td>
+					<td>
+						<?= $cartToBookInRent['cartInRentBeginDate']?>
+					</td>
+					<td>
+						<em>En cours de location</em>
+					</td>
 				</tr>
 						
-			</tbody>
 		
 
 		<?php endforeach ?>
+		<?php endforeach ?>
+			</tbody>
 		</table>
 		
-		<?php endforeach ?>
 	</div>
 	
 <?php $this->stop('main_content') ?>

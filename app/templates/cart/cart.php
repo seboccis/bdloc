@@ -8,11 +8,14 @@
 <?php if (!empty($books)) { ?>
 <?php echo 'Le nombre d\'exemplaires dans votre panier est de : <em id="showNumberBooksInCart"></em>'; ?>	
 <a href="<?= $this->url('remove_cart') ?>">Vider le panier</a>
-<a href="<?= $this->url('submit_order') ?>">Soumettre la commande</button>
-<table>
+<a href="<?= $this->url('submit_order') ?>">Soumettre la commande</a>
+<table class="cartTable">
 	<thead>
-		<th>Titre</th>
-		<th>Cover</th>
+		<tr>
+			<th>Titre</th>
+			<th>Cover</th>
+			<th>Action</th>
+		</tr>
 	</thead>
 	<tbody>
 <?php foreach ($books as $book) :?>
