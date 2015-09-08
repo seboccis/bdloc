@@ -3,24 +3,33 @@
 <?php $this->start('main_content') ?>
 	<h2>Ceci est la page de login.</h2>
 
+	<div class="box box-login">
+		
 		<form action="" method="POST">
-			<div class="form-row">
+			<div class="form-group">
 				<label for="">Pseudo</label>
 				<input type="text" name="username" id="username">
+				<div><?php echo $error; ?></div>
 			</div>
-			<div class="form-row">
+			<div class="form-group">
 				<label for="password">Mot de passe</label>
 				<input type="password" name="password" id="password">
 			</div>
+			<div class="form-group">
+				<a href="<?= $this->url('forgot_password') ?>">Mot de passe oublié</a>
+			</div>
 			
-			<button>Valider</button>
+			<div class="navigation">
+				
+				<button class="btn btn-success">Valider</button>
+			
+				<a class="btn btn-danger" href="<?= $this->url('home') ?>">Retour</a>
 
-			<div><?php echo $error; ?></div>
-
-			<a href="<?= $this->url('forgot_password') ?>">Mot de passe oublié</a>
+			</div>
 
 		</form>
 
-		<a href="<?= $this->url('register') ?>">Créer un compte</a>
+	</div>
+		
 	
 <?php $this->stop('main_content') ?>

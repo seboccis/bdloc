@@ -39,10 +39,12 @@
 						}
 					?>
 				</p>
-				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	?>
-					<button class="addToCart">Ajouter au panier</button>
-				<?php }else if($book['isBookInCart'] == 1){									?>
-					<p>Déjà dans le panier !</p>
+
+				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
+					<button class="addToCart btn btn-success">Ajouter au panier</a>
+				<?php }else if($book['isBookInCart'] == 1){									 ?>
+
+					<p>Ajouté au panier !</p>
 				<?php }																		?>
 				<p id="cartError"></p>
 

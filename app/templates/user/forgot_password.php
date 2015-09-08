@@ -3,15 +3,21 @@
 <?php $this->start('main_content') ?>
 	<h2>Mot de passe oublié</h2>
 
+	<div class="box box-login">
+
 		<form action="" method="post">
-			<div class="form-row">
-				<label for="email">Votre email
+			<div class="form-group">
+				<label for="email">Votre email</label>
 					<input type="email" name="email" id="email">
-					<input type="submit" value="OK">
 					<div class="help-block text-danger"><?php echo $errorEmail; ?></div>
-				</label>
+			</div>
+
+			<div class="navigation">
+				<input class="btn btn-success" type="submit" value="Evoyer l'email">
+				<a class="btn btn-danger" href="<?= $this->url('home') ?>">Retour</a>
 			</div>
 
 		</form>
+	</div>
 	
 <?php $this->stop('main_content') ?>

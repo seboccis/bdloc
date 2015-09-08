@@ -250,6 +250,43 @@ body{
 									height: 30px;
 								}
 
+/*CSS de la page deliveryPlace*/
+#showMap{
+	width: 80%;
+	height: 60%;
+	margin: 0 auto;
+}
+	#showMap #mapDeliveryPlacesChoice {
+					height: 100%
+	}
+
+#validateChoicedDeliveryPlace{
+	display: none;
+}
+
+.container section p.legendShowMap{
+	display: none;
+}
+table{
+	margin-bottom: 30px;
+}
+table thead tr th, table tbody tr td{
+	border: 1px solid #ccc;
+	padding: 5px;
+	line-height: 50px;
+} 
+
+thead tr th, tbody tr td{
+	border-collapse: collapse;
+	width: 200px;
+	height: 30px;
+	text-align: center;
+}
+
+.cartTable tr td{
+	line-height: -50px;
+}
+
 	.container #shadow{
 		position: absolute;
 		display: none;
@@ -308,45 +345,6 @@ body{
 				.container #shadow #lightBox figcaption h1{
 					font-size: 1.2rem;
 				}
-
-/*CSS de la page deliveryPlace*/
-#showMap{
-	width: 80%;
-	height: 60%;
-	margin: 0 auto;
-}
-	#showMap #mapDeliveryPlacesChoice {
-					height: 100%
-	}
-
-#validateChoicedDeliveryPlace{
-	display: none;
-}
-
-.container section p.legendShowMap{
-	display: none;
-}
-table{
-	margin-bottom: 30px;
-}
-table thead tr th, table tbody tr td{
-	border: 1px solid #ccc;
-	padding: 5px;
-	line-height: 50px;
-} 
-
-thead tr th, tbody tr td{
-	border-collapse: collapse;
-	width: 200px;
-	height: 30px;
-	text-align: center;
-}
-
-.cartTable tr td{
-	line-height: -50px;
-}
-
-
 
 #carousel{
 	width: 200px;

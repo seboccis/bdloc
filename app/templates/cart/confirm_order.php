@@ -28,6 +28,7 @@
 </table>
 	<p>Nom et adresse du point de livraison : <?= $deliveryPlace['name'] . ", " . $deliveryPlace['address']?></p>
 
-	<a href="<?=$this->url('save_order',['cartIdToOrder' => $cartIdToOrder, 'deliveryPlace' => $deliveryPlace['id']])?>">Valider la commande</a>
+	<a class="btn btn-success" href="<?=$this->url('save_order',['cartIdToOrder' => $cartIdToOrder, 'deliveryPlace' => $deliveryPlace['id']])?>">Valider</a>
+	<a class="btn btn-danger" href="<?=$this->url('cart')?>">Retour</a>
 	
 <?php $this->stop('main_content') ?>
