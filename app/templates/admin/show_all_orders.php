@@ -27,13 +27,19 @@
 
 		<tbody>
 			<?php foreach ($allOrdersAndUsers as $allOrderAndUser): ?>
-				
+						
 				<tr>
 					<td>
-						<?=$allOrderAndUser['username']?>
+						<?php 
+						if ($allOrderAndUser['status'] != 0) {
+							echo $allOrderAndUser['username'];
+						}?>
+						
 					</td>
 					<td>
 						<?php
+						if ($allOrderAndUser['status'] != 0) {
+							
 							switch ($allOrderAndUser['status']) {
 								case '1':
 									echo "A traiter";
@@ -43,13 +49,19 @@
 								
 								break;
 							}
+						}
 						?>
 					</td>
 					<td>
+						<?php if ($allOrderAndUser['status'] != 0): ?>
+							
 						<?= $allOrderAndUser['begin_date']?>
+						<?php endif ?>
 					</td>
 					<td>
+						<?php if ($allOrderAndUser['status'] != 0): ?>
 						<a href="<?=$this->url('show_order',['cartId' => $allOrderAndUser['cartId'], 'status' => $allOrderAndUser['status'], 'username' => $allOrderAndUser['username']])?>"><i class="fa fa-search"></i></a>
+						<?php endif ?>
 					</td>
 					
 				</tr>
@@ -57,6 +69,7 @@
 			<?php endforeach ?>
 		</tbody>
 	</table>
+
 		
 	</div>
 	
