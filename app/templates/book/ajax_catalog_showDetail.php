@@ -1,6 +1,6 @@
 <?php ?>
 
-	<div data-bookId="<?= $book['id'] ?>" class="table">
+	<div class="table">
 		<div class="row">
 
 			<div class="cell cell-left">
@@ -49,8 +49,10 @@
 							?>
 						</p>
 
-						<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
-							<button class="addToCart btn btn-success"><i class="fa fa-cart-plus" title="Ajouter au panier"></i> Ajouter au panier</button>
+						<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>		
+
+							<button class="addToCart btn btn-success" data-bookId="<?= $book['id'] ?>"><i class="fa fa-cart-plus"></i> Ajouter au panier</button>
+
 						<?php }else if($book['isBookInCart'] == 1){									 ?>
 
 							<p>Ajouté au panier !</p>
@@ -65,13 +67,13 @@
 
 					<fieldset>
 
-						<legend>Série dont est issue cette BD</legend>
+						<legend>Série : <?php echo $serieTitle; ?></legend>
 
 						<div id="carousel">
 
-							<button id="btnCarouselPrev" class="btnCarousel">&lsaquo;</button>
+							<button id="btnCarouselPrev" class="btnCarousel"><span>&lsaquo;</span></button>
 
-							<div id="carouselWindow" data-numberBooksInSerie="<?php echo count($booksCarousel); ?>" data-carouselPosition="1">
+							<div id="carouselWindow" data-numberBooksInSerie="<?php echo $numberBooksInSerie; ?>" data-carouselPosition="1">
 
 								<div id="spriteCarousel">
 
@@ -96,7 +98,11 @@
 
 							</div>
 
-							<button id="btnCarouselNext" class="btnCarousel">&rsaquo;</button>
+<?php if($numberBooksInSerie != 1){															?>
+
+							<button id="btnCarouselNext" class="btnCarousel"><span>&rsaquo;</span></button>
+
+<?php }																						?>
 
 						</div>
 

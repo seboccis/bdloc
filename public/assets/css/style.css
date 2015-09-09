@@ -397,6 +397,7 @@ thead tr th, tbody tr td{
 						.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel{
 							width: 340px;
 							height: 390px;
+							margin: 0 auto;
 							background: #fff9c4;
 						}
 
@@ -406,7 +407,7 @@ thead tr th, tbody tr td{
 								font-size: 28px;
 								width: 30px;
 								height: 30px;
-								line-height: 23px;
+								line-height: 4px;
 								margin: 180px 20px;
 								border-radius: 50%;
 								float: left;

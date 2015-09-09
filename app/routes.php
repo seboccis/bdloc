@@ -73,4 +73,13 @@
 
 		// Gestion des paniers périmés
 		['GET', '/gestion_paniers/', 'Cart#deleteExpiredCarts', 'delete_expiredCarts'],
+
+		// Page d'accueil du back-office
+		['GET', '/Administrateur/', 'Default#homeAdmin', 'home_admin'],
+		// Page affichant toutes les commandes des utilisateurs
+		['GET', '/Administrateur/Commandes/', 'Cart#showAllOrders', 'show_all_orders'],
+		// Page affichant la commande sélectionnée par l'administrateur
+		['GET', '/Administrateur/Commandes/[:cartId]/[:status]/[:username]/', 'Cart#showOrder', 'show_order'],
+
+
 	);

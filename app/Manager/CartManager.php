@@ -193,4 +193,27 @@ class CartManager extends DefaultManager
     	return $sth->fetchAll();
 	}
 
+	public function showAllCarts()
+	{
+		$sql = "SELECT c.id as cartId, c.status, c.deliveryplace_id, c.begin_date, c.end_date, u.id as userId, u.username
+				FROM ". $this->table ." as c
+				LEFT JOIN users as u
+				ON user_id = u.id";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchAll();
+	}
+
+	public function getDeliveryplaceId($cartId)
+	{
+		$sql = "SELECT deliveryplace_id
+				FROM ".$this->table. "
+				WHERE id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchColumn();
+	}
+
 }

@@ -184,4 +184,19 @@ class BookManager extends DefaultManager
  		return $sth->fetchAll();
  	}
 
+ 	public function getSerieTitle($bookId)
+ 	{
+ 		$sql = "SELECT title
+ 				FROM series
+ 				WHERE id = 	(
+								SELECT serieId
+								FROM " . $this->table . "
+								WHERE id = $bookId
+ 							)";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchColumn();
+ 	}
+
 }
