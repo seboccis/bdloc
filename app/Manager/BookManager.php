@@ -173,11 +173,12 @@ class BookManager extends DefaultManager
  	public function bookCarousel($id)
  	{
 
- 		$sql = "SELECT id, cover, title, serieId
+ 		$sql = "SELECT id, cover, title, serieId, num
  				FROM books
  				WHERE serieId = (SELECT serieId
  								FROM books
- 								WHERE id = $id)";
+ 								WHERE id = $id)
+				ORDER BY num ASC";
  		$sth = $this->dbh->prepare($sql);
  		$sth->execute();
 

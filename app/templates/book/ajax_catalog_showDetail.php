@@ -86,7 +86,7 @@
 												<img src="<?php echo $this->assetUrl('img/mini-covers/'.$bookC['cover']); ?>" alt="<?php echo $bookC['title']; ?>">
 											</div>
 											<figcaption>
-												<p><?php echo $bookC['title']; ?></p>
+												<p><?php echo $bookC['num']; ?> : <?php echo $bookC['title']; ?></p>
 											</figcaption>
 										</figure>
 
