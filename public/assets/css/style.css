@@ -5,7 +5,7 @@
 }
 
 body{
-	font: 16px sans-serif;
+	font: 16px sans-serif;	
 }
 
 .table{
@@ -246,8 +246,17 @@ body{
 								}
 
 								.container section #content #showBooks .card .row .cell-text .btn-long{
-									width: 200px;
-									height: 30px;
+									width: 150px;
+									height: 30px;									
+								}
+								.container section #content #showBooks .card .row .cell-text .btn-long .fa-cart-plus{
+									font-size: 20px;
+									color: #4CAF50;
+
+								}
+								.container section #content #showBooks .card .row .cell-text .btn-long .fa-plus-circle{
+									font-size: 20px;
+									color: #42A5F5;
 								}
 
 /*CSS de la page deliveryPlace*/
@@ -374,6 +383,14 @@ thead tr th, tbody tr td{
 							}
 
 					.container #shadow #lightBox div.table div.row div.cell-right #detailsOnBook{}
+
+					.container #shadow #lightBox div.table div.row div.cell-right #detailsOnBook .btn-success{}
+
+					.container #shadow #lightBox div.table div.row div.cell-right #detailsOnBook .btn-success .fa-cart-plus{
+						font-weight: 20px;
+						color: #4CAF50;
+					}
+
 
 					.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie{}
 

@@ -10,10 +10,13 @@
 	<link rel="icon" type="image/png" href="<?= $this->assetUrl('img/icons/favicon.png') ?>" />
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/reset.css') ?>" />
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 </head>
 <body>
 	<div class="container">
 		<header>
+			<img class="back" src="<?php echo $this->assetUrl('img/sempe-chat.jpg'); ?>" alt="">
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 			<div class="logInfo">
 				<h2><?= $w_user['username'] ?></h2>

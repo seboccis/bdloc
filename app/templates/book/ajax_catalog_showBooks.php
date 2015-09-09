@@ -45,9 +45,9 @@
 					?>
 				</p>
 				<p<?php if($book['quantity_available'] == 0){ echo ' class="pNotAvailable"';} ?>><?php echo $this->e($book['string_quantity_available'])?></p>
-				<button class="detail btn btn-long btn-info" data-book-id="<?= $book['id']; ?>">Plus de détails</button>
+				<button class="detail btn btn-long btn-info" data-book-id="<?= $book['id']; ?>"><i class="fa fa-plus-circle"></i> Plus de détails</button>
 				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	?>
-					<button class="addToCart btn btn-success btn-long">Ajouter au panier</button>
+					<button class="addToCart btn btn-success btn-long"><i class="fa fa-cart-plus"></i> Ajouter au panier</button>
 				<?php }else if ($book['isBookInCart'] == 1){								?>
 					<p id="msgInCart">Ajouté au panier !</p>
 				<?php }																		?>

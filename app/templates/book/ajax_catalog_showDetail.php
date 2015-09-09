@@ -50,7 +50,7 @@
 						</p>
 
 						<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
-							<button class="addToCart btn btn-success">Ajouter au panier</button>
+							<button class="addToCart btn btn-success"><i class="fa fa-cart-plus" title="Ajouter au panier"></i> Ajouter au panier</button>
 						<?php }else if($book['isBookInCart'] == 1){									 ?>
 
 							<p>Ajouté au panier !</p>
