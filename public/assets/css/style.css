@@ -452,11 +452,19 @@ thead tr th, tbody tr td{
 											height: 313px;
 											border: solid 1px #999;
 											background: #fff;
+											position: relative;
 										}
 
 											.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel .coverCardCarousel img{
 												display: block;
 												max-width: 100%;
+												position: absolute;
+												top: 50%;
+												left: 50%;
+												-webkit-transform: translateX(-50%)translateY(-50%);
+												-ms-transform: translateX(-50%)translateY(-50%);
+												-o-transform: translateX(-50%)translateY(-50%);
+												transform: translateX(-50%)translateY(-50%);
 											}
 
 										.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel figcaption{
