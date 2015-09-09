@@ -10,7 +10,7 @@
 
 		if (!empty($deliveryplace)) {
 			echo '<p>Lieu de livraison : '. $deliveryplace['name']. '</p>' . '<br> <p> Adresse : ' . $deliveryplace['address'].'</p>' ;
-			echo '<a href="#">Confirmer la commande</a>';
+			echo '<a href="'.$this->url('send_order_confirmation',['cartId' => $cartId]).'">Confirmer la commande</a>';
 		}
 		else {
 			echo '<p>La commande est terminée </p>';

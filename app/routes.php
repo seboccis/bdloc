@@ -80,6 +80,8 @@
 		['GET', '/Administrateur/Commandes/', 'Cart#showAllOrders', 'show_all_orders'],
 		// Page affichant la commande sélectionnée par l'administrateur
 		['GET', '/Administrateur/Commandes/[:cartId]/[:status]/[:username]/', 'Cart#showOrder', 'show_order'],
+		// Page d'envoi de l'email de confirmation de commande par l'administrateur
+		['GET', '/Administrateur/Commandes/[:cartId]/', 'Cart#sendOrderConfirmEmail', 'send_order_confirmation'],
 
 
 	);

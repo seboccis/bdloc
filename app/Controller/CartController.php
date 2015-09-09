@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use \Manager\UserManager;
 use \Manager\CartManager;
 use \Manager\BookManager;
 use \Manager\CartBookManager;
@@ -465,6 +466,7 @@ class CartController extends DefaultController
 			'books' => $books,
 			'deliveryplace' => $deliveryplace,
 			'username' => $username,
+			'cartId' => $cartId,
 
 		];
 
@@ -472,6 +474,96 @@ class CartController extends DefaultController
 
 		$this->show('admin/show_order', $data);
 	}
+
+	public function sendOrderConfirmEmail($cartId)
+	{
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$deliveryPlaceManager = new DeliveryPlaceManager();
+		$userManager = new UserManager();
+		// Récupérer les infos de la commande et de l'utilisateur avec le cartId
+
+		// Récupérer l'id de l'utilisateur
+
+		$userId = $cartManager->getUserIdByCart($cartId);
+
+		$user = $userManager->find($userId);
+
+		// Récupération des livres
+		$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
+		$books = $bookManager->showBooks($booksIds);
+
+		
+		// Récupérer l'id du point relai
+		$deliveryPlaceId = $cartManager->getDeliveryplaceId($cartId);
+			
+		// Récupérer le nom et l'adresse du point relai 
+		$deliveryplace = $deliveryPlaceManager->showDeliveryplace($deliveryPlaceId);
+
+		$recap = '<p>Bonjour '.$user['username'].'</p>';
+
+		$recap .= '<p>La commande suivante vient de vous être expédiée.</p><br><p>Voici le détail de votre commande :</p><br>
+						<table>
+								<thead>
+									<tr>
+										<th>
+											Titre :
+										</th>
+									</tr>
+								</thead>
+								<tbody>';
+		foreach ($books as $book) {
+			$recap .= '<tr>
+							<td>
+								'. $book['title'] .'
+							</td>
+						</tr>';
+		}
+
+		$recap .='		</tbody>
+						</table>';
+
+		$recap .= '<p>Votre commande sera livrée au point de retrait suivant : '.$deliveryplace['name'] .': ' . $deliveryplace['address'] . '</p>';
+		
+		$recap .= '<p>Elle sera disponible dans 48h.</p>';
+
+		$recap .= '<p>Merci d\'utiliser notre service, <br> Bdialement <br> L\'équipe de BDloc</p>';
+		
+
+		
+		$errorEmail = "";
+
+		$mail = new \PHPMailer;
+		$mail->isSMTP();
+		$mail->setLanguage('fr');
+		$mail->CharSet = 'UTF-8';
+		$mail->SMTPDebug = 2;	//0 pour désactiver les infos de débug
+		$mail->Debugoutput = 'html';
+		$mail->Host = 'smtp.gmail.com';
+		$mail->Port = 587;
+		$mail->SMTPSecure = 'tls';
+		$mail->SMTPAuth = true;
+		$mail->Username = "tony.wf3.nanterre@gmail.com";
+		$mail->Password = "nanterre1";
+		$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
+		$mail->addAddress($user['email']);
+		$mail->isHTML(true); 	
+		$mail->Subject = 'Envoyé par PHP !';					
+		
+		$mail->Body = $recap;
+
+				if (!$mail->send()) {
+						echo "Mailer Error: " . $mail->ErrorInfo;
+					} else {
+						echo "Message sent!";
+					}
+				// $this->redirectToRoute('admin/home_Admin');
+		
+	}	
+		
+
+
+		
 
 }
 

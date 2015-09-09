@@ -216,4 +216,15 @@ class CartManager extends DefaultManager
 		return $sth->fetchColumn();
 	}
 
+	public function getUserIdByCart($cartId)
+	{
+		$sql = "SELECT user_id
+				FROM ".$this->table. "
+				WHERE id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchColumn();
+	}
+
 }
