@@ -71,7 +71,7 @@
 
 							<button id="btnCarouselPrev" class="btnCarousel"><span>&lsaquo;</span></button>
 
-							<div id="carouselWindow" data-numberBooksInSerie="<?php echo count($booksCarousel); ?>" data-carouselPosition="1">
+							<div id="carouselWindow" data-numberBooksInSerie="<?php echo $numberBooksInSerie; ?>" data-carouselPosition="1">
 
 								<div id="spriteCarousel">
 
@@ -96,7 +96,11 @@
 
 							</div>
 
+<?php if($numberBooksInSerie != 1){															?>
+
 							<button id="btnCarouselNext" class="btnCarousel"><span>&rsaquo;</span></button>
+
+<?php }																						?>
 
 						</div>
 

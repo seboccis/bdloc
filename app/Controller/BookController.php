@@ -203,7 +203,14 @@ class BookController extends DefaultController
 		// titre de la série dont est issue la bd
 		$serieTitle = $bookManager->getSerieTitle($bookId);
 
-		$data = array('book' => $book, 'booksCarousel' => $booksCarousel, 'serieTitle' => $serieTitle);
+		$numberBooksInSerie = count($booksCarousel);
+
+		$data = array(
+						'book' 				 => $book,
+						'booksCarousel' 	 => $booksCarousel,
+						'serieTitle' 		 => $serieTitle,
+						'numberBooksInSerie' => $numberBooksInSerie
+					);
 
 		$this->show('book/ajax_catalog_showDetail', $data);
 	}
