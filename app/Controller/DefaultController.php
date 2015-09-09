@@ -25,4 +25,9 @@ class DefaultController extends Controller
 		}
 	}
 
+	public function homeAdmin()
+	{
+		$this->show('admin/home_admin');
+	}
+
 }

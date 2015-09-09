@@ -17,6 +17,9 @@
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 			<div class="logInfo">
 				<h2><?= $w_user['username'] ?></h2>
+				<?php if ($w_user['role']== 'admin') {
+					echo '<a href="'.$this->url('home_admin').'">Accéder au Back Office</a>';
+				}?>
 				<a href="<?= $this->url('logout')?>">Se déconnecter</a>
 			</div>
 				

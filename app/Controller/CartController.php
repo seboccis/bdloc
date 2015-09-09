@@ -423,6 +423,56 @@ class CartController extends DefaultController
 
 	}
 
+	public function showAllOrders()
+	{
+		$cartManager = new CartManager();
+		
+
+		$allOrdersAndUsers = $cartManager->showAllCarts();
+		
+		$data = [
+			'allOrdersAndUsers' => $allOrdersAndUsers,
+		];
+
+		$this->show('admin/show_all_orders', $data);
+
+
+	}
+
+	public function showOrder($cartId, $status, $username)
+	{
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$deliveryPlaceManager = new DeliveryPlaceManager();
+		$deliveryplace = "";
+
+
+		if ($status == 1) {
+			// Récupérer l'id du point relai
+			$deliveryPlaceId = $cartManager->getDeliveryplaceId($cartId);
+			
+			// Récupérer le nom et l'adresse du point relai 
+			$deliveryplace = $deliveryPlaceManager->showDeliveryplace($deliveryPlaceId);
+		}
+
+		$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
+
+		$books = $bookManager->showBooks($booksIds);
+
+		
+
+		$data = [
+			'books' => $books,
+			'deliveryplace' => $deliveryplace,
+			'username' => $username,
+
+		];
+
+
+
+		$this->show('admin/show_order', $data);
+	}
+
 }
 
 
