@@ -93,7 +93,6 @@
 			$('#shadow').fadeIn(200);
 			$('#lightBox').fadeIn(200);
 
-			event.stopPropagation();
 		}
 
 		function getDetail(bookId){
@@ -241,11 +240,70 @@
 			addToCart(bookId);
 		});
 
+		$('#lightBox').on('click', '#btnCarouselPrev',function(event){
+			event.preventDefault();
+
+			var numberPanels	= $('#carouselWindow').attr('data-numberBooksInSerie');
+			var actualPosition	= $('#carouselWindow').attr('data-carouselPosition');
+
+			if(actualPosition == numberPanels){
+				$('#btnCarouselNext').css({'visibility': 'visible'});
+			}
+
+			var newPosition = parseInt(actualPosition) - 1;
+
+			var translate = (parseInt(actualPosition) - 2) * -220;
+
+			$('#spriteCarousel').css({'left': translate + 'px'});
+
+			$('#carouselWindow').attr('data-carouselPosition', newPosition);
+
+			if(newPosition == 1){
+				$('#btnCarouselPrev').css({'visibility': 'hidden'});
+			}
+
+			event.stopPropagation();
+		});
+
+		$('#lightBox').on('click', '#btnCarouselNext',function(event){
+			event.preventDefault();
+
+			var numberPanels	= $('#carouselWindow').attr('data-numberBooksInSerie');
+			var actualPosition	= $('#carouselWindow').attr('data-carouselPosition');
+
+			if(actualPosition == 1){
+				$('#btnCarouselPrev').css({'visibility': 'visible'});
+			}
+
+			var translate = actualPosition * -220;
+
+			$('#spriteCarousel').css({'left': translate + 'px'});
+
+			var newPosition = parseInt(actualPosition) + 1;
+
+			$('#carouselWindow').attr('data-carouselPosition', newPosition);
+
+			if(newPosition == numberPanels){
+				$('#btnCarouselNext').css({'visibility': 'hidden'});
+			}
+
+			event.stopPropagation();
+		});
+
+		$('#lightBox').on('click', '.newDetail',function(event){
+			event.preventDefault();
+
+			var bookId = $(this).attr('data-bookId');
+			getDetail(bookId);
+
+			event.stopPropagation();
+		});
+
 		$('#lightBox').on("click",function(event){
 			event.stopPropagation();
 		});
 
-		$('#lightBox').on("click", '#closeLightBox',function(event){
+		$('#lightBox').on("click", '#closeLightBox', function(event){
 			$('#lightBox').fadeOut(200);
 			$('#shadow').fadeOut(200);
 			event.stopPropagation();
@@ -279,6 +337,7 @@
 
 function showDeliveryPlace(response){
 	$('#choicedDeliveryPlace').html(response);
+	// var nameChoiced$('#deliveryplace>optgroup>option[value="impair"]')')
 }
 
 function getDeliveryPlace(id){

@@ -1,70 +1,113 @@
 <?php ?>
 
-	<figure data-bookId="<?= $book['id'] ?>">
-		
-		<img src="<?php echo $this->assetUrl('img/covers/'.$book['cover']);?>">
+	<div data-bookId="<?= $book['id'] ?>" class="table">
+		<div class="row">
 
-		<button id='closeLightBox'><span>&times;</span></button>
-
-		<figcaption>
+			<div class="cell cell-left">
+				
+				<img src="<?php echo $this->assetUrl('img/covers/'.$book['cover']);?>">
 			
-				<h1><?php echo $this->e($book['title'])?></h1>
-				<p>
-					Scénariste : 
-					<?php 
-						if (empty($this->e($book['scenaristAka']))) {
-							echo $this->e($book['scenaristFirstName']) . " " . $this->e($book['scenaristLastName']);
-						} else {
-							echo $this->e($book['scenaristAka']);
-						}
-					?>		
-				</p>
-				<p>
-					Illustrateur : 
-					<?php
-						if (empty($this->e($book['illustratorAka']))) {
-							echo $this->e($book['illustratorFirstName']) . " " . $this->e($book['illustratorLastName']) ;
-						} else {
-							echo $this->e($book['illustratorAka']);
-						}
-					?>
-				</p>
-				<p>
-					Coloriste : 
-					<?php
-						if (empty($this->e($book['coloristAka']))) {
-							echo $this->e($book['coloristFirstName']) . " " . $this->e($book['coloristLastName']) ;
-						} else {
-							echo $this->e($book['coloristAka']);
-						}
-					?>
-				</p>
+			</div>
+			
+			<div class="cell cell-right">
 
-				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
-					<button class="addToCart btn btn-success">Ajouter au panier</a>
-				<?php }else if($book['isBookInCart'] == 1){									 ?>
+				<form id="detailsOnBook">
 
-					<p>Ajouté au panier !</p>
-				<?php }																		?>
-				<p id="cartError"></p>
+					<fieldset>
 
-				<div id="carousel" data-numberBooksInSerie="<?php echo count($booksCarousel); ?>" data-increment="1">
+						<legend>Informations détaillées sur cette BD</legend>
+
+						<h1><?php echo $this->e($book['title'])?></h1>
+						<p>
+							Scénariste : 
+							<?php 
+								if (empty($this->e($book['scenaristAka']))) {
+									echo $this->e($book['scenaristFirstName']) . " " . $this->e($book['scenaristLastName']);
+								} else {
+									echo $this->e($book['scenaristAka']);
+								}
+							?>		
+						</p>
+						<p>
+							Illustrateur : 
+							<?php
+								if (empty($this->e($book['illustratorAka']))) {
+									echo $this->e($book['illustratorFirstName']) . " " . $this->e($book['illustratorLastName']) ;
+								} else {
+									echo $this->e($book['illustratorAka']);
+								}
+							?>
+						</p>
+						<p>
+							Coloriste : 
+							<?php
+								if (empty($this->e($book['coloristAka']))) {
+									echo $this->e($book['coloristFirstName']) . " " . $this->e($book['coloristLastName']) ;
+								} else {
+									echo $this->e($book['coloristAka']);
+								}
+							?>
+						</p>
+
+						<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
+							<button class="addToCart btn btn-success">Ajouter au panier</button>
+						<?php }else if($book['isBookInCart'] == 1){									 ?>
+
+							<p>Ajouté au panier !</p>
+						<?php }																		?>
+						<p id="cartError"></p>
+
+					</fieldset>
+							
+				</form>
+
+				<form id="detailsOnSerie">
+
+					<fieldset>
+
+						<legend>Série dont est issue cette BD</legend>
+
+						<div id="carousel">
+
+							<button id="btnCarouselPrev" class="btnCarousel">&lsaquo;</button>
+
+							<div id="carouselWindow" data-numberBooksInSerie="<?php echo count($booksCarousel); ?>" data-carouselPosition="1">
+
+								<div id="spriteCarousel">
 
 <?php 	foreach($booksCarousel as $bookC){													?>
 
-					<figure class="cardCarousel">
-						<div class="coverCardCarousel">
-							<img src="<?php echo $this->assetUrl('img/mini-covers/'.$bookC['cover']); ?>" alt="<?php echo $bookC['title']; ?>">
-						</div>
-						<figcaption>
-							<span><?php echo $bookC['title']; ?></span>
-						</figcaption>
-					</figure>
+									<a href="" class="newDetail" data-bookId="<?php echo $bookC['id']; ?>">
+
+										<figure class="cardCarousel">
+											<div class="coverCardCarousel">
+												<img src="<?php echo $this->assetUrl('img/mini-covers/'.$bookC['cover']); ?>" alt="<?php echo $bookC['title']; ?>">
+											</div>
+											<figcaption>
+												<p><?php echo $bookC['title']; ?></p>
+											</figcaption>
+										</figure>
+
+									</a>
 
 <?php 	}																					?>				
 				    
-				</div>
+								</div>
 
-		</figcaption>
+							</div>
 
-	</figure>	
+							<button id="btnCarouselNext" class="btnCarousel">&rsaquo;</button>
+
+						</div>
+
+					</fieldset>
+
+				</form>
+				
+			</div>
+
+		</div>
+		
+		<button id='closeLightBox'><span>&times;</span></button>
+
+	</div>	

@@ -299,6 +299,7 @@ thead tr th, tbody tr td{
 
 		.container #shadow #lightBox{
 			background-color: #fff;
+			width: 900px;
 			position: absolute;
 			top:50%;
 			left: 50%;
@@ -309,80 +310,145 @@ thead tr th, tbody tr td{
 			transform: translateX(-50%)translateY(-50%);
 		}
 
-			.container #shadow #lightBox figure img{
-				display: block;
-			}
-			.container #shadow #lightBox figure #closeLightBox{
-				position: absolute;
-				top: 15px;
-				right: 15px;
-				z-index: 11;
-				border:none;
-				background: rgba(255,255,255,0.6);
-				font-size: 1rem;
-				line-height: 20px;
-				display: inline-block;
-				width: 20px;
-				height: 20px;
-				text-shadow:0 0 1px #222;
-				cursor: pointer;
-			}
+			.container #shadow #lightBox div.table{}
 
-				.container #shadow #lightBox figure #closeLightBox span{
+				.container #shadow #lightBox div.table #closeLightBox{
 					position: absolute;
-					top: 50%;
-					left: 50%;
-					-webkit-transform: translateX(-50%)translateY(-50%);
-					-ms-transform: translateX(-50%)translateY(-50%);
-					-o-transform: translateX(-50%)translateY(-50%);
-					transform: translateX(-50%)translateY(-50%);
+					top: 15px;
+					right: 15px;
+					z-index: 11;
+					border:none;
+					background: rgba(255,255,255,0.6);
+					font-size: 1rem;
+					line-height: 20px;
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					text-shadow:0 0 1px #222;
+					cursor: pointer;
 				}
 
-			.container #shadow #lightBox figcaption{
-				padding: 5px;
-			}
+					.container #shadow #lightBox div.table #closeLightBox span{
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						-webkit-transform: translateX(-50%)translateY(-50%);
+						-ms-transform: translateX(-50%)translateY(-50%);
+						-o-transform: translateX(-50%)translateY(-50%);
+						transform: translateX(-50%)translateY(-50%);
+					}
 
-				.container #shadow #lightBox figcaption h1{
-					font-size: 1.2rem;
-				}
+				.container #shadow #lightBox div.table div.row{}
 
-#carousel{
-	width: 200px;
-	height: 350px;
-	overflow: hidden;
-	background: red;
-}
+					.container #shadow #lightBox div.table div.row div.cell{
+						width: 450px;
+						vertical-align: middle;
+						text-align: left;
+						height: 700px;
+					}
 
-	#carousel .cardCarousel{
-		display: block;
-		width: inherit;
-		height: inherit;
-		float: left;
-	}
+					.container #shadow #lightBox div.table div.row div.cell-left{}
 
-		#carousel .cardCarousel .coverCardCarousel{
-			height: 313px;
-			position: absolute;
-			top: 0;
-			left: 0;
-		}
+						.container #shadow #lightBox div.table div.row div.cell-left img{
+							display: block;
+							max-width: 400px;
+							margin: 10px auto;
+						}
 
-			#carousel .cardCarousel .coverCardCarousel img{
-				display: block;
-				max-width: 100%;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				-webkit-transform: translateX(-50%)translateY(-50%);
-				-ms-transform: translateX(-50%)translateY(-50%);
-				-o-transform: translateX(-50%)translateY(-50%);
-				transform: translateX(-50%)translateY(-50%);
-			}
+					.container #shadow #lightBox div.table div.row div.cell-right{}
 
-		#carousel .cardCarousel figcaption{
-			height: 37px;
-			position: absolute;
-			top: 313px;
-			left: 0;
-			background: blue;
-		}
+					.container #shadow #lightBox div.table div.row div.cell-right form{
+						display: block;
+						width: 400px;
+						margin: 0 auto;
+					}
+
+						.container #shadow #lightBox div.table div.row div.cell-right form fieldset{
+							border: solid 1px #ce93d8;
+							padding: 15px;
+						}
+
+							.container #shadow #lightBox div.table div.row div.cell-right form fieldset legend{		
+								margin-left: 20px;
+								padding: 0 3px;
+							}
+
+					.container #shadow #lightBox div.table div.row div.cell-right #detailsOnBook{}
+
+					.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie{}
+
+						.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel{
+							width: 340px;
+							height: 390px;
+							background: #fff9c4;
+						}
+
+							.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel .btnCarousel{
+								background: #fff176;
+								color: #ffa726;
+								font-size: 28px;
+								width: 30px;
+								height: 30px;
+								line-height: 23px;
+								margin: 180px 20px;
+								border-radius: 50%;
+								float: left;
+							}
+
+							.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #btnCarouselPrev{
+								visibility: hidden;
+							}
+
+							.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #btnCarouselNext{}
+
+							.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow{
+								width: 200px;
+								height: 350px;
+								margin-top: 20px;
+								overflow: hidden;
+								position: relative;
+								float: left;
+							}
+
+								.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel{
+									height: 350px;
+									width: 10000px;
+									background: #fff;
+									position: absolute;
+									top: 0;
+									left: 0;
+									-webkit-transition-duration: 1s;
+									-o-transition-duration: 1s;
+									transition-duration: 1s;
+								}
+
+									.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel{
+										display: block;
+										margin-right: 20px;
+										height: 350px;
+										float: left;
+									}
+
+										.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel .coverCardCarousel{
+											width: 200px;
+											height: 313px;
+											border: solid 1px #999;
+											background: #fff;
+										}
+
+											.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel .coverCardCarousel img{
+												display: block;
+												max-width: 100%;
+											}
+
+										.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel figcaption{
+											width: 200px;
+											height: 37px;
+											border: solid 1px #999;
+											background: #fff;
+										}
+
+											.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselWindow #spriteCarousel .cardCarousel figcaption p{
+												line-height: 37px;
+												text-align: center;
+											}
