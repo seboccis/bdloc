@@ -127,8 +127,6 @@ class BookController extends DefaultController
 			$transformedBooks[] = $book;
 		}
 
-		// debug($transformedBooks);die();
-
 		////// Définition des variables à envoyer sur la page ajax_catalog_showBooks.php
 
 		$total = $bookManager->countCatalogBooks($selectedGenresId, $availability, $keyword, $sort, $start, $number);
@@ -168,9 +166,11 @@ class BookController extends DefaultController
 	 */
 	public function ajaxCatalogDetail()
 	{
+		$bookId = $_GET['id'];
+
 		$bookManager = new BookManager;
 		
-		$book = $bookManager->extendedFind($_GET['id']);
+		$book = $bookManager->extendedFind($bookId);
 
 		$cartManager = new CartManager();
 		
@@ -197,10 +197,13 @@ class BookController extends DefaultController
 
 		$book['isBookInCart'] = $isBookInCart;
 
-		//livres de la meme serie
-		$booksCarousel = $bookManager->bookCarousel($_GET['id']);
+		// livres de la meme serie
+		$booksCarousel = $bookManager->bookCarousel($bookId);
 
-		$data = array('book' => $book, 'booksCarousel' => $booksCarousel);
+		// titre de la série dont est issue la bd
+		$serieTitle = $bookManager->getSerieTitle($bookId);
+
+		$data = array('book' => $book, 'booksCarousel' => $booksCarousel, 'serieTitle' => $serieTitle);
 
 		$this->show('book/ajax_catalog_showDetail', $data);
 	}

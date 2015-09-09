@@ -235,7 +235,8 @@
 		
 		$('#lightBox').on('click', '.addToCart', function(event){
 			event.preventDefault();
-			var bookId = $(this).parent().parent('figure').attr('data-bookId');
+			var bookId = $(this).attr('data-bookId');
+
 			$(this).fadeOut(500);		
 			addToCart(bookId);
 		});

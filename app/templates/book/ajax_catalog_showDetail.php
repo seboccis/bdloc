@@ -1,6 +1,6 @@
 <?php ?>
 
-	<div data-bookId="<?= $book['id'] ?>" class="table">
+	<div class="table">
 		<div class="row">
 
 			<div class="cell cell-left">
@@ -50,7 +50,7 @@
 						</p>
 
 						<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>
-							<button class="addToCart btn btn-success">Ajouter au panier</button>
+							<button class="addToCart btn btn-success" data-bookId="<?= $book['id'] ?>">Ajouter au panier</button>
 						<?php }else if($book['isBookInCart'] == 1){									 ?>
 
 							<p>Ajouté au panier !</p>
@@ -65,11 +65,11 @@
 
 					<fieldset>
 
-						<legend>Série dont est issue cette BD</legend>
+						<legend>Série : <?php echo $serieTitle; ?></legend>
 
 						<div id="carousel">
 
-							<button id="btnCarouselPrev" class="btnCarousel">&lsaquo;</button>
+							<button id="btnCarouselPrev" class="btnCarousel"><span>&lsaquo;</span></button>
 
 							<div id="carouselWindow" data-numberBooksInSerie="<?php echo count($booksCarousel); ?>" data-carouselPosition="1">
 
@@ -96,7 +96,7 @@
 
 							</div>
 
-							<button id="btnCarouselNext" class="btnCarousel">&rsaquo;</button>
+							<button id="btnCarouselNext" class="btnCarousel"><span>&rsaquo;</span></button>
 
 						</div>
 
