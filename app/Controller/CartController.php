@@ -26,7 +26,7 @@ class CartController extends DefaultController
 		$cartId = $cartManager->findCart($_SESSION['user']['id']);
 		
 		if (empty($cartId)) {
-			// créer une relation cart / book
+			// créer un cart
 			$cartId = $cartManager->createCart($_SESSION['user']['id']);
 		}
 		
@@ -48,6 +48,9 @@ class CartController extends DefaultController
 			$bookManager->decreaseQuantityAvailable($_GET['id']);
 		}
 
+		// Modifier la date de modification du cart
+		$cartManager->editModifiedDateOfCart($cartId);
+
 		die($cartError);
 	}
 	
@@ -61,10 +64,13 @@ class CartController extends DefaultController
 		$cartManager = new CartManager();
 		$bookManager = new BookManager();
 		
-		$cartManager->removeBook($bookId);
+		$cartManager->removeBook($bookId, $cartId);
 		// Réduire la quantité de livres disponibles dans la table books
 
 		$bookManager->increaseQuantityAvailable($bookId);
+
+		// Modifier la date de modification du cart
+		$cartManager->editModifiedDateOfCart($cartId);
 
 		$this->redirectToRoute('cart');
 	}
@@ -106,7 +112,8 @@ class CartController extends DefaultController
 		$data = [
 			'books' => $books,
 			'cartEmpty' => $cartEmpty,
-			'orderError' => $orderError,	
+			'orderError' => $orderError,
+			'cartId' => $cartId,	
 		];
 		
 		$this->show('cart/cart', $data);

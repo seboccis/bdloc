@@ -8,16 +8,6 @@ namespace Manager;
 class CartManager extends DefaultManager
 {
 
-	// public function findCartDelay($cartId)
-	// {
-	// 	$sql = "SELECT UNIX_TIMESTAMP(modified_date) - UNIX_TIMESTAMP(date_sub(NOW(),INTERVAL 10 MINUTE))
-	// 			FROM $this->table
-	// 			WHERE id = $cartId";
-	// 	$sth = $this->dbh->prepare($sql);
-	// 	$sth->execute();
-	// 	return $sth->fetchColumn();
-	// } 
-
 	public function findCart($id)
 	{
 		$sql = "SELECT id
@@ -117,10 +107,11 @@ class CartManager extends DefaultManager
 		return $sth->fetchAll();
 	}
 
-	public function removeBook($bookId)
+	public function removeBook($bookId, $cartId)
 	{
 		$sql = "DELETE FROM cart_to_books
-				WHERE book_id = $bookId";
+				WHERE book_id = $bookId
+				AND cart_id = $cartId";
 		$sth = $this->dbh->prepare($sql);
 		return $sth->execute();
 	}
@@ -225,6 +216,15 @@ class CartManager extends DefaultManager
 		$sth->execute();
 
 		return $sth->fetchColumn();
+	}
+
+	public function editModifiedDateOfCart($cartId)
+	{
+		$sql = "UPDATE " . $this->table . "
+				SET modified_date = NOW()
+				WHERE id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
 	}
 
 }
