@@ -167,6 +167,36 @@
 			.done(showAddToCart);
 		}
 
+		// Affichage de la vignette de BD visée dans le carousel
+
+		function translateCarousel(actualPosition, newPosition){
+
+			var numberPanels	= $('#carouselWindow').attr('data-numberBooksInSerie');
+
+			$('#carouselIndicators span a:nth-child(' + parseInt(actualPosition) + ') i').removeClass("fa-circle").addClass("fa-circle-thin");
+			$('#carouselIndicators span a:nth-child(' + parseInt(newPosition) + ') i').removeClass("fa-circle-thin").addClass("fa-circle");
+
+			if(newPosition == 1){
+				$('#btnCarouselPrev').css({'visibility': 'hidden'});
+				$('#btnCarouselNext').css({'visibility': 'visible'});
+			}
+			else if(newPosition == numberPanels){
+				$('#btnCarouselPrev').css({'visibility': 'visible'});
+				$('#btnCarouselNext').css({'visibility': 'hidden'});
+			}
+			else{
+				$('#btnCarouselPrev').css({'visibility': 'visible'});
+				$('#btnCarouselNext').css({'visibility': 'visible'});
+			}
+
+			var translate = (parseInt(newPosition) - 1) * -500;
+
+			$('#spriteCarousel').css({'left': translate + 'px'});
+
+			$('#carouselWindow').attr('data-carouselPosition', newPosition);
+
+		}
+
 
 	//// Gestion des événements
 
@@ -244,24 +274,10 @@
 		$('#lightBox').on('click', '#btnCarouselPrev',function(event){
 			event.preventDefault();
 
-			var numberPanels	= $('#carouselWindow').attr('data-numberBooksInSerie');
 			var actualPosition	= $('#carouselWindow').attr('data-carouselPosition');
-
-			if(actualPosition == numberPanels){
-				$('#btnCarouselNext').css({'visibility': 'visible'});
-			}
-
 			var newPosition = parseInt(actualPosition) - 1;
 
-			var translate = (parseInt(actualPosition) - 2) * -220;
-
-			$('#spriteCarousel').css({'left': translate + 'px'});
-
-			$('#carouselWindow').attr('data-carouselPosition', newPosition);
-
-			if(newPosition == 1){
-				$('#btnCarouselPrev').css({'visibility': 'hidden'});
-			}
+			translateCarousel(actualPosition, newPosition);
 
 			event.stopPropagation();
 		});
@@ -269,24 +285,21 @@
 		$('#lightBox').on('click', '#btnCarouselNext',function(event){
 			event.preventDefault();
 
-			var numberPanels	= $('#carouselWindow').attr('data-numberBooksInSerie');
 			var actualPosition	= $('#carouselWindow').attr('data-carouselPosition');
-
-			if(actualPosition == 1){
-				$('#btnCarouselPrev').css({'visibility': 'visible'});
-			}
-
-			var translate = actualPosition * -220;
-
-			$('#spriteCarousel').css({'left': translate + 'px'});
-
 			var newPosition = parseInt(actualPosition) + 1;
 
-			$('#carouselWindow').attr('data-carouselPosition', newPosition);
+			translateCarousel(actualPosition, newPosition);
 
-			if(newPosition == numberPanels){
-				$('#btnCarouselNext').css({'visibility': 'hidden'});
-			}
+			event.stopPropagation();
+		});
+
+		$('#lightBox').on('click', '.carouselIndicator',function(event){
+			event.preventDefault();
+
+			var actualPosition	= $('#carouselWindow').attr('data-carouselPosition');
+			var newPosition = $(this).attr('data-carouselPosition');
+
+			translateCarousel(actualPosition, newPosition);
 
 			event.stopPropagation();
 		});

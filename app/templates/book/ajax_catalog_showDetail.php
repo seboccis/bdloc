@@ -104,6 +104,24 @@
 
 <?php }																						?>
 
+							<div id="carouselIndicators">
+
+								<span>
+
+<?php 	if($numberBooksInSerie > 1){														?>
+
+									<a href="" class="carouselIndicator" data-carouselPosition="1"><i class="fa fa-circle"></i></a>
+
+<?php 		for($index = 2; $index <= $numberBooksInSerie; $index++){						?>
+
+									<a href="" class="carouselIndicator" data-carouselPosition="<?= $index; ?>"><i class="fa fa-circle-thin"></i></a>
+
+<?php 		}
+		}																					?>
+								</span>
+
+							</div>
+
 						</div>
 
 					</fieldset>
