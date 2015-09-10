@@ -341,8 +341,12 @@
 				url: path,
 			})
 			.done(function(){
+				that.parents('tr').attr('class','hidden');
 				that.parents('tr').fadeOut(200);
 				countBooksInCart();
+				if ($('tr.visible').length == 0){
+					$('#order').css({'display':'none'});
+				}; 
 			});
 		});
 

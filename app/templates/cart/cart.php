@@ -6,9 +6,11 @@
 
 
 <?php if (!empty($books)) { ?>
-<?php echo 'Le nombre d\'exemplaires dans votre panier est de : <em id="showNumberBooksInCart"></em>'; ?>	
+<?php echo 'Le nombre d\'exemplaires dans votre panier est de : <em id="showNumberBooksInCart"></em><br><a id="order" class="btn btn-success" href="'.$this->url('submit_order').'">Commander</a><br>';
+?>	
+
 <a class="btn btn-danger" href="<?= $this->url('remove_cart') ?>">Vider le panier</a>
-<a class="btn btn-success" href="<?= $this->url('submit_order') ?>">Commander</a>
+
 <table class="cartTable">
 	<thead>
 		<tr>
@@ -19,7 +21,7 @@
 	</thead>
 	<tbody>
 <?php foreach ($books as $book) :?>
-		<tr>
+		<tr class="visible">
 			<td>
 				<?= $this->e($book['title'])?>
 			</td>
