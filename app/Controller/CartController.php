@@ -648,6 +648,54 @@ class CartController extends DefaultController
 					}
 		
 	}	
+
+	public function returnOrder()
+	{
+		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$userManager = new UserManager();
+
+		$cartId = "";
+		$books = "";
+
+		if (!empty($_POST)) {
+			$cartId = trim(strip_tags($_POST['cartId']));
+
+			// Retrouver la commande correspondante
+			$booksIds = $cartManager->findAllBooksIdsInCart($cartId);
+			$books = $bookManager->showBooks($booksIds);
+
+			// Récupérer l'id de l'utilisateur
+
+			$userId = $cartManager->getUserIdByCart($cartId);
+			$user = $userManager->find($userId);
+
+
+
+			$data = [
+			'books'=> $books,
+			'user' => $user,
+			];
+
+
+		$this->show('admin/confirm_order_return', $data);
+		
+		}
+		
+		else {
+			$this->show('admin/confirm_order_return');
+		}
+
+	}
+
+	public function validateReturnOrder()
+	{
+		if (!empty($_POST)) {
+			// die('test');
+			debug($_POST);
+			$this->show('admin/order_return');
+		}
+	}
 		
 
 

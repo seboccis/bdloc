@@ -21,6 +21,7 @@
 				
 			<nav>
 				<a href="<?= $this->url('show_all_orders') ?>">Voir toutes les commandes des utilisateurs</a>
+				<a href="<?= $this->url('confirm_order_return') ?>">Valider le retour d'une commande</a>
 			</nav>
 
 		</header>
