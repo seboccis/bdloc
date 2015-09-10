@@ -172,6 +172,15 @@ class CartManager extends DefaultManager
 		return $sth->execute();
 	}
 
+	public function confirmOrder($cartId)
+	{
+		$sql = "UPDATE " . $this->table . " 
+				SET status = 2, begin_date = NOW() 
+				WHERE id = $cartId";
+		$sth = $this->dbh->prepare($sql);
+		return $sth->execute();
+	}
+
 	public function getIdsExpiredCarts()
 	{
 		$sql = "SELECT id

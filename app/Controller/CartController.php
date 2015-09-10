@@ -290,11 +290,87 @@ class CartController extends DefaultController
 	{
 		// Modifier le statut du cart et insérer le point de livraison sélectionné 
 		$cartManager = new CartManager();
+		$bookManager = new BookManager();
+		$deliveryPlaceManager = new DeliveryPlaceManager();
 
 		if ($cartManager->convertCartToOrder($cartIdToOrder, $deliveryPlaceId)) {
-			$this->redirectToRoute('catalog');
-					
-		}
+			// envoyer un email de confirmation
+
+
+			// Récupération des informations du cart, des books et de l'user
+			// user
+			$user = $this->getUser();
+			
+			// books
+
+			$booksIds = $cartManager->findAllBooksIdsInCart($cartIdToOrder);
+			$books = $bookManager->showBooks($booksIds);
+
+			// Récupérer le nom et l'adresse du point relai 
+			$deliveryplace = $deliveryPlaceManager->showDeliveryplace($deliveryPlaceId);
+
+
+
+			$recap = '<p>Bonjour '.$user['username'].'</p>';
+
+			$recap .= '<p>Nous avons pris connaissance de la commande suivante : <br>
+							<table>
+									<thead>
+										<tr>
+											<th>
+												Titre :
+											</th>
+										</tr>
+									</thead>
+									<tbody>';
+			foreach ($books as $book) {
+				$recap .= '<tr>
+								<td>
+									'. $book['title'] .'
+								</td>
+							</tr>';
+			}
+
+			$recap .='		</tbody>
+							</table>';
+
+			$recap .= '<p>Vous recevrez prochainement un email vous confirmant l\'envoi de la commande au point relais suivant : '.$deliveryplace['name'] .': ' . $deliveryplace['address'] . '</p>';
+			
+			$recap .= '<p>Merci d\'utiliser notre service, <br> Bdialement <br> L\'équipe de BDloc</p>';
+			
+
+			
+			$errorEmail = "";
+
+			$mail = new \PHPMailer;
+			$mail->isSMTP();
+			$mail->setLanguage('fr');
+			$mail->CharSet = 'UTF-8';
+			$mail->SMTPDebug = 2;	//0 pour désactiver les infos de débug
+			$mail->Debugoutput = 'html';
+			$mail->Host = 'smtp.gmail.com';
+			$mail->Port = 587;
+			$mail->SMTPSecure = 'tls';
+			$mail->SMTPAuth = true;
+			$mail->Username = "tony.wf3.nanterre@gmail.com";
+			$mail->Password = "nanterre1";
+			$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
+			$mail->addAddress($user['email']);
+			$mail->isHTML(true); 	
+			$mail->Subject = 'Envoyé par PHP !';					
+			
+			$mail->Body = $recap;
+
+					if (!$mail->send()) {
+							echo "Mailer Error: " . $mail->ErrorInfo;
+						} else {
+							echo "Message sent!";
+						}
+
+
+				$this->redirectToRoute('catalog');
+						
+			}
 
 
 	}
@@ -563,8 +639,13 @@ class CartController extends DefaultController
 						echo "Mailer Error: " . $mail->ErrorInfo;
 					} else {
 						echo "Message sent!";
+
+						// Changement du statut du cart sélectionné
+						$cartManager->confirmOrder($cartId);
+						$this->redirectToRoute('home_admin');
+
+
 					}
-				// $this->redirectToRoute('admin/home_Admin');
 		
 	}	
 		

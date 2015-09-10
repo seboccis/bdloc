@@ -40,6 +40,9 @@
 									echo "A traiter";
 									break;
 								case '2':
+									echo "Commande en cours";
+									break;
+								case '3':
 									echo "Commande terminée";
 								
 								break;
