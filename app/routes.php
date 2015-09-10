@@ -45,7 +45,7 @@
 
 
 		// Requête AJAX pour retirer un article du panier
-		['GET|POST', '/panier/retirer/[:bookId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	
+		['GET|POST', '/panier/retirer/[:bookId]/[:cartId]/', 'Cart#ajaxCartRemoveBookFromCart', 'ajax_cart_remove_book_from_cart'],	
 
 
 

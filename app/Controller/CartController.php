@@ -57,7 +57,7 @@ class CartController extends DefaultController
 	/**
 	 * Page de retrait d'une bd du panier
 	 */
-	public function ajaxCartRemoveBookFromCart($bookId)
+	public function ajaxCartRemoveBookFromCart($bookId, $cartId)
 	{
 		$this->lock();
 		

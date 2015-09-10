@@ -29,7 +29,7 @@
 				<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
 			</td>
 			<td>
-				<a class="removeFromCart btn btn-danger" href="<?= $this->url('ajax_cart_remove_book_from_cart',['bookId'=>$book['id'],'$cartId'=>$cartId])?>">Retirer</a>
+				<a class="removeFromCart btn btn-danger" href="<?= $this->url('ajax_cart_remove_book_from_cart',['bookId'=>$book['id'],'cartId'=>$cartId])?>">Retirer</a>
 			</td>
 		</tr>
 	<?php endforeach ?>
