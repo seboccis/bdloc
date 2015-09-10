@@ -355,7 +355,6 @@
 
 function showDeliveryPlace(response){
 	$('#choicedDeliveryPlace').html(response);
-	// var nameChoiced$('#deliveryplace>optgroup>option[value="impair"]')')
 }
 
 function getDeliveryPlace(id){
@@ -393,9 +392,9 @@ function showMap(response){
    											});
 		(function (marker, data) {
 		                google.maps.event.addListener(marker, "click", function (e) {
-		                			$('#inputChoicedDeliveryPlace').attr('value', data);
-		                			$('#validateChoicedDeliveryPlace').fadeIn(400);
-	                   				getDeliveryPlace(data);
+	                   				$('#deliveryplace option').attr('selected', false);
+	                   				$('#deliveryplace option[value=' + data + ']').attr('selected', true);
+	                   				$('#deliveryplace').change();
 		 						});
 		})(marker, data);
 	}
@@ -413,6 +412,13 @@ function getMap(){
 		.done(showMap);
 	}
 }
+
+$('#deliveryplace').on('change', function(event){
+	var data =  $("#deliveryplace option:selected").val();
+	$('#inputChoicedDeliveryPlace').attr('value', data);
+	$('#validateChoicedDeliveryPlace').fadeIn(400);
+	getDeliveryPlace(data);
+});
 
 
 
