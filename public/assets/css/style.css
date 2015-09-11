@@ -203,6 +203,8 @@ body{
 		.container header .logInfo a{
 			display: block;
 			margin-top: 10px;
+			text-align: center;
+			
 		}
 
 		.container header nav{
