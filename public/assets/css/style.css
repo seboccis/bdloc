@@ -5,7 +5,7 @@
 }
 
 html{
-	background-color: #79C8FF;
+	background-color: #b3e5fc;
 }
 
 body{
@@ -14,12 +14,13 @@ body{
 
 .table{
 	display: table;
-	border:solid 1px #000;
+	border:solid 1px  #fffde7;
 }
 
 .row{
 	display: table-row;
-	background-color: #CC4847;
+	
+
 }
 
 .cell{
@@ -40,6 +41,8 @@ body{
 	position: absolute;
 	top: 10px;
 	left: 10px;
+	background-color: #01579b;
+	color: white;
 }
 
 .container{
@@ -132,11 +135,14 @@ body{
 			top: 0;
 			left: 0;
 
+
 		}
 
+		
 			.container section #sideBar label{			
 				width: 100%;
 				display: block;
+
 			}
 
 			.container section #sideBar #resultKeywordResearch a{
@@ -226,8 +232,11 @@ body{
 				.container section #content #showBooks .card{
 					width: 440px;
 					height: 350px;
-					margin: 0 20px 20px 0;
+					margin: 0 0 20px 20px;
 					float: left;
+					border-radius: 0 0 15px 0;
+					background-color: #fffde7;
+					box-shadow: 5px 5px 5px #999;
 				}
 
 				.container section #content #showBooks .card-bookNotAvailable{
