@@ -27,9 +27,9 @@
 			</div>
 				
 			<nav>
-				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
-				<a href="<?php echo $this->url('cart');?>">Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
-				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
+				<a href="<?php echo $this->url('catalog');?>"><i class="fa fa-book"></i>Catalogue</a>
+				<a href="<?php echo $this->url('cart');?>"><i class="fa fa-shopping-cart"></i>Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
+				<a href="<?php echo $this->url('account');?>"><i class="fa fa-user"></i>Mon Compte</a>
 			</nav>
 		</header>
 

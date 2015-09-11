@@ -105,7 +105,19 @@ body{
 			width: 800px;
 			margin : 0 auto;
 
-		}		
+		}
+
+			.container header nav .fa-book{
+				margin-right: 5px;
+			}
+
+			.container header nav .fa-shopping-cart{
+				margin-right: 5px;
+			}
+
+			.container header nav .fa-user{
+				margin-right: 5px;
+			}		
 
 			.container header nav a{
 				display: block;
