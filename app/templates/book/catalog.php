@@ -75,7 +75,7 @@
 
 					<div id="paginationNav" class="elementOfResultsBar">
 						<a href="" id="prevBooks">&lsaquo; Précédentes</a>
-						<span id="pagination">#<span id="first">1</span>à#<span id="last">20</span>sur<span id="total"></span>BD</span>
+						<span id="pagination"><span class="sharp">#</span><span id="first">1</span>à<span class="sharp">#</span><span id="last">20</span>sur<span id="total"></span>BD</span>
 						<a href="" id="nextBooks">Suivantes &rsaquo;</a>
 					</div>
 
