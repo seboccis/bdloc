@@ -392,7 +392,7 @@ class UserController extends DefaultController
 					$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
 					$mail->addAddress($user['email']);
 					$mail->isHTML(true); 	
-					$mail->Subject = 'Envoyé par PHP !';					
+					$mail->Subject = 'Changement de mot de passe';					
     				
 					$mail->Body = '<a href="www.bdloc.dev/change_password/?token='.$token.'&username='.$username.'">Cliquer ici pour créer un nouveau mot de passe</a>';
 

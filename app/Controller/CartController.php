@@ -357,7 +357,7 @@ class CartController extends DefaultController
 			$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
 			$mail->addAddress($user['email']);
 			$mail->isHTML(true); 	
-			$mail->Subject = 'Envoyé par PHP !';					
+			$mail->Subject = 'Confirmation de commande';					
 			
 			$mail->Body = $recap;
 
@@ -631,7 +631,7 @@ class CartController extends DefaultController
 		$mail->setFrom('jeandupont@example.com', 'Service de Messagerie BDloc');
 		$mail->addAddress($user['email']);
 		$mail->isHTML(true); 	
-		$mail->Subject = 'Envoyé par PHP !';					
+		$mail->Subject = 'Votre commande va être livrée';					
 		
 		$mail->Body = $recap;
 
