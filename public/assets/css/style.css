@@ -489,7 +489,7 @@ body{
 
 								.container section #content #showBooks .card-bookNotAvailable .row .cell-text .btn-long{
 									position: absolute;
-									z-index: 5;									
+									z-index: 3;									
 								}
 
 								.container section #content #showBooks .card .row .cell-text .btn-long .fa-cart-plus{
@@ -766,6 +766,7 @@ thead tr th, tbody tr td{
 							}
 
 								.container #shadow #lightBox div.table div.row div.cell-right #detailsOnSerie #carousel #carouselIndicators span{
+									width: 100%;
 									font-size: 10px;
 									position: absolute;
 									top: 50%;

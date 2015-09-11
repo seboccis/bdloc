@@ -86,7 +86,7 @@
 												<img src="<?php echo $this->assetUrl('img/mini-covers/'.$this->e($bookC['cover'])) ?>" alt="<?= $this->e($bookC['title']) ?>">
 											</div>
 											<figcaption>
-												<p><?= $this->e($bookC['num']) ?> : <?= $this->e($bookC['title']) ?></p>
+												<p><?php if($numberBooksInSerie != 1){ echo $this->e($bookC['num']) . ' : ';}?><?= $this->e($bookC['title']) ?></p>
 											</figcaption>
 										</figure>
 
