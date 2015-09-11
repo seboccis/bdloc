@@ -24,23 +24,9 @@ html{
 	-o-transform: translateX(-50%)translateY(-50%);
 	transform: translateX(-50%)translateY(-50%);
 	width: 400px;
-	/*height: 500px;*/
 	border-radius: 5px;
 	background-color: #01579B;
 }
-/*.navigation-home{
-	height: 300px;
-}
-.navigation-email{
-	height: 400px;
-}
-
-.navigation-login{
-	height: 350px;
-}
-.navigation-register{
-	height: 700px;
-}*/
 
 .navigation >h2{
 	margin-top: 10px;
