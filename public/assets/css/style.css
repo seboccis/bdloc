@@ -315,13 +315,13 @@ body{
 			text-align: center;
 			border : 1px solid #000;
 			border-bottom: none;
-			background-color: white;
+			background-color: #01579B;
 			padding: 10px;
 			text-decoration: none;
 			-webkit-transition: 0.5s;
 			-o-transition: 0.5s;
 			transition: 0.5s;
-			color: #000;
+			color: white;
 		}
 		.container section .navbarAccount nav a:first-child{
 			margin-top: 25px;	
