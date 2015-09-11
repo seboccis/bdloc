@@ -8,8 +8,89 @@ a{
 	text-decoration: none;
 }
 
+.text-error{
+	color: red;
+}
+
 html{
 	background-color: #b3e5fc;
+}
+.navigation{
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	width: 400px;
+	height: 500px;
+	border-radius: 5px;
+	background-color: #01579B;
+}
+.navigation-home{
+	height: 300px;
+}
+.navigation-email{
+	height: 400px;
+}
+
+.navigation-login{
+	height: 350px;
+}
+.navigation-register{
+	height: 700px;
+}
+
+.navigation >h2{
+	margin-top: 10px;
+	text-align: center;
+	font-size: 2rem;
+	color: #fff;
+} 
+
+.navigation > .link{
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);: 
+	display: inline-block;
+}
+
+.link>a, .link>button{
+	display: inline-block;
+	margin: 40px;
+	border: 1px solid;
+	padding: 10px;
+	border-radius: 10px; 
+	background-color: #FFFDE7;
+	color: #000;
+	box-shadow: 
+}
+
+.navigation>form{
+	width: 400px;
+	padding: 20px;
+}
+
+form>.form-group>label, form>.form-group>input{
+	display: block;
+}
+form>.form-group>label{
+	color: #fff;
+}
+form>.form-group>a{
+	color: #fff;
+}
+form>.form-group>a:hover{
+	color: purple;
+}
+
+form>.form-group>input{
+	border-radius: 3px;
+	height: 30px;
+	width: 250px;
 }
 
 body{

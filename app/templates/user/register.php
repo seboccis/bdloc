@@ -2,9 +2,8 @@
 
 <?php $this->start('main_content') ?>
 
-	<h2>Ceci est la page d'inscription.</h2>
 	<div class="container">
-		<div class="box box-register">
+		<div class="navigation navigation-register">
 				
 			<form action="" method="POST">
 				<div class="form-group">
@@ -49,7 +48,7 @@
 					<input type="tel" name="phone_number" id="phone_number" value="<?= $this->e($phone_number) ?>">
 				</div>
 
-				<div class="navigation">
+				<div class="link">
 					<button class="btn btn-success">Valider</button>
 					<a class="btn btn-danger" href="<?= $this->url('home') ?>">Retour</a>
 				</div>

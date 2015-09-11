@@ -1,15 +1,15 @@
 <?php $this->layout('layout', ['title' => 'Login']) ?>
 
 <?php $this->start('main_content') ?>
-	<h2>Ceci est la page de login.</h2>
+	
 
-	<div class="box box-login">
+	<div class="navigation navigation-login">
 		
 		<form action="" method="POST">
 			<div class="form-group">
 				<label for="">Pseudo</label>
 				<input type="text" name="username" id="username">
-				<div><?= $this->e($error) ?></div>
+				<p class="text-error"><?= $this->e($error) ?>
 			</div>
 			<div class="form-group">
 				<label for="password">Mot de passe</label>
@@ -19,7 +19,7 @@
 				<a href="<?= $this->url('forgot_password') ?>">Mot de passe oublié</a>
 			</div>
 			
-			<div class="navigation">
+			<div class="link">
 				
 				<button class="btn btn-success">Valider</button>
 			
