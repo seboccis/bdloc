@@ -13,7 +13,7 @@
 				<div>
 					<h3>Catégories</h3>
 					<?php foreach($genres as $genre){	?>
-						<label for="checkbox<?= $genre['id']?>"><input type="checkbox" name="genres[]" class="checkbox" id="checkbox<?= $genre['id']?>" value="<?= $genre['id']; ?>"><?= $genre['genre'];?></label>
+						<label for="checkbox<?= $this->e($genre['id']) ?>"><input type="checkbox" name="genres[]" class="checkbox" id="checkbox<?= $this->e($genre['id']) ?>" value="<?= $this->e($genre['id']) ?>"><?= $this->e($genre['genre']) ?></label>
 					<?php }								?>
 				</div>
 

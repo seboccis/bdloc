@@ -1,19 +1,19 @@
 <?php 									?>
-	<input type="hidden" id='dataRequest' data-request-precStart="<?= $precStart; ?>" data-request-first="<?= $first; ?>" data-request-last="<?= $last; ?>" data-request-total="<?= $total; ?>" data-request-nextStart="<?= $nextStart; ?>">
+	<input type="hidden" id='dataRequest' data-request-precStart="<?= $this->e($precStart) ?>" data-request-first="<?= $this->e($first) ?>" data-request-last="<?= $this->e($last) ?>" data-request-total="<?= $this->e($total) ?>" data-request-nextStart="<?= $this->e($nextStart) ?>">
 <?php foreach($books as $book){			?>
 	
-	<div class="card<?php if($book['quantity_available'] == 0){ echo ' card-bookNotAvailable';} ?> table" data-bookId="<?= $book['id'] ?>">
+	<div class="card<?php if($book['quantity_available'] == 0){ echo ' card-bookNotAvailable';} ?> table" data-bookId="<?= $this->e($book['id']) ?>">
 
 		<div class="row">
 
 			<div class="cell">
 
-				<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
+				<img src="<?php echo $this->assetUrl('img/mini-covers/'.$this->e($book['cover']));?>">
 
 			</div>
 			<div class="cell cell-text">
 
-				<h1><?php echo $this->e($book['title'])?></h1>
+				<h1><?= $this->e($book['title'])?></h1>
 				<p>
 					Scénariste : 
 					<?php 
@@ -44,8 +44,8 @@
 						}
 					?>
 				</p>
-				<p<?php if($book['quantity_available'] == 0){ echo ' class="pNotAvailable"';} ?>><?php echo $this->e($book['string_quantity_available'])?></p>
-				<button class="detail btn btn-long btn-info" data-book-id="<?= $book['id']; ?>"><i class="fa fa-plus-circle"></i> Plus de détails</button>
+				<p<?php if($book['quantity_available'] == 0){ echo ' class="pNotAvailable"';} ?>><?= $this->e($book['string_quantity_available']) ?></p>
+				<button class="detail btn btn-long btn-info" data-book-id="<?= $this->e($book['id']) ?>"><i class="fa fa-plus-circle"></i> Plus de détails</button>
 				<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	?>
 					<button class="addToCart btn btn-success btn-long"><i class="fa fa-cart-plus"></i> Ajouter au panier</button>
 				<?php }else if ($book['isBookInCart'] == 1){								?>

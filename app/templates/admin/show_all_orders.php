@@ -31,7 +31,7 @@
 						
 				<tr>
 					<td>
-						<?php echo $allOrderAndUser['username']; ?>
+						<?= $this->e($allOrderAndUser['username']) ?>
 						
 					</td>
 					<td>
@@ -49,7 +49,7 @@
 							} ?>
 					</td>
 					<td>
-						<?= $allOrderAndUser['begin_date']?>
+						<?= $this->e($allOrderAndUser['begin_date']) ?>
 					</td>
 					<td>
 						<a href="<?=$this->url('show_order',['cartId' => $allOrderAndUser['cartId'], 'status' => $allOrderAndUser['status'], 'username' => $allOrderAndUser['username']])?>"><i class="fa fa-search"></i></a>

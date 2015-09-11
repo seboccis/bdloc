@@ -30,13 +30,13 @@
 									<?php foreach ($books as $book): ?>	
 											<tr>
 												<td>
-													<?= $book['title']?>
+													<?= $this->e($book['title']) ?>
 												</td>
 												<td>
 													<img src="<?= $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
 												</td>
 												<td>
-													<input type="checkbox" name="<?= $book['title'] ?>" value="<?= $book['id'] ?>">
+													<input type="checkbox" name="<?= $this->e($book['title']) ?>" value="<?= $this->e($book['id']) ?>">
 												</td>
 											</tr>
 									<?php endforeach ?>

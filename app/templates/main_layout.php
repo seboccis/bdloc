@@ -16,10 +16,10 @@
 <body>
 	<div class="container">
 		<header>
-			<img class="back" src="<?php echo $this->assetUrl('img/sempe-chat.jpg'); ?>" alt="">
+			<img class="back" src="<?= $this->assetUrl('img/sempe-chat.jpg') ?>" alt="">
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 			<div class="logInfo">
-				<h2><?= $w_user['username'] ?></h2>
+				<h2><?= $this->e($w_user['username']) ?></h2>
 				<?php if ($w_user['role']== 'admin') {
 					echo '<a href="'.$this->url('home_admin').'">Accéder au Back Office</a>';
 				}?>

@@ -17,7 +17,7 @@
 
 						<legend>Informations détaillées sur cette BD</legend>
 
-						<h1><?php echo $this->e($book['title'])?></h1>
+						<h1><?php echo $this->e($book['title']) ?></h1>
 						<p>
 							Scénariste : 
 							<?php 
@@ -51,7 +51,7 @@
 
 						<?php if ($book['isBookInCart'] == 0 && $book['quantity_available'] != 0){	 ?>		
 
-							<button class="addToCart btn btn-success" data-bookId="<?= $book['id'] ?>"><i class="fa fa-cart-plus"></i> Ajouter au panier</button>
+							<button class="addToCart btn btn-success" data-bookId="<?= $this->e($book['id']) ?>"><i class="fa fa-cart-plus"></i> Ajouter au panier</button>
 
 						<?php }else if($book['isBookInCart'] == 1){									 ?>
 
@@ -67,26 +67,26 @@
 
 					<fieldset>
 
-						<legend>Série : <?php echo $serieTitle; ?></legend>
+						<legend>Série : <?= $this->e($serieTitle) ?></legend>
 
 						<div id="carousel">
 
 							<button id="btnCarouselPrev" class="btnCarousel"><span>&lsaquo;</span></button>
 
-							<div id="carouselWindow" data-numberBooksInSerie="<?php echo $numberBooksInSerie; ?>" data-carouselPosition="1">
+							<div id="carouselWindow" data-numberBooksInSerie="<?= $this->e($numberBooksInSerie) ?>" data-carouselPosition="1">
 
 								<div id="spriteCarousel">
 
 <?php 	foreach($booksCarousel as $bookC){													?>
 
-									<a href="" class="newDetail" data-bookId="<?php echo $bookC['id']; ?>">
+									<a href="" class="newDetail" data-bookId="<?= $this->e($bookC['id']) ?>">
 
 										<figure class="cardCarousel">
 											<div class="coverCardCarousel">
-												<img src="<?php echo $this->assetUrl('img/mini-covers/'.$bookC['cover']); ?>" alt="<?php echo $bookC['title']; ?>">
+												<img src="<?php echo $this->assetUrl('img/mini-covers/'.$this->e($bookC['cover'])) ?>" alt="<?= $this->e($bookC['title']) ?>">
 											</div>
 											<figcaption>
-												<p><?php echo $bookC['num']; ?> : <?php echo $bookC['title']; ?></p>
+												<p><?= $this->e($bookC['num']) ?> : <?= $this->e($bookC['title']) ?></p>
 											</figcaption>
 										</figure>
 
@@ -114,7 +114,7 @@
 
 <?php 		for($index = 2; $index <= $numberBooksInSerie; $index++){						?>
 
-									<a href="" class="carouselIndicator" data-carouselPosition="<?= $index; ?>"><i class="fa fa-circle-thin"></i></a>
+									<a href="" class="carouselIndicator" data-carouselPosition="<?= $this->e($index) ?>"><i class="fa fa-circle-thin"></i></a>
 
 <?php 		}
 		}																					?>
