@@ -8,7 +8,7 @@
 
 			<fieldset>
 
-				<legend>Filtres</legend>
+				<legend><h2>Filtres</h2></legend>
 
 				<div class='filter'>
 					<h3>Catégories</h3>
@@ -55,7 +55,7 @@
 				
 				<fieldset>
 					
-					<legend>Résultats</legend>
+					<legend><h2>Résultats</h2></legend>
 
 					<div class="elementOfResultsBar">
 						<select name="sort" id="selectCatalogSort">
@@ -74,9 +74,9 @@
 					</div>
 
 					<div id="paginationNav" class="elementOfResultsBar">
-						<a href="" id="prevBooks">&lsaquo; Précédentes</a>
+						<a href="" id="prevBooks" class="anchorButton">&lsaquo; Précédentes</a>
 						<span id="pagination"><span class="sharp">#</span><span id="first">1</span>à<span class="sharp">#</span><span id="last">20</span>sur<span id="total"></span>BD</span>
-						<a href="" id="nextBooks">Suivantes &rsaquo;</a>
+						<a href="" id="nextBooks" class="anchorButton">Suivantes &rsaquo;</a>
 					</div>
 
 				</fieldset>

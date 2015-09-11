@@ -19,17 +19,17 @@
 
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 			<div class="logInfo">
-				<h2><?= $this->e($w_user['username']) ?></h2>
+				<span>Bonjour <?= $this->e($w_user['username']) ?> ,</span>
 				<?php if ($w_user['role']== 'admin') {
-					echo '<a href="'.$this->url('home_admin').'">Accéder au Back Office</a>';
+					echo '<a class="anchorButton" href="'.$this->url('home_admin').'">Accéder au Back Office</a>';
 				}?>
-				<a href="<?= $this->url('logout')?>">Se déconnecter</a>
+				<a class="anchorButton" href="<?= $this->url('logout')?>">Se déconnecter</a>
 			</div>
 				
 			<nav>
-				<a href="<?php echo $this->url('catalog');?>"><h2>Catalogue</h2></a>
-				<a href="<?php echo $this->url('cart');?>"><h2>Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></h2></a>
-				<a href="<?php echo $this->url('account');?>"><h2>Mon Compte</h2></a>
+				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
+				<a href="<?php echo $this->url('cart');?>">Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
+				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
 			</nav>
 		</header>
 
