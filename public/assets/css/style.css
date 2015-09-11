@@ -443,7 +443,7 @@ body{
 					float: left;
 					border-radius: 0 0 15px 0;
 					background-color: #fffde7;
-					box-shadow: 5px 5px 5px #999;
+					box-shadow: 5px 5px 5px #01579b;
 					position: relative;
 				}
 
@@ -589,7 +589,9 @@ thead tr th, tbody tr td{
 			transform: translateX(-50%)translateY(-50%);
 		}
 
-			.container #shadow #lightBox div.table{}
+			.container #shadow #lightBox div.table{
+				border: none;
+			}
 
 				.container #shadow #lightBox div.table #closeLightBox{
 					position: absolute;
