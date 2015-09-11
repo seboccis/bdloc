@@ -253,7 +253,8 @@ body{
 				}
 
 				.container section #content #resultsBar #paginationNav{
-					margin-left: 100px;
+					float: right;
+					margin-right: 40px;
 				}
 
 				.container section #content #resultsBar .elementOfResultsBar #selectCatalogNumber{
@@ -261,15 +262,19 @@ body{
 				}
 
 				.container section #content #resultsBar .elementOfResultsBar #pagination{
-					padding: 5px;
+					
+				}
+
+				.container section #content #resultsBar .elementOfResultsBar .sharp{
+					margin-left: 5px;
 				}
 
 				.container section #content #resultsBar .elementOfResultsBar #first{
-					padding: 5px;
+					margin-right: 5px;
 				}
 
 				.container section #content #resultsBar .elementOfResultsBar #last{
-					padding: 5px;
+					margin-right: 5px;
 				}
 
 				.container section #content #resultsBar .elementOfResultsBar #total{
