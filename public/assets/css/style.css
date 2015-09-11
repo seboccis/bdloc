@@ -88,8 +88,7 @@ body{
 		.container header .logInfo{
 			position: absolute;
 			top:5%;
-			right: 5%;
-			margin-right: 50px;
+			right: 2.5%;
 			border: 1px solid #000;
 			background-color: #01579b;
 			color: #fff;
