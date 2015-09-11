@@ -56,6 +56,8 @@
 
 		</div>
 
+		<div class="mask"></div>
+
 	</div>	
 
 <?php }								?>

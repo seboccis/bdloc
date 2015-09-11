@@ -338,13 +338,17 @@ body{
 					border-radius: 0 0 15px 0;
 					background-color: #fffde7;
 					box-shadow: 5px 5px 5px #999;
+					position: relative;
 				}
 
 				.container section #content #showBooks .card-bookNotAvailable{
-					background: red;
+					background: #aaa;
 				}
 
-					.container section #content #showBooks .card .row{}
+					.container section #content #showBooks .card .row{
+						width: 100%;
+						height: 100%;
+					}
 
 						.container section #content #showBooks .card .row .cell{
 							width: 220px;
@@ -360,17 +364,28 @@ body{
 							.container section #content #showBooks .card .row .cell-text{}
 
 								.container section #content #showBooks .card .row .cell-text .pNotAvailable{
-									color: white;
+									color: red;
 								}
 
 								.container section #content #showBooks .card .row .cell-text #msgInCart{
 									color: blue;
 								}
 
+								.container section #content #showBooks .card-bookNotAvailable .row .cell-text #msgInCart{
+									color: blue;
+									margin-top: 32px;
+								}
+
 								.container section #content #showBooks .card .row .cell-text .btn-long{
 									width: 150px;
-									height: 30px;									
+									height: 30px;								
 								}
+
+								.container section #content #showBooks .card-bookNotAvailable .row .cell-text .btn-long{
+									position: absolute;
+									z-index: 5;									
+								}
+
 								.container section #content #showBooks .card .row .cell-text .btn-long .fa-cart-plus{
 									font-size: 20px;
 									color: #4CAF50;
@@ -380,6 +395,22 @@ body{
 									font-size: 20px;
 									color: #42A5F5;
 								}
+
+					.container section #content #showBooks .card .mask{
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 0;
+						left: 0;
+						background: rgba(255, 255, 255, 0.6);
+						border-radius: 0 0 15px 0;
+						box-shadow: 5px 5px 5px #999;
+						display: none;
+					}
+
+					.container section #content #showBooks .card-bookNotAvailable .mask{
+						display: block;
+					}
 
 /*CSS de la page deliveryPlace*/
 #showMap{
