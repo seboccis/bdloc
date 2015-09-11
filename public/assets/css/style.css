@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+a{
+	text-decoration: none;
+}
+
 html{
 	background-color: #b3e5fc;
 }
@@ -35,7 +39,7 @@ body{
 .fieldset fieldset{
 	height: 95%;
 	width: 90%;
-	padding: 10px;
+	padding: 0 10px 10px 10px;
 	background: #ccc;
 	border: solid 1px #000;
 	position: absolute;
@@ -44,6 +48,10 @@ body{
 	background-color: #01579b;
 	color: white;
 }
+
+	.fieldset fieldset legend{
+		color: #000;
+	}
 
 .container{
 	width: 100%;
@@ -134,29 +142,47 @@ body{
 			position: absolute;
 			top: 0;
 			left: 0;
-
-
 		}
 
 		
 			.container section #sideBar label{			
 				width: 100%;
 				display: block;
-
+				margin-bottom: 2px;
 			}
 
-			.container section #sideBar #resultKeywordResearch a{
-				color: #000;
-				text-decoration: none;
+			.container section #sideBar h3{
+				color: #ccc;
+				margin-top: 10px;
+				margin-bottom: 5px;
 			}
 
-				.container section #sideBar #resultKeywordResearch a span{
-					color: rgba(0,0,0,0.4);
-				}
+			.container section #sideBar #inputKeyword{
+				width: 150px;
+			}
 
-				.container section #sideBar #resultKeywordResearch a em{
+			.container section #sideBar #resultKeywordResearch{
+				background-color: #fffde7;
+				width: 150px;
+			}
+
+				.container section #sideBar #resultKeywordResearch a{
 					color: #000;
+					text-decoration: none;
+					width: 150px;
+					display: block;
+					padding-left: 10px;
+					margin-bottom: 2px;
 				}
+
+					.container section #sideBar #resultKeywordResearch a span{
+						/*color: rgba(0,0,0,0.4);*/
+						color: #000;
+					}
+
+					.container section #sideBar #resultKeywordResearch a em{
+						color: #ea80fc;
+					}
 
 		.container section .navbarAccount nav a{
 			display: block;
@@ -332,7 +358,7 @@ thead tr th, tbody tr td{
 	}
 
 		.container #shadow #lightBox{
-			background-color: #fff;
+			background-color: #b3e5fc;
 			width: 900px;
 			position: absolute;
 			top:50%;

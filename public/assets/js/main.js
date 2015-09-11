@@ -124,6 +124,8 @@
 				$('#resultKeywordResearch').html('');
 			}
 			else{
+				$("#resultKeywordResearch").css({'display': 'block'});
+
 				var path = $('#inputKeyword').attr('data-ajax-catalog-getKeywords-path');
 
 				$.ajax({
@@ -230,6 +232,7 @@
 		$('#btnRefresh').on('click', function(e){
 			e.preventDefault();
 			$("#inputKeyword").val('');
+			$("#resultKeywordResearch").css({'display': 'none'});
 			getBooks(0);
 		});
 
