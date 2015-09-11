@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<img class="banner" src="<?php echo $this->assetUrl('img/banner/paris.jpeg')?>" alt="Photo de Paris">
-		<header>
+		<header class="default">
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 		</header>
 

@@ -18,16 +18,17 @@ html{
 .navigation{
 	position: absolute;
 	left: 50%;
-	-webkit-transform: translateX(-50%);
-	-ms-transform: translateX(-50%);
-	-o-transform: translateX(-50%);
-	transform: translateX(-50%);
+	top: 50%;
+	-webkit-transform: translateX(-50%)translateY(-50%);
+	-ms-transform: translateX(-50%)translateY(-50%);
+	-o-transform: translateX(-50%)translateY(-50%);
+	transform: translateX(-50%)translateY(-50%);
 	width: 400px;
-	height: 500px;
+	/*height: 500px;*/
 	border-radius: 5px;
 	background-color: #01579B;
 }
-.navigation-home{
+/*.navigation-home{
 	height: 300px;
 }
 .navigation-email{
@@ -39,40 +40,49 @@ html{
 }
 .navigation-register{
 	height: 700px;
-}
+}*/
 
 .navigation >h2{
 	margin-top: 10px;
 	text-align: center;
 	font-size: 2rem;
 	color: #fff;
+	display:block;
 } 
 
-.navigation > .link{
-	position: absolute;
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);: 
-	display: inline-block;
+.navigation .link{
+	margin: 30px 0;
+	text-align: center;
+}
+
+.navigation .link a.btn:last-child{
+	margin-left: 30px;
 }
 
 .link>a, .link>button{
 	display: inline-block;
-	margin: 40px;
+/*	margin: 40px;*/
+	width: 150px;
+	text-align: center;
 	border: 1px solid;
 	padding: 10px;
 	border-radius: 10px; 
 	background-color: #FFFDE7;
 	color: #000;
-	box-shadow: 
+	font: 16px 'Roboto', sans-serif;
 }
 
 .navigation>form{
 	width: 400px;
 	padding: 20px;
+	display: block;
+	margin: 0 auto;
 }
+
+	.navigation>form>.form-group{
+		width: 250px;
+		margin: 0 auto;
+	}
 
 form>.form-group>label, form>.form-group>input{
 	display: block;
@@ -166,6 +176,20 @@ body{
 			font-size: 2rem;
 		}
 
+		.container .default h1{
+			text-align: center;
+			font-size: 2rem;
+			display: block;
+			width: 400px;
+			position: absolute;
+			top:50%;
+			left: 50%;
+			-webkit-transform: translateX(-50%)translateY(-50%);
+			-ms-transform: translateX(-50%)translateY(-50%);
+			-o-transform: translateX(-50%)translateY(-50%);
+			transform: translateX(-50%)translateY(-50%);
+		}
+
 		.container header .logInfo{
 			position: absolute;
 			top:5%;
@@ -256,7 +280,7 @@ body{
 				margin-left: 10px;
 			}
 
-			.container section #sideBar .filter:last-child(){
+			.container section #sideBar .filter:last-child{
 				overflow: visible;
 			}
 
