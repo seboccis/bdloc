@@ -16,13 +16,13 @@
 	</div>
 
 	<div id="content">
-		<p>Prénom : <?= $w_user['first_name'] ?></p>
-		<p>Nom : <?= $w_user['last_name'] ?></p>
-		<p>Pseudo : <?= $w_user['username'] ?></p>
-		<p>Email : <?= $w_user['email']?></p>
-		<p>Adresse : <?= $w_user['address'] ?></p>
-		<p>Code postal : <?= $w_user['zip_code'] ?></p>
-		<p>Numéro de téléphone : <?= $w_user['phone_number'] ?></p>
+		<p>Prénom : <?= $this->e($w_user['first_name']) ?></p>
+		<p>Nom : <?= $this->e($w_user['last_name']) ?></p>
+		<p>Pseudo : <?= $this->e($w_user['username']) ?></p>
+		<p>Email : <?= $this->e($w_user['email']) ?></p>
+		<p>Adresse : <?= $this->e($w_user['address']) ?></p>
+		<p>Code postal : <?= $this->e($w_user['zip_code']) ?></p>
+		<p>Numéro de téléphone : <?= $this->e($w_user['phone_number']) ?></p>
 	</div>
 		
 <?php $this->stop('main_content') ?>

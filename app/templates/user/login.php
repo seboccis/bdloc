@@ -9,7 +9,7 @@
 			<div class="form-group">
 				<label for="">Pseudo</label>
 				<input type="text" name="username" id="username">
-				<div><?php echo $error; ?></div>
+				<div><?= $this->e($error) ?></div>
 			</div>
 			<div class="form-group">
 				<label for="password">Mot de passe</label>

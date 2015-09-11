@@ -18,7 +18,7 @@
 	<tbody>
 		<tr>
 			<td>
-				<?= $book['title']?></p>
+				<?= $this->e($book['title']) ?></p>
 			</td>
 		</tr>
 	</tbody>
@@ -26,7 +26,7 @@
 
 <?php endforeach ?>
 </table>
-	<p>Nom et adresse du point de livraison : <?= $deliveryPlace['name'] . ", " . $deliveryPlace['address']?></p>
+	<p>Nom et adresse du point de livraison : <?= $this->e($deliveryPlace['name']) . ", " . $this->e($deliveryPlace['address']) ?></p>
 
 	<a class="btn btn-success" href="<?=$this->url('save_order',['cartIdToOrder' => $cartIdToOrder, 'deliveryPlace' => $deliveryPlace['id']])?>">Valider</a>
 	<a class="btn btn-danger" href="<?=$this->url('cart')?>">Retour</a>

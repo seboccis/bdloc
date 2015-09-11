@@ -17,7 +17,7 @@
 	</div>
 
 	<div id="content">
-		<?= $orderEmpty ?>
+		<?= $this->e($orderEmpty) ?>
 		
 		<h2>Commandes terminées</h2>
 		<table>
@@ -35,13 +35,13 @@
 			foreach ($cartToBook['books'] as $book) : ?>
 				<tr>
 					<td>
-						<?=$book['title']?>
+						<?= $this->e($book['title']) ?>
 					</td>
 					<td>
-						<?= $cartToBook['cartBeginDate']?>
+						<?= $this->e($cartToBook['cartBeginDate']) ?>
 					</td>
 					<td>
-						<?= $cartToBook['cartEndDate']?>
+						<?= $this->e($cartToBook['cartEndDate']) ?>
 					</td>
 				</tr>
 						
@@ -53,7 +53,7 @@
 		</table>
 		
 		
-		<?= $orderInRentEmpty ?>
+		<?= $this->e($orderInRentEmpty) ?>
 		
 		<h2>Commandes en cours</h2>
 		<table>
@@ -71,10 +71,10 @@
 			foreach ($cartToBookInRent['booksInRent'] as $book) : ?>
 				<tr>
 					<td>
-						<?=$book['title']?>
+						<?= $this->e($book['title']) ?>
 					</td>
 					<td>
-						<?= $cartToBookInRent['cartInRentBeginDate']?>
+						<?= $this->e($cartToBookInRent['cartInRentBeginDate']) ?>
 					</td>
 					<td>
 						<em>En cours de location</em>

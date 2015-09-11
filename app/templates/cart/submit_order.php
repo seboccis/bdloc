@@ -9,6 +9,7 @@
 
 
 <form action="<?=$this->url('confirm_order')?>" method="POST">
+
 	<legend>Choisissez le point de livraison</legend>
 <?php 
 		if (!empty($deliveryPlaces)) {
@@ -19,12 +20,12 @@
 				$arr = $i.($i==1 ? "er arrondissement" : "ème arrondissement");
 				$code = $i + 75000;
 ?>
-				<optgroup label="<?= $arr ?>">
+				<optgroup label="<?= $this->e($arr) ?>">
 <?php
 					foreach ($deliveryPlaces as $deliveryPlace) {
 						if ($deliveryPlace['code'] == $code) {
 ?>
-							<option value="<?=$deliveryPlace['id']?>"><?= $deliveryPlace['name']?></option>
+							<option value="<?= $this->e($deliveryPlace['id']) ?>"><?= $this->e($deliveryPlace['name']) ?></option>
 <?php
 						}
 					}
@@ -34,7 +35,7 @@
 			}
 ?>
 			</select>
-			<input type="hidden" name="cartIdToOrder" value="<?= $cartIdToOrder ?>">
+			<input type="hidden" name="cartIdToOrder" value="<?= $this->e($cartIdToOrder) ?>">
 <?php
 		}
 ?>
@@ -42,7 +43,7 @@
 </form>
 
 <div id="showMap">
-	<div id="mapDeliveryPlacesChoice"  data-showMap="<?php echo $showMap; ?>" data-ajax-deliveryPlace-getMap-path="<?php echo $this->url('ajax_deliveryPlace_getMap'); ?>" data-ajax-deliveryPlace-getDeliveryPlace-path="<?php echo $this->url('ajax_deliveryPlace_getDeliveryPlace'); ?>"></div>
+	<div id="mapDeliveryPlacesChoice"  data-showMap="<?= $this->e($showMap) ?>" data-ajax-deliveryPlace-getMap-path="<?php echo $this->url('ajax_deliveryPlace_getMap'); ?>" data-ajax-deliveryPlace-getDeliveryPlace-path="<?php echo $this->url('ajax_deliveryPlace_getDeliveryPlace'); ?>"></div>
 </div>
 
 <p class="legendShowMap">En survolant un marqueur rouge du plan, vous découvrez le nom et l'adresse d'un point-relais.</p>
@@ -52,7 +53,7 @@
 
 <form action="<?= $this->url('confirm_order'); ?>" method="POST">
 
-	<input type="hidden" name="cartIdToOrder" value="<?= $cartIdToOrder; ?>">
+	<input type="hidden" name="cartIdToOrder" value="<?= $this->e($cartIdToOrder) ?>">
 	<input type="hidden" id="inputChoicedDeliveryPlace" name="deliveryplace" value="">
 	<button id="validateChoicedDeliveryPlace">Valider votre point-relais</button>
 

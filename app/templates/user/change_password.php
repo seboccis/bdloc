@@ -14,7 +14,7 @@
 				<label for="confirm_password">Confirmé mot de passe
 					<input type="password" name="confirm_password" id="confirm_password">
 				</label>
-				<div class="help-block text-danger"><?php echo $errorConfirm_password; ?></div>
+				<div class="help-block text-danger"><?= $this->e($errorConfirm_password) ?></div>
 			</div>
 			<button type="submit">Envoyer</button>
 		</form>

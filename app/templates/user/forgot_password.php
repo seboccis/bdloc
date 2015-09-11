@@ -9,7 +9,7 @@
 			<div class="form-group">
 				<label for="email">Votre email</label>
 					<input type="email" name="email" id="email">
-					<div class="help-block text-danger"><?php echo $errorEmail; ?></div>
+					<div class="help-block text-danger"><?= $this->e($errorEmail) ?></div>
 			</div>
 
 			<div class="navigation">

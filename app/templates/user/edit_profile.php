@@ -22,34 +22,34 @@
 				<legend>Modification des informations</legend>
 				<div class="form-row">
 					<label for="last_name">Nom</label>
-					<input type="text" name="last_name" id="last_name" value="<?= $w_user['last_name']; ?>">
+					<input type="text" name="last_name" id="last_name" value="<?= $this->e($w_user['last_name']) ?>">
 				</div>
 				<div class="form-row">
 					<label for="first_name">Prénom</label>
-					<input type="text" name="first_name" id="first_name" value="<?= $w_user['first_name']; ?>">
+					<input type="text" name="first_name" id="first_name" value="<?= $this->e($w_user['first_name']) ?>">
 				</div>
 				<div class="form-row">
 					<label for="username">Pseudo</label>
-					<input type="text" name="username" id="username" value="<?= $w_user['username']; ?>">
+					<input type="text" name="username" id="username" value="<?= $this->e($w_user['username']) ?>">
 					<p><?= $usernameError ?></p>
 				</div>
 				<div class="form-row">
 					<label for="email">email</label>
-					<input type="text" name="email" id="email" value="<?= $w_user['email']; ?>">
+					<input type="text" name="email" id="email" value="<?= $this->e($w_user['email']) ?>">
 					<p><?= $emailError ?></p>
 				</div>
 				<div class="form-row">
 					<label for="address">Adresse</label>
-					<input type="text" name="address" id="address" value="<?= $w_user['address']; ?>">
+					<input type="text" name="address" id="address" value="<?= $this->e($w_user['address']) ?>">
 				</div>
 				<div class="form-row">
 					<label for="zipcode">Code postal</label>
-					<input type="text" name="zip_code" id="zipcode" value="<?= $w_user['zip_code']; ?>">
+					<input type="text" name="zip_code" id="zipcode" value="<?= $this->e($w_user['zip_code']) ?>">
 					<p><?= $zip_codeError ?></p>
 				</div>
 				<div class="form-row">
 					<label for="phone_number">Numero de téléphone</label>
-					<input type="tel" name="phone_number" id="phone_number" value="<?= $w_user['phone_number']; ?>">
+					<input type="tel" name="phone_number" id="phone_number" value="<?= $this->e($w_user['phone_number']) ?>">
 				</div>
 			</fieldset>
 

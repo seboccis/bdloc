@@ -23,7 +23,7 @@
 				<div class="form-row">
 					<label for="old_password">Ancien mot de passe</label>
 					<input type="password" name="old_password" id="old_password">
-					<p><?= $old_passwordError ?></p>
+					<p><?= $this->e($old_passwordError) ?></p>
 				</div>
 				<div class="form-row">
 					<label for="password">Nouveau mot de passe</label>
@@ -33,7 +33,7 @@
 				<div class="form-row">
 					<label for="confirmPassword">Confirmation du nouveau mot de passe</label>
 					<input type="password" name="confirmPassword" id="confirmPassword">	
-					<p><?= $passwordError ?></p>			
+					<p><?= $this->e($passwordError) ?></p>			
 				</div>
 
 			</fieldset>

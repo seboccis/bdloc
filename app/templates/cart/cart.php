@@ -23,10 +23,10 @@
 <?php foreach ($books as $book) :?>
 		<tr class="visible">
 			<td>
-				<?= $this->e($book['title'])?>
+				<?= $this->e($book['title']) ?>
 			</td>
 			<td>
-				<img src="<?php echo $this->assetUrl('img/mini-covers/'.$book['cover']);?>">
+				<img src="<?php echo $this->assetUrl('img/mini-covers/'. $this->e($book['cover']))?>">
 			</td>
 			<td>
 				<a class="removeFromCart btn btn-danger" href="<?= $this->url('ajax_cart_remove_book_from_cart',['bookId'=>$book['id'],'cartId'=>$cartId])?>">Retirer</a>
