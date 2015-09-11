@@ -37,8 +37,8 @@ body{
 }
 
 .fieldset fieldset{
-	height: 95%;
-	width: 90%;
+	/*height: 95%;*/
+	width: 96%;
 	padding: 0 10px 10px 10px;
 	background: #ccc;
 	border: solid 1px #000;
@@ -137,23 +137,37 @@ body{
 
 		.container section #sideBar{
 			display: block;
-			width: 20%;
+			width: 23%;
 			height: 100%;
 			position: absolute;
 			top: 0;
-			left: 0;
+			left: 2%;
 		}
 
+			.container section #sideBar .filter{
+				clear: left;
+				overflow: hidden;
+				margin-left: 10px;
+			}
+
+			.container section #sideBar .filter:last-child(){
+				overflow: visible;
+			}
+
+				.container section #sideBar .filter .filters{
+					margin-left: 10px;
+				}
 		
 			.container section #sideBar label{			
-				width: 100%;
+				width: 50%;
 				display: block;
+				float:left;
 				margin-bottom: 2px;
 			}
 
 			.container section #sideBar h3{
 				color: #ccc;
-				margin-top: 10px;
+				margin-top: 20px;
 				margin-bottom: 5px;
 			}
 
@@ -164,6 +178,7 @@ body{
 			.container section #sideBar #resultKeywordResearch{
 				background-color: #fffde7;
 				width: 150px;
+				position: absolute;
 			}
 
 				.container section #sideBar #resultKeywordResearch a{
@@ -173,6 +188,10 @@ body{
 					display: block;
 					padding-left: 10px;
 					margin-bottom: 2px;
+				}
+
+				.container section #sideBar #resultKeywordResearch a:hover{
+					background: #ccc;
 				}
 
 					.container section #sideBar #resultKeywordResearch a span{
@@ -212,11 +231,11 @@ body{
 
 		.container section #content{
 			display: block;
-			width: 80%;
+			width: 75%;
 			height: 100%;
 			position: absolute;
 			top: 0;
-			left: 20%;
+			left: 25%;
 		}
 
 			.container section #content #resultsBar{

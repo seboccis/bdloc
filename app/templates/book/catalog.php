@@ -10,23 +10,35 @@
 
 				<legend>Filtres</legend>
 
-				<div>
+				<div class='filter'>
 					<h3>Catégories</h3>
-					<?php foreach($genres as $genre){	?>
-						<label for="checkbox<?= $this->e($genre['id']) ?>"><input type="checkbox" name="genres[]" class="checkbox" id="checkbox<?= $this->e($genre['id']) ?>" value="<?= $this->e($genre['id']) ?>"><?= $this->e($genre['genre']) ?></label>
-					<?php }								?>
+
+					<div class="filters">	
+						<?php foreach($genres as $genre){	?>
+							<label for="checkbox<?= $this->e($genre['id']) ?>"><input type="checkbox" name="genres[]" class="checkbox" id="checkbox<?= $this->e($genre['id']) ?>" value="<?= $this->e($genre['id']) ?>"><?= $this->e($genre['genre']) ?></label>
+						<?php }								?>
+					</div>
+
 				</div>
 
-				<div>
+				<div  class='filter'>
 					<h3>Disponibilité</h3>
-					<label for="checkboxAvailability"><input type="checkbox" name="availability" class="checkbox" id="checkboxAvailability" value="1">Disponibles</label>
+
+					<div class="filters">
+						<label for="checkboxAvailability"><input type="checkbox" name="availability" class="checkbox" id="checkboxAvailability" value="1">Disponibles</label>
+					</div>
+
 				</div>
 
-				<div>
+				<div  class='filter'>
 					<h3>Recherche</h3>
-					<input type="text" id="inputKeyword" name="keyword" placeholder="mot-clé" data-ajax-catalog-getKeywords-path="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
-					<button id="btnRefresh">Rafraîchir</button>				
-					<div id="resultKeywordResearch"></div>
+
+					<div class="filters">
+						<input type="text" id="inputKeyword" name="keyword" placeholder="mot-clé" data-ajax-catalog-getKeywords-path="<?php echo $this->url('ajax_catalog_keyword'); ?>" value="" autocomplete="off">
+						<button id="btnRefresh">Rafraîchir</button>				
+						<div id="resultKeywordResearch"></div>
+					</div>
+
 				</div>
 
 			</fieldset>

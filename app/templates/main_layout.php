@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<header>
-			<img class="back" src="<?= $this->assetUrl('img/sempe-chat.jpg') ?>" alt="">
+
 			<h1>BDLoc :: <?= $this->e($title) ?></h1>
 			<div class="logInfo">
 				<h2><?= $this->e($w_user['username']) ?></h2>
@@ -27,9 +27,9 @@
 			</div>
 				
 			<nav>
-				<a href="<?php echo $this->url('catalog');?>">Catalogue</a>
-				<a href="<?php echo $this->url('cart');?>">Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></a>
-				<a href="<?php echo $this->url('account');?>">Mon Compte</a>
+				<a href="<?php echo $this->url('catalog');?>"><h2>Catalogue</h2></a>
+				<a href="<?php echo $this->url('cart');?>"><h2>Mon Panier <em id="numberBooksInCart" data-ajax-main-countBooksInCart="<?php echo $this->url('ajax_main_countBooksInCart'); ?>"></em></h2></a>
+				<a href="<?php echo $this->url('account');?>"><h2>Mon Compte</h2></a>
 			</nav>
 		</header>
 
